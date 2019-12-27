@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">PawDopt</string>
+
+    <string name="emailHint">Email</string>
+    <string name="passHint">Password</string>
+    <string name="firstNameHint">First Name</string>
+    <string name="lastNameHint">Last Name</string>
+
+    <string name="loginBtnTxt">Login</string>
+    <string name="signUpBtnTxt">Sign Up</string>
+
+    <string name="loginTxt">Already a Member? Sign In!</string>
+    <string name="signUpTxt">Not a Member? Register!</string>
 </resources>

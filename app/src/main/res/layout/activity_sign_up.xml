@@ -6,4 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/firstNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/authPagesFieldHt"
+            android:layout_marginLeft="@dimen/margin8dp"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:layout_marginRight="@dimen/margin8dp"
+            android:hint="@string/firstNameHint" />
+
+        <EditText
+            android:id="@+id/lastNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/authPagesFieldHt"
+            android:layout_marginLeft="@dimen/margin8dp"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:layout_marginRight="@dimen/margin8dp"
+            android:hint="@string/lastNameHint" />
+
+        <EditText
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/authPagesFieldHt"
+            android:layout_marginLeft="@dimen/margin8dp"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:layout_marginRight="@dimen/margin8dp"
+            android:hint="@string/emailHint" />
+
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/authPagesFieldHt"
+            android:layout_marginLeft="@dimen/margin8dp"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:layout_marginRight="@dimen/margin8dp"
+            android:hint="@string/passHint" />
+
+        <Button
+            android:id="@+id/signUpBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/authPagesFieldHt"
+            android:layout_marginLeft="@dimen/margin8dp"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:layout_marginRight="@dimen/margin8dp"
+            android:background="@color/appPrimaryGreenColor"
+            android:text="@string/signUpBtnTxt"
+            android:textColor="@color/appSecondaryWhiteColor" />
+
+        <TextView
+            android:id="@+id/loginTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/authPagesTextHt"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:text="@string/loginTxt" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

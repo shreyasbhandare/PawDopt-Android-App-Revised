@@ -2,4 +2,14 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="margin32dp">32dp</dimen>
+    <dimen name="margin16dp">16dp</dimen>
+    <dimen name="margin8dp">8dp</dimen>
+
+    <dimen name="careIconDimenX">150dp</dimen>
+    <dimen name="careIconDimenY">150dp</dimen>
+
+    <dimen name="authPagesFieldHt">50dp</dimen>
+    <dimen name="authPagesTextHt">25dp</dimen>
 </resources>

@@ -18,6 +18,8 @@
         <EditText
             android:id="@+id/firstNameEdit"
             android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtMedFontSize"
             android:layout_height="@dimen/authPagesFieldHt"
             android:layout_marginLeft="@dimen/margin8dp"
             android:layout_marginTop="@dimen/margin16dp"
@@ -27,6 +29,8 @@
         <EditText
             android:id="@+id/lastNameEdit"
             android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtMedFontSize"
             android:layout_height="@dimen/authPagesFieldHt"
             android:layout_marginLeft="@dimen/margin8dp"
             android:layout_marginTop="@dimen/margin16dp"
@@ -36,6 +40,8 @@
         <EditText
             android:id="@+id/emailEdit"
             android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtMedFontSize"
             android:layout_height="@dimen/authPagesFieldHt"
             android:layout_marginLeft="@dimen/margin8dp"
             android:layout_marginTop="@dimen/margin16dp"
@@ -45,6 +51,8 @@
         <EditText
             android:id="@+id/passwordEdit"
             android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtMedFontSize"
             android:layout_height="@dimen/authPagesFieldHt"
             android:layout_marginLeft="@dimen/margin8dp"
             android:layout_marginTop="@dimen/margin16dp"
@@ -54,11 +62,14 @@
         <Button
             android:id="@+id/signUpBtn"
             android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat"
             android:layout_height="@dimen/authPagesFieldHt"
             android:layout_marginLeft="@dimen/margin8dp"
             android:layout_marginTop="@dimen/margin16dp"
             android:layout_marginRight="@dimen/margin8dp"
-            android:background="@color/appPrimaryGreenColor"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtMedFontSize"
+            android:background="@drawable/rounded_button"
             android:text="@string/signUpBtnTxt"
             android:textColor="@color/appSecondaryWhiteColor" />
 
@@ -66,6 +77,8 @@
             android:id="@+id/loginTxt"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/authPagesTextHt"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtSmlFontSize"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin16dp"
             android:text="@string/loginTxt" />

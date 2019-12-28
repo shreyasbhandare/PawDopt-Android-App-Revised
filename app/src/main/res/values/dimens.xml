@@ -10,6 +10,13 @@
     <dimen name="careIconDimenX">150dp</dimen>
     <dimen name="careIconDimenY">150dp</dimen>
 
+    <dimen name="splashScreenIconDimenX">250dp</dimen>
+    <dimen name="splashScreenIconDimenY">250dp</dimen>
+
     <dimen name="authPagesFieldHt">50dp</dimen>
     <dimen name="authPagesTextHt">25dp</dimen>
+
+    <dimen name="txtLgeFontSize">26sp</dimen>
+    <dimen name="txtMedFontSize">20sp</dimen>
+    <dimen name="txtSmlFontSize">14sp</dimen>
 </resources>

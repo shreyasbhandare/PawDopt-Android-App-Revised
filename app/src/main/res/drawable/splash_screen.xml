@@ -6,12 +6,10 @@
     <item android:drawable="@android:color/white"/>
 
     <!-- Your product logo - 144dp color version of your app icon -->
-    <item>
-
-        <bitmap
-            android:src="@drawable/care128"
-            android:gravity="center"/>
-
+    <item android:width="@dimen/splashScreenIconDimenX"
+        android:height="@dimen/splashScreenIconDimenY"
+        android:gravity="center"
+        android:drawable="@drawable/pawdopt">
     </item>
 
 </layer-list>

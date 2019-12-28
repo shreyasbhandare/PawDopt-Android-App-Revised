@@ -16,6 +16,8 @@
     <dimen name="authPagesFieldHt">50dp</dimen>
     <dimen name="authPagesTextHt">25dp</dimen>
 
+    <dimen name="txtXXLFontSize">38sp</dimen>
+    <dimen name="txtXLFontSize">32sp</dimen>
     <dimen name="txtLgeFontSize">26sp</dimen>
     <dimen name="txtMedFontSize">20sp</dimen>
     <dimen name="txtSmlFontSize">14sp</dimen>

@@ -34,6 +34,7 @@
         android:id="@+id/passwordEdit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/authPagesFieldHt"
+        android:inputType="textPassword"
         android:hint="@string/passHint"
         android:fontFamily="@font/montserrat"
         android:textSize="@dimen/txtMedFontSize"

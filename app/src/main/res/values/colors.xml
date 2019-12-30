@@ -6,4 +6,6 @@
 
     <color name="appPrimaryGreenColor">#28ad7a</color>
     <color name="appSecondaryWhiteColor">#FFFFFF</color>
+    <color name="appSecondaryGreyColor">#606060</color>
+    <color name="appSecondaryBlackColor">#000000</color>
 </resources>

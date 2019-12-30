@@ -11,4 +11,13 @@
 
     <string name="loginTxt">Already a Member? Sign In!</string>
     <string name="signUpTxt">Not a Member? Register!</string>
+
+    <string name="menuSearchTxt">Search</string>
+    <string name="menuFavoriteTxt">Favorites</string>
+    <string name="menuAccountTxt">Account</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_search_fragment">Hello search fragment</string>
+    <string name="hello_favorites_fragment">Hello favorites fragment</string>
+    <string name="hello_account_fragment">Hello account fragment</string>
 </resources>

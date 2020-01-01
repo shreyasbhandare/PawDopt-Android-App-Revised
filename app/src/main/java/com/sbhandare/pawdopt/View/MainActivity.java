@@ -1,6 +1,9 @@
-package com.sbhandare.pawdopt;
+package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.net.Uri;
@@ -8,6 +11,12 @@ import android.os.Bundle;
 
 import com.fxn.BubbleTabBar;
 import com.fxn.OnBubbleClickListener;
+import com.sbhandare.pawdopt.Adapter.RVAdapter;
+import com.sbhandare.pawdopt.Model.Pet;
+import com.sbhandare.pawdopt.R;
+import com.sbhandare.pawdopt.Adapter.ViewPagerAdapter;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener,
                                                                FavoritesFragment.OnFragmentInteractionListener,
@@ -31,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
 
         setupViewPager(viewPager);
         bubbleTabBar.setupBubbleTabBar(viewPager);
-
         bubbleTabBar.addBubbleListener(new OnBubbleClickListener() {
             @Override
             public void onBubbleClick(int i) {
@@ -48,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
                 }
             }
         });
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {

@@ -1,4 +1,4 @@
-package com.sbhandare.pawdopt;
+package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.sbhandare.pawdopt.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

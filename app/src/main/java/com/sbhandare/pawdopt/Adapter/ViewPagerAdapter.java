@@ -1,4 +1,4 @@
-package com.sbhandare.pawdopt;
+package com.sbhandare.pawdopt.Adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

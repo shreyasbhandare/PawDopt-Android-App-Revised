@@ -20,4 +20,31 @@
     <string name="hello_search_fragment">Hello search fragment</string>
     <string name="hello_favorites_fragment">Hello favorites fragment</string>
     <string name="hello_account_fragment">Hello account fragment</string>
+
+    <string name="distanceTitle">Distance</string>
+    <string name="categoryTitle">Category</string>
+    <string-array name="distance_array">
+        <item>&lt; 5 Miles</item>
+        <item>&lt; 50 Miles</item>
+        <item>&lt; 100 Miles</item>
+        <item>&lt; 500 Miles</item>
+    </string-array>
+
+    <string-array name="pettype_array">
+        <item>Dog</item>
+        <item>Cat</item>
+        <item>Mouse</item>
+        <item>Rabbit</item>
+        <item>Horse</item>
+    </string-array>
+
+    <string name="aboutTxt">\u2022 About PawDopt</string>
+    <string name="logoutTxt">\u2022 Logout</string>
+    <string name="appNameYearTxt">\@ 2019 PawDopt</string>
+    <string name="appVersionTxt">v1.0</string>
+
+
+    <string name="aboutTitleTxt">"Who are we?"</string>
+    <string name="aboutParaTxt">One day, I was talking to my wife about donating money to an animal shelter. I ended up thinking, what more I could do as a software engineer to help the shelters and adoption agencies. The idea struck me there itself. An App that helps pets get adopted! PawDopt emerged as an idea but I hope it would turn into a movement someday.\n\n~ Shreyas</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.sbhandare.pawdopt.View;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sbhandare.pawdopt.R;
 
@@ -30,6 +32,9 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private TextView aboutTv;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,7 +73,23 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
+        aboutTv = view.findViewById(R.id.aboutTxt);
+        aboutTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog
+                        .Builder(getActivity())
+                        .setTitle(R.string.aboutTitleTxt)
+                        .setMessage(getString(R.string.aboutParaTxt))
+                        .setCancelable(true)
+                        .show();
+
+
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

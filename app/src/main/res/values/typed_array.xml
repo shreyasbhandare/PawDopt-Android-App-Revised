@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="pet_icon_array">
+        <item>@drawable/ic_dog_100</item>
+        <item>@drawable/ic_cat_100</item>
+        <item>@drawable/ic_mouse_96</item>
+        <item>@drawable/ic_rabbit_80</item>
+        <item>@drawable/ic_horse_100</item>
+    </integer-array>
+
+</resources>

@@ -1,9 +1,9 @@
 package com.sbhandare.pawdopt.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,10 +13,8 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.util.ArrayList;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
@@ -28,12 +26,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
         TextView tvPetName;
         TextView tvPetBreed;
         ImageView ivPetPhoto;
+        CheckBox cbLike;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             this.tvPetName = itemView.findViewById(R.id.petName);
             this.tvPetBreed = itemView.findViewById(R.id.petBreed);
             this.ivPetPhoto = itemView.findViewById(R.id.petPhoto);
+            this.cbLike = itemView.findViewById(R.id.petLike);
         }
     }
 
@@ -57,6 +57,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
         TextView textViewPetName = holder.tvPetName;
         TextView textViewPetBreed = holder.tvPetBreed;
         ImageView imageViewPetPhoto = holder.ivPetPhoto;
+        CheckBox checkBoxPetLike = holder.cbLike;
 
         textViewPetName.setText(dataSet.get(listPosition).getName());
         textViewPetBreed.setText(dataSet.get(listPosition).getBreed());

@@ -1,14 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.SearchFragment">
+
+    <Button
+        android:id="@+id/petDistaceBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_primary_filter_btn"
+        android:textColor="@color/appSecondaryWhiteColor"
+        android:text="Distance"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/margin8dp"
+        android:paddingEnd="@dimen/margin32dp"
+        android:textSize="@dimen/txtSemiMedFontSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/petTypeBtn"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/margin8dp"
+        android:layout_marginStart="4dp" />
+
+    <Button
+        android:id="@+id/petTypeBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_primary_filter_btn"
+        android:textColor="@color/appSecondaryWhiteColor"
+        android:text="Category"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/margin8dp"
+        android:paddingEnd="@dimen/margin32dp"
+        android:textSize="@dimen/txtSemiMedFontSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/petDistaceBtn"
+        app:layout_constraintRight_toRightOf="@id/filterImg"
+        android:layout_marginEnd="@dimen/margin8dp"
+        android:layout_marginTop="@dimen/margin8dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/filterImg"
+        android:background="@drawable/filter_96"
+        app:layout_constraintLeft_toRightOf="@+id/petTypeBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/margin8dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/petSearchListRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_marginTop="@dimen/margin8dp"
+        android:paddingBottom="65dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/petDistaceBtn" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

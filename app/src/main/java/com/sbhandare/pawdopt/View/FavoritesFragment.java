@@ -5,12 +5,19 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sbhandare.pawdopt.Adapter.RVAdapter;
+import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.R;
+
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +33,11 @@ public class FavoritesFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private static RVAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private static RecyclerView recyclerView;
+    private static ArrayList<Pet> data;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,7 +80,27 @@ public class FavoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+
+        // Inflate the layout for this fragment
+        recyclerView = view.findViewById(R.id.petFavoriteListRV);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        data = new ArrayList<>();
+        data.add(new Pet("Pumpkin","Persian", "https://cdn.pixabay.com/photo/2017/09/25/08/04/cat-2784291_960_720.jpg"));
+        data.add(new Pet("Cinnamon","siamese", "https://cdn.pixabay.com/photo/2017/02/15/12/12/cat-2068462_960_720.jpg"));
+        data.add(new Pet("Buddy","labrador", "https://cdn.pixabay.com/photo/2016/02/25/10/31/puppy-1221791_960_720.jpg"));
+        data.add(new Pet("Pikachu","Mouse", "https://cdn.pixabay.com/photo/2017/04/05/08/56/mouse-2204321_960_720.jpg"));
+        data.add(new Pet("Ruckus","Pit Bull", "https://cdn.pixabay.com/photo/2019/04/13/13/58/pit-bull-4124677_960_720.jpg"));
+        data.add(new Pet("Betsy","Domestic Short Hair", "https://cdn.pixabay.com/photo/2016/09/18/22/41/cat-1679193_960_720.jpg"));
+
+        adapter = new RVAdapter(data);
+        recyclerView.setAdapter(adapter);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -19,6 +19,8 @@
     <dimen name="txtXXLFontSize">38sp</dimen>
     <dimen name="txtXLFontSize">32sp</dimen>
     <dimen name="txtLgeFontSize">26sp</dimen>
+    <dimen name="txtSemiLgeFontSize">23sp</dimen>
     <dimen name="txtMedFontSize">20sp</dimen>
+    <dimen name="txtSemiMedFontSize">17sp</dimen>
     <dimen name="txtSmlFontSize">14sp</dimen>
 </resources>

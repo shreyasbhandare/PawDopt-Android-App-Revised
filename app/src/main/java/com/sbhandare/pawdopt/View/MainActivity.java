@@ -20,7 +20,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener,
                                                                FavoritesFragment.OnFragmentInteractionListener,
-                                                               AccountFragment.OnFragmentInteractionListener {
+                                                               AccountFragment.OnFragmentInteractionListener,
+                                                               FilterFragment.OnFragmentInteractionListener {
 
     BubbleTabBar bubbleTabBar;
     private ViewPager viewPager;

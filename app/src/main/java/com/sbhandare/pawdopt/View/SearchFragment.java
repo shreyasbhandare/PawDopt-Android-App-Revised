@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -47,6 +48,7 @@ public class SearchFragment extends Fragment {
     private static ArrayList<Pet> data;
     private Button petDistanceBtn;
     private Button petCategoryBtn;
+    private AppCompatImageView filterBtn;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -93,6 +95,7 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         petCategoryBtn = view.findViewById(R.id.petTypeBtn);
         petDistanceBtn = view.findViewById(R.id.petDistaceBtn);
+        filterBtn = view.findViewById(R.id.filterImg);
         recyclerView = view.findViewById(R.id.petSearchListRV);
         recyclerView.setHasFixedSize(true);
 
@@ -113,6 +116,7 @@ public class SearchFragment extends Fragment {
 
         String[] distance_array = getResources().getStringArray(R.array.distance_array);
         String[] categoy_text_array = getResources().getStringArray(R.array.pettype_array);
+        /*
         int[] icons = new int[] {
                 R.drawable.ic_dog_100,
                 R.drawable.ic_dog_100,
@@ -120,7 +124,7 @@ public class SearchFragment extends Fragment {
                 R.drawable.ic_rabbit_80,
                 R.drawable.ic_horse_100
         };
-
+        */
         petDistanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,13 +147,21 @@ public class SearchFragment extends Fragment {
                 BottomSheet.Builder builder = new BottomSheet.Builder(getContext());
                 builder.setTitle(R.string.categoryTitle);
                 builder.setDarkTheme(false);
-                builder.setItems(categoy_text_array, icons,(dialogInterface, i) -> {
-                    petDistanceBtn.setText(categoy_text_array[i]);
+                builder.setItems(categoy_text_array,(dialogInterface, i) -> {
+                    petCategoryBtn.setText(categoy_text_array[i]);
                 });
                 builder.setDividers(false);
                 builder.setFullWidth(false);
                 builder.setItemTextColor(ResourcesCompat.getColor(getResources(), R.color.appPrimaryGreenColor, null));
                 builder.show();
+            }
+        });
+
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FilterFragment filterFragment = new FilterFragment();
+                filterFragment.show(getFragmentManager(),"filter");
             }
         });
 

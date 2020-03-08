@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.FilterFragment">
+    
+    <View
+        android:layout_width="30dp"
+        android:layout_height="1dp"
+        android:id="@+id/line1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/margin8dp"
+        android:background="@color/appSecondaryBlackColor"
+        />
+
+    <View
+        android:layout_width="30dp"
+        android:layout_height="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        android:layout_marginTop="3dp"
+        android:background="@color/appSecondaryBlackColor"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="@dimen/margin16dp"
+        android:paddingBottom="@dimen/margin16dp"
+        android:paddingStart="@dimen/margin8dp"
+        android:paddingEnd="@dimen/margin8dp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/categoryTv"
+        android:text = "Category"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="@dimen/margin8dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/catBtnlayout"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin8dp"
+        android:layout_marginEnd="@dimen/margin8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/categoryTv">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dogCategoryBtn"
+            android:text="Dog"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/catCategoryBtn"
+            android:text="Cat"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_marginStart="@dimen/margin8dp"
+            android:layout_gravity="center" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:id="@+id/otherCategorySpinner"
+            android:textAlignment="center"
+            android:entries="@array/pettype_array"
+            android:layout_marginStart="@dimen/margin8dp"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/distanceTv"
+        android:text = "Distance"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toBottomOf="@+id/catBtnlayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="@dimen/margin8dp"
+        android:layout_marginTop="@dimen/margin8dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/distBtnlayout"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin8dp"
+        android:layout_marginEnd="@dimen/margin8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/distanceTv">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fiveMileBtn"
+            android:text="5 Miles"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fiftyMileBtn"
+            android:text="50 Miles"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_marginStart="@dimen/margin8dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/hundredMileBtn"
+            android:text="100 Miles"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_marginStart="@dimen/margin8dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fiveHundredMileBtn"
+            android:text="500 Miles"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_marginStart="@dimen/margin8dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/genderTv"
+        android:text = "Gender"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toBottomOf="@+id/distBtnlayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="@dimen/margin8dp"
+        android:layout_marginTop="@dimen/margin8dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/genderBtnlayout"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin8dp"
+        android:layout_marginEnd="@dimen/margin8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/genderTv">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/femaleBtn"
+            android:text="Female"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/maleBtn"
+            android:text="Male"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_marginStart="@dimen/margin8dp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sizeTv"
+        android:text = "Size"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toBottomOf="@+id/genderBtnlayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="@dimen/margin8dp"
+        android:layout_marginTop="@dimen/margin8dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sizeBtnlayout"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin8dp"
+        android:layout_marginEnd="@dimen/margin8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/sizeTv">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/smallBtn"
+            android:text="Small"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mediumBtn"
+            android:text="Medium"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_marginStart="@dimen/margin8dp"
+            android:layout_gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bigBtn"
+            android:text="Big"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:textColor="@color/appSecondaryWhiteColor"
+            android:layout_marginStart="@dimen/margin8dp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/sizeBtnlayout"
+        android:layout_marginTop="@dimen/margin16dp"
+        android:layout_marginStart="@dimen/margin8dp"
+        android:layout_marginEnd="@dimen/margin8dp"
+        android:padding="0dp"
+        android:background="@drawable/rounded_button"
+        android:text="Apply"
+        android:fontFamily="@font/montserrat"
+        android:textAllCaps="false"
+        android:textSize="@dimen/txtMedFontSize"
+        android:textColor="@color/appSecondaryWhiteColor"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

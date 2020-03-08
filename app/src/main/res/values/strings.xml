@@ -47,4 +47,7 @@
     <string name="aboutTitleTxt">"Who are we?"</string>
     <string name="aboutParaTxt">One day, I was talking to my wife about donating money to an animal shelter. I ended up thinking, what more I could do as a software engineer to help the shelters and adoption agencies. The idea struck me there itself. An App that helps pets get adopted! PawDopt emerged as an idea but I hope it would turn into a movement someday.\n\n~ Shreyas</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

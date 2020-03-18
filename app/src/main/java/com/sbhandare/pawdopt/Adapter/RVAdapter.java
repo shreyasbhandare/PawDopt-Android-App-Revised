@@ -14,12 +14,13 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
 
-    private ArrayList<Pet> dataSet;
+    private List<Pet> dataSet;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -37,7 +38,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
         }
     }
 
-    public RVAdapter(ArrayList<Pet> data) {
+    public RVAdapter(List<Pet> data) {
         this.dataSet = data;
     }
 

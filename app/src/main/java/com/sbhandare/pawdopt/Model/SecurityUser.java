@@ -1,21 +1,22 @@
 package com.sbhandare.pawdopt.Model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "security_user")
 public class SecurityUser {
-
-    private long secuid;
-
+    @PrimaryKey
+    @NonNull
     private String username;
 
     private String password;
 
-    public long getSecuid() {
-        return secuid;
-    }
+    private String token;
 
-    public void setSecuid(long secuid) {
-        this.secuid = secuid;
-    }
+    private String refreshToken;
 
+    @NonNull
     public String getUsername() {
         return username;
     }
@@ -28,7 +29,23 @@ public class SecurityUser {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NonNull String password) {
         this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

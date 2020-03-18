@@ -1,8 +1,10 @@
 package com.sbhandare.pawdopt.Model;
 
-public class Pet {
+public class Pet
+{
+    private int petid;
 
-    private long petid;
+    private int petfinderid;
 
     private String name;
 
@@ -46,185 +48,149 @@ public class Pet {
 
     private Organization organization;
 
-    public Pet(String name, String breed, String image){
+    public Pet(String name, String breed, String img){
         this.name = name;
         this.breed = breed;
-        this.image = image;
+        this.image = img;
     }
 
-    public long getPetid() {
-        return petid;
-    }
-
-    public void setPetid(long petid) {
+    public void setPetid(int petid){
         this.petid = petid;
     }
-
-    public String getName() {
-        return name;
+    public int getPetid(){
+        return this.petid;
     }
-
-    public void setName(String name) {
+    public void setPetfinderid(int petfinderid){
+        this.petfinderid = petfinderid;
+    }
+    public int getPetfinderid(){
+        return this.petfinderid;
+    }
+    public void setName(String name){
         this.name = name;
     }
-
-    public String getBreed() {
-        return breed;
+    public String getName(){
+        return this.name;
     }
-
-    public void setBreed(String breed) {
+    public void setBreed(String breed){
         this.breed = breed;
     }
-
-    public String getGender() {
-        return gender;
+    public String getBreed(){
+        return this.breed;
     }
-
-    public void setGender(String gender) {
+    public void setTypeCode(String typeCode){
+        this.typeCode = typeCode;
+    }
+    public String getTypeCode(){
+        return this.typeCode;
+    }
+    public void setGender(String gender){
         this.gender = gender;
     }
-
-    public String getAge() {
-        return age;
+    public String getGender(){
+        return this.gender;
     }
-
-    public void setAge(String age) {
+    public void setAge(String age){
         this.age = age;
     }
-
-    public String getColor() {
-        return color;
+    public String getAge(){
+        return this.age;
     }
-
-    public void setColor(String color) {
+    public void setColor(String color){
         this.color = color;
     }
-
-    public String getCoat() {
-        return coat;
+    public String getColor(){
+        return this.color;
     }
-
-    public void setCoat(String coat) {
+    public void setCoat(String coat){
         this.coat = coat;
     }
-
-    public String getSize() {
-        return size;
+    public String getCoat(){
+        return this.coat;
     }
-
-    public void setSize(String size) {
+    public void setSize(String size){
         this.size = size;
     }
-
-    public String getBio() {
-        return bio;
+    public String getSize(){
+        return this.size;
     }
-
-    public void setBio(String bio) {
+    public void setBio(String bio){
         this.bio = bio;
     }
-
-    public String getImage() {
-        return image;
+    public String getBio(){
+        return this.bio;
     }
-
-    public void setImage(String image) {
+    public void setImage(String image){
         this.image = image;
     }
-
-    public String getIsVaccinated() {
-        return isVaccinated;
+    public String getImage(){
+        return this.image;
     }
-
-    public void setIsVaccinated(String isVaccinated) {
+    public void setIsVaccinated(String isVaccinated){
         this.isVaccinated = isVaccinated;
     }
-
-    public String getIsSpayedNeutered() {
-        return isSpayedNeutered;
+    public String getIsVaccinated(){
+        return this.isVaccinated;
     }
-
-    public void setIsSpayedNeutered(String isSpayedNeutered) {
+    public void setIsSpayedNeutered(String isSpayedNeutered){
         this.isSpayedNeutered = isSpayedNeutered;
     }
-
-    public String getIsGoodWithCats() {
-        return isGoodWithCats;
+    public String getIsSpayedNeutered(){
+        return this.isSpayedNeutered;
     }
-
-    public void setIsGoodWithCats(String isGoodWithCats) {
+    public void setIsGoodWithCats(String isGoodWithCats){
         this.isGoodWithCats = isGoodWithCats;
     }
-
-    public String getIsGoodWithChildren() {
-        return isGoodWithChildren;
+    public String getIsGoodWithCats(){
+        return this.isGoodWithCats;
     }
-
-    public void setIsGoodWithChildren(String isGoodWithChildren) {
+    public void setIsGoodWithChildren(String isGoodWithChildren){
         this.isGoodWithChildren = isGoodWithChildren;
     }
-
-    public String getIsGoodWithDogs() {
-        return isGoodWithDogs;
+    public String getIsGoodWithChildren(){
+        return this.isGoodWithChildren;
     }
-
-    public void setIsGoodWithDogs(String isGoodWithDogs) {
+    public void setIsGoodWithDogs(String isGoodWithDogs){
         this.isGoodWithDogs = isGoodWithDogs;
     }
-
-    public String getIsAdoptable() {
-        return isAdoptable;
+    public String getIsGoodWithDogs(){
+        return this.isGoodWithDogs;
     }
-
-    public void setIsAdoptable(String isAdoptable) {
+    public void setIsAdoptable(String isAdoptable){
         this.isAdoptable = isAdoptable;
     }
-
-    public Organization getOrganization() {
-        return organization;
+    public String getIsAdoptable(){
+        return this.isAdoptable;
     }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
-    public String getTypeCode() {
-        return typeCode;
-    }
-
-    public void setTypeCode(String type) {
-        this.typeCode = type;
-    }
-
-    public String getIsDeclawed() {
-        return isDeclawed;
-    }
-
-    public void setIsDeclawed(String isDeclawed) {
+    public void setIsDeclawed(String isDeclawed){
         this.isDeclawed = isDeclawed;
     }
-
-    public String getIsHouseTrained() {
-        return isHouseTrained;
+    public String getIsDeclawed(){
+        return this.isDeclawed;
     }
-
-    public void setIsHouseTrained(String isHouseTrained) {
+    public void setIsHouseTrained(String isHouseTrained){
         this.isHouseTrained = isHouseTrained;
     }
-
-    public String getIsSpecialNeeds() {
-        return isSpecialNeeds;
+    public String getIsHouseTrained(){
+        return this.isHouseTrained;
     }
-
-    public void setIsSpecialNeeds(String isSpecialNeeds) {
+    public void setIsSpecialNeeds(String isSpecialNeeds){
         this.isSpecialNeeds = isSpecialNeeds;
     }
-
-    public String getTags() {
-        return tags;
+    public String getIsSpecialNeeds(){
+        return this.isSpecialNeeds;
     }
-
-    public void setTags(String tags) {
+    public void setTags(String tags){
         this.tags = tags;
     }
+    public String getTags(){
+        return this.tags;
+    }
+    public void setOrganization(Organization organization){
+        this.organization = organization;
+    }
+    public Organization getOrganization(){
+        return this.organization;
+    }
 }
+

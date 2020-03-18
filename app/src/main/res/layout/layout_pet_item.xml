@@ -19,7 +19,7 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/margin8dp">
 
-                <com.sbhandare.pawdopt.Util.RoundedImageView
+                <com.sbhandare.pawdopt.Component.PawDoptImageView
                     android:id="@+id/petPhoto"
                     android:layout_width="115dp"
                     android:layout_height="115dp"

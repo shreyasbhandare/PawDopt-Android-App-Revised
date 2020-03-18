@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -35,6 +36,11 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*
+        Intent intent = getIntent();
+        String token = intent.getExtras().getString("access_token");
+        */
 
         bubbleTabBar = findViewById(R.id.bubbleTabBar);
         viewPager = findViewById(R.id.viewPager);

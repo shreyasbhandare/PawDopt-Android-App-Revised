@@ -1,7 +1,8 @@
 package com.sbhandare.pawdopt.Model;
 
-public class Address {
-    private long addressid;
+public class Address
+{
+    private int addressid;
 
     private String street1;
 
@@ -15,59 +16,46 @@ public class Address {
 
     private String zipCode;
 
-    public long getAddressid() {
-        return addressid;
-    }
-
-    public void setAddressid(long addressid) {
+    public void setAddressid(int addressid){
         this.addressid = addressid;
     }
-
-    public String getStreet1() {
-        return street1;
+    public int getAddressid(){
+        return this.addressid;
     }
-
-    public void setStreet1(String street1) {
+    public void setStreet1(String street1){
         this.street1 = street1;
     }
-
-    public String getStreet2() {
-        return street2;
+    public String getStreet1(){
+        return this.street1;
     }
-
-    public void setStreet2(String street2) {
+    public void setStreet2(String street2){
         this.street2 = street2;
     }
-
-    public String getCity() {
-        return city;
+    public String getStreet2(){
+        return this.street2;
     }
-
-    public void setCity(String city) {
+    public void setCity(String city){
         this.city = city;
     }
-
-    public String getState() {
-        return state;
+    public String getCity(){
+        return this.city;
     }
-
-    public void setState(String state) {
+    public void setState(String state){
         this.state = state;
     }
-
-    public String getCountry() {
-        return country;
+    public String getState(){
+        return this.state;
     }
-
-    public void setCountry(String country) {
+    public void setCountry(String country){
         this.country = country;
     }
-
-    public String getZipCode() {
-        return zipCode;
+    public String getCountry(){
+        return this.country;
     }
-
-    public void setZipCode(String zipCode) {
+    public void setZipCode(String zipCode){
         this.zipCode = zipCode;
+    }
+    public String getZipCode(){
+        return this.zipCode;
     }
 }

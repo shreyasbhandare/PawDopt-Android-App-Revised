@@ -8,4 +8,6 @@
     <color name="appSecondaryWhiteColor">#FFFFFF</color>
     <color name="appSecondaryGreyColor">#606060</color>
     <color name="appSecondaryBlackColor">#000000</color>
+    <color name="appSecondaryLightGreyColor">#DCDCDC</color>
+    <color name="appSecondaryLightGreenColor">#76dbb5</color>
 </resources>

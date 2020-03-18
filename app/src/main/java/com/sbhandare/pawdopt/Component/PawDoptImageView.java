@@ -1,38 +1,36 @@
-package com.sbhandare.pawdopt.Util;
+package com.sbhandare.pawdopt.Component;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-public class RoundedImageView extends AppCompatImageView {
+public class PawDoptImageView extends AppCompatImageView {
 
     private float radius = 18.0f;
     private Path path;
     private RectF rect;
 
-    public RoundedImageView(Context context) {
+    public PawDoptImageView(Context context) {
         super(context);
         init();
     }
 
-    public RoundedImageView(Context context, AttributeSet attrs) {
+    public PawDoptImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public RoundedImageView(Context context, AttributeSet attrs, int defStyle) {
+    public PawDoptImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
     private void init() {
         path = new Path();
-
     }
 
     @Override

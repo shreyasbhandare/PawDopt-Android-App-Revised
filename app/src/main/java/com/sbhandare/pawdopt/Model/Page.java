@@ -1,29 +1,23 @@
 package com.sbhandare.pawdopt.Model;
 
-public class Page {
+import java.util.List;
 
-    private Object listObj;
+public class Page
+{
+    private List<Pet> listObj;
 
-    private Pagination pageDetails;
+    private PageDetails pageDetails;
 
-    public Page(Object listObj, Pagination pageDetails) {
-        this.pageDetails = pageDetails;
+    public void setListObj(List<Pet> listObj){
         this.listObj = listObj;
     }
-
-    public Pagination getPageDetails() {
-        return pageDetails;
+    public List<Pet> getListObj(){
+        return this.listObj;
     }
-
-    public void setPageDetails(Pagination pageDetails) {
+    public void setPageDetails(PageDetails pageDetails){
         this.pageDetails = pageDetails;
     }
-
-    public Object getListObj() {
-        return listObj;
-    }
-
-    public void setListObj(Object listObj) {
-        this.listObj = listObj;
+    public PageDetails getPageDetails(){
+        return this.pageDetails;
     }
 }

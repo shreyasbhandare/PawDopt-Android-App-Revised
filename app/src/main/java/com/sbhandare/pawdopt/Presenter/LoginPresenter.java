@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -31,14 +32,6 @@ public class LoginPresenter {
         this.securityUserRepository = new SecurityUserRepository(context);
     }
 
-    public void validateCredentials(){
-
-    }
-
-    public boolean isAlreadyLoggedIn(String username){
-        return securityUserRepository.getSecurityUserByUsername(username) != null;
-    }
-
     public void login(String username, String password) throws IOException {
         String url = "https://pawdopt.herokuapp.com/api/v1/oauth/token?grant_type=password&username="+username+"&password="+password;
 
@@ -52,7 +45,6 @@ public class LoginPresenter {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    // Do what you want to do with the response.
                     if(response.body() != null) {
                         //System.out.println(Objects.requireNonNull(response.body()).string());
                         Gson gson = new Gson();
@@ -67,8 +59,8 @@ public class LoginPresenter {
                     }
                     view.loadMainActivity();
                 } else {
-                    System.out.println("no success");
                     // Request not successful
+                    System.out.println("no success");
                 }
             }
         });
@@ -76,7 +68,12 @@ public class LoginPresenter {
 
     private Call post(String url, Callback callback) {
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        OkHttpClient client = new OkHttpClient();
+        //OkHttpClient client = new OkHttpClient();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(30, TimeUnit.SECONDS);
+        builder.readTimeout(30, TimeUnit.SECONDS);
+        builder.writeTimeout(30, TimeUnit.SECONDS);
+        OkHttpClient client = builder.build();
 
         RequestBody body = RequestBody.create("", JSON);
         Request request = new Request.Builder()

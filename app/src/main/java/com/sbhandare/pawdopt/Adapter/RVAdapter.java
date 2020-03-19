@@ -62,7 +62,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.MyViewHolder> {
 
         textViewPetName.setText(dataSet.get(listPosition).getName());
         textViewPetBreed.setText(dataSet.get(listPosition).getBreed());
-        Picasso.get().load(dataSet.get(listPosition).getImage()).into(imageViewPetPhoto);
+        Picasso.get().load(dataSet.get(listPosition).getImage()).fit().into(imageViewPetPhoto);
     }
 
     @Override

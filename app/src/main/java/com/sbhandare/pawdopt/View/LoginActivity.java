@@ -3,7 +3,7 @@ package com.sbhandare.pawdopt.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,27 +29,28 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
         LoginPresenter loginPresenter = new LoginPresenter(this, getApplicationContext());
         initUIElements();
 
-        signUpTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-                LoginActivity.this.startActivity(myIntent);
-            }
+        signUpTxt.setOnClickListener(view -> {
+            Intent myIntent = new Intent(LoginActivity.this, SignUpActivity.class);
+            LoginActivity.this.startActivity(myIntent);
         });
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    if(!loginPresenter.isAlreadyLoggedIn(usernameEditTxt.getText().toString()))
-                        loginPresenter.login(usernameEditTxt.getText().toString(), passwordEditTxt.getText().toString());
-                    else
-                        loadMainActivity();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        loginBtn.setOnClickListener(view -> {
+            try {
+                if(TextUtils.isEmpty(usernameEditTxt.getText()) && TextUtils.isEmpty(passwordEditTxt.getText())){
+                    usernameEditTxt.setError( "Email is required!" );
+                    passwordEditTxt.setError( "Password is required!" );
                 }
-                //Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
-                //LoginActivity.this.startActivity(myIntent);
+                else if(TextUtils.isEmpty(usernameEditTxt.getText()))
+                    usernameEditTxt.setError( "Email is required!" );
+                else if(TextUtils.isEmpty(passwordEditTxt.getText()))
+                    passwordEditTxt.setError( "Password is required!" );
+                else {
+                    String username = usernameEditTxt.getText().toString();
+                    String password = passwordEditTxt.getText().toString();
+                    loginPresenter.login(username, password);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
@@ -64,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
     @Override
     public void loadMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        //intent.putExtra("access_token",token);
         LoginActivity.this.startActivity(intent);
     }
 }

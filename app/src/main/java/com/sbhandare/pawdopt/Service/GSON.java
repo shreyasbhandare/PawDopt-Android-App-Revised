@@ -1,5 +1,12 @@
 package com.sbhandare.pawdopt.Service;
 
-public class GSON {
+import com.google.gson.Gson;
 
+public class GSON
+{
+    private static Gson gson = new Gson();
+
+    public static Gson getGson() {
+        return gson;
+    }
 }

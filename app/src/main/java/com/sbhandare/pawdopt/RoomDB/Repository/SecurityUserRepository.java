@@ -51,7 +51,11 @@ public class SecurityUserRepository {
         }.execute();
     }
 
-    public static void updateSecurityUser(final SecurityUser securityUser) {
+    public void updateSecurityUser(SecurityUser securityUser){
+        updateSecurityUserTask(securityUser);
+    }
+
+    private static void updateSecurityUserTask(final SecurityUser securityUser) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {

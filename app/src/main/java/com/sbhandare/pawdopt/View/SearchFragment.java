@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +54,8 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private Button petCategoryBtn;
     private AppCompatImageView filterBtn;
     private SearchFragmentPresenter searchFragmentPresenter;
+
+    boolean isLoading = false;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -219,7 +223,61 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         adapter = new RVAdapter(data);
         recyclerView.setAdapter(adapter);
     }
+/*
+    @Override
+    public void initScrollListener(List<Pet> petList) {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == petList.size() - 1) {
+                        //bottom of list!
+                        loadMore();
+                        isLoading = true;
+                    }
+                }
+            }
+        });
+
+
+    }
+
+
+    @Override
+    public void loadMore(List<Pet> petList) {
+        rowsArrayList.add(null);
+        recyclerViewAdapter.notifyItemInserted(rowsArrayList.size() - 1);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rowsArrayList.remove(rowsArrayList.size() - 1);
+                int scrollPosition = rowsArrayList.size();
+                recyclerViewAdapter.notifyItemRemoved(scrollPosition);
+                int currentSize = scrollPosition;
+                int nextLimit = currentSize + 10;
+
+                while (currentSize - 1 < nextLimit) {
+                    rowsArrayList.add("Item " + currentSize);
+                    currentSize++;
+                }
+
+                recyclerViewAdapter.notifyDataSetChanged();
+                isLoading = false;
+            }
+        }, 2000);
+    }
+*/
     @Override
     public void populateRV(List<Pet> petList) {
         getActivity().runOnUiThread(new Runnable() {

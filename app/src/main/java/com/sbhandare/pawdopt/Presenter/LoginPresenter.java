@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.sbhandare.pawdopt.Model.Oauth2Token;
+import com.sbhandare.pawdopt.Model.SecurityUser;
 import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,11 +51,18 @@ public class LoginPresenter {
                         Gson gson = new Gson();
                         Oauth2Token oauth2Token = gson.fromJson(Objects.requireNonNull(response.body()).string(), Oauth2Token.class);
 
-                        if(securityUserRepository.getSecurityUserByUsername(username)==null) {
-                            securityUserRepository.insertSecurityUser(username,
-                                    oauth2Token.getAccess_token(),
-                                    oauth2Token.getRefresh_token(),
-                                    password);
+                        if(oauth2Token!=null) {
+                            if(securityUserRepository.getSecurityUserByUsername(username)==null)
+                                securityUserRepository.insertSecurityUser(username,
+                                        oauth2Token.getAccess_token(),
+                                        oauth2Token.getRefresh_token(),
+                                        password);
+                            else {
+                                SecurityUser securityUser =  securityUserRepository.getSecurityUserByUsername(username);
+                                securityUser.setToken(oauth2Token.getAccess_token());
+                                securityUser.setRefreshToken(oauth2Token.getRefresh_token());
+                                securityUserRepository.updateSecurityUser(securityUser);
+                            }
                         }
                     }
                     view.loadMainActivity();
@@ -68,7 +76,7 @@ public class LoginPresenter {
 
     private Call post(String url, Callback callback) {
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        //OkHttpClient client = new OkHttpClient();
+
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(30, TimeUnit.SECONDS);
         builder.readTimeout(30, TimeUnit.SECONDS);

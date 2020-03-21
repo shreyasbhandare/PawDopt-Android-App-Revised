@@ -81,9 +81,14 @@ public class SearchFragmentPresenter {
                 }
             });
         }
-
-
     }
+
+    public void loadMorePetList(){
+
+
+        //in
+    }
+
 
     private Call get(String url, Callback callback) {
         final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -103,5 +108,7 @@ public class SearchFragmentPresenter {
 
     public interface View{
         void populateRV(List<Pet> petList);
+        //void initScrollListener(List<Pet> petList);
+        //void loadMore(List<Pet> petList);
     }
 }

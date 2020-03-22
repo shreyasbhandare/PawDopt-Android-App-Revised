@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -113,6 +114,15 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         textViewPetName.setText(dataSet.get(position).getName());
         textViewPetBreed.setText(dataSet.get(position).getBreed());
         Picasso.get().load(dataSet.get(position).getImage()).fit().into(imageViewPetPhoto);
+        checkBoxPetLike.setChecked(false);
+
+        checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked) {
+                dataSet.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position,dataSet.size());
+            }
+        });
     }
 }
 

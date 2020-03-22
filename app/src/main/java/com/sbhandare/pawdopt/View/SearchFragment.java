@@ -104,7 +104,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         initUIElements(view);
         searchFragmentPresenter = new SearchFragmentPresenter(this,getContext());
         searchFragmentPresenter.populatePetList();
-        //initScrollListener();
 
         String[] distance_array = getResources().getStringArray(R.array.distance_array);
         String[] categoy_text_array = getResources().getStringArray(R.array.pettype_array);
@@ -152,8 +151,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to the bottom of the list
                 searchFragmentPresenter.getMorePets();
             }
         };

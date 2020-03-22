@@ -1,5 +1,8 @@
 package com.sbhandare.pawdopt.Adapter;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,16 +11,20 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sbhandare.pawdopt.Component.PawDoptToast;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.R;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -25,10 +32,12 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_RESULT = 1;
 
+    private Context context;
     private List<Pet> dataSet;
     private long totalResults;
 
-    public RViewAdapter(List<Pet> data, long totalResults) {
+    public RViewAdapter(Context context, List<Pet> data, long totalResults) {
+        this.context = context;
         this.dataSet = data;
         this.totalResults = totalResults;
     }
@@ -118,6 +127,8 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
+                PawDoptToast.showFavoritesToast(context, dataSet.get(position).getName());
+
                 dataSet.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,dataSet.size());

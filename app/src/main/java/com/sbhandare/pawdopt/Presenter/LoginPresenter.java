@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.sbhandare.pawdopt.Model.Oauth2Token;
 import com.sbhandare.pawdopt.Model.SecurityUser;
 import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
+import com.sbhandare.pawdopt.Service.GSON;
+import com.sbhandare.pawdopt.Service.OkhttpProcessor;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,17 +28,19 @@ public class LoginPresenter {
     private View view;
     private Context context;
     private SecurityUserRepository securityUserRepository;
+    private OkhttpProcessor okhttpProcessor;
 
     public LoginPresenter(View view, Context context) {
         this.view = view;
         this.context = context;
         this.securityUserRepository = new SecurityUserRepository(context);
+        this.okhttpProcessor = new OkhttpProcessor();
     }
 
     public void login(String username, String password) throws IOException {
         String url = "https://pawdopt.herokuapp.com/api/v1/oauth/token?grant_type=password&username="+username+"&password="+password;
 
-        post(url, new Callback() {
+        okhttpProcessor.post(url, "", new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 // Something went wrong
@@ -48,8 +52,7 @@ public class LoginPresenter {
                 if (response.isSuccessful()) {
                     if(response.body() != null) {
                         //System.out.println(Objects.requireNonNull(response.body()).string());
-                        Gson gson = new Gson();
-                        Oauth2Token oauth2Token = gson.fromJson(Objects.requireNonNull(response.body()).string(), Oauth2Token.class);
+                        Oauth2Token oauth2Token = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(), Oauth2Token.class);
 
                         if(oauth2Token!=null) {
                             if(securityUserRepository.getSecurityUserByUsername(username)==null)
@@ -72,26 +75,6 @@ public class LoginPresenter {
                 }
             }
         });
-    }
-
-    private Call post(String url, Callback callback) {
-        final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(30, TimeUnit.SECONDS);
-        builder.readTimeout(30, TimeUnit.SECONDS);
-        builder.writeTimeout(30, TimeUnit.SECONDS);
-        OkHttpClient client = builder.build();
-
-        RequestBody body = RequestBody.create("", JSON);
-        Request request = new Request.Builder()
-                .url(url)
-                .addHeader("Authorization", "Basic cGF3ZG9wdC1jbGllbnQtaWQ6cGF3ZG9wdC1jbGllbnQtc2VjcmV0")
-                .post(body)
-                .build();
-        Call call = client.newCall(request);
-        call.enqueue(callback);
-        return call;
     }
 
     public interface View{

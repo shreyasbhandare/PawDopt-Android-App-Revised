@@ -216,7 +216,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                rViewAdapter = new RViewAdapter(petList, totalResults);
+                rViewAdapter = new RViewAdapter(getContext(), petList, totalResults);
                 recyclerView.setAdapter(rViewAdapter);
             }
         });

@@ -68,14 +68,14 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return dataSet.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+    private class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvPetName;
         TextView tvPetBreed;
         ImageView ivPetPhoto;
         CheckBox cbLike;
 
-        public ItemViewHolder(View itemView) {
+        private ItemViewHolder(View itemView) {
             super(itemView);
             this.tvPetName = itemView.findViewById(R.id.petName);
             this.tvPetBreed = itemView.findViewById(R.id.petBreed);
@@ -88,7 +88,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         ProgressBar progressBar;
 
-        public LoadingViewHolder(@NonNull View itemView) {
+        private LoadingViewHolder(@NonNull View itemView) {
             super(itemView);
             progressBar = itemView.findViewById(R.id.progressBar);
         }

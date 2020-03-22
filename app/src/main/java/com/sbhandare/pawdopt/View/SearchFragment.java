@@ -18,7 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.sbhandare.pawdopt.Adapter.EndlessRecyclerViewScrollListener;
 import com.sbhandare.pawdopt.Adapter.RVAdapter;
+import com.sbhandare.pawdopt.Adapter.RViewAdapter;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
@@ -45,17 +47,18 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static RVAdapter rvAdapter;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
-    private static RVAdapter adapter;
+    private static RViewAdapter rViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private static List<Pet> data;
     private Button petDistanceBtn;
     private Button petCategoryBtn;
     private AppCompatImageView filterBtn;
     private SearchFragmentPresenter searchFragmentPresenter;
 
-    boolean isLoading = false;
+    private boolean isLoading = false;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -100,23 +103,14 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         // Inflate the layout for this fragment
-        searchFragmentPresenter = new SearchFragmentPresenter(this,getContext());
         initUIElements(view);
-
+        searchFragmentPresenter = new SearchFragmentPresenter(this,getContext());
         searchFragmentPresenter.populatePetList();
-        //populateRVTestData();
+        //initScrollListener();
 
         String[] distance_array = getResources().getStringArray(R.array.distance_array);
         String[] categoy_text_array = getResources().getStringArray(R.array.pettype_array);
-        /*
-        int[] icons = new int[] {
-                R.drawable.ic_dog_100,
-                R.drawable.ic_dog_100,
-                R.drawable.ic_mouse_96,
-                R.drawable.ic_rabbit_80,
-                R.drawable.ic_horse_100
-        };
-        */
+
         petDistanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,6 +150,17 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 filterFragment.show(getFragmentManager(),"filter");
             }
         });
+
+        scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                searchFragmentPresenter.getMorePets();
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        recyclerView.addOnScrollListener(scrollListener);
 
         return view;
     }
@@ -211,21 +216,8 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-    private void populateRVTestData() {
-        data = new ArrayList<>();
-        data.add(new Pet("Pumpkin","Persian", "https://cdn.pixabay.com/photo/2017/09/25/08/04/cat-2784291_960_720.jpg"));
-        data.add(new Pet("Cinnamon","siamese", "https://cdn.pixabay.com/photo/2017/02/15/12/12/cat-2068462_960_720.jpg"));
-        data.add(new Pet("Buddy","labrador", "https://cdn.pixabay.com/photo/2016/02/25/10/31/puppy-1221791_960_720.jpg"));
-        data.add(new Pet("Pikachu","Mouse", "https://cdn.pixabay.com/photo/2017/04/05/08/56/mouse-2204321_960_720.jpg"));
-        data.add(new Pet("Ruckus","Pit Bull", "https://cdn.pixabay.com/photo/2019/04/13/13/58/pit-bull-4124677_960_720.jpg"));
-        data.add(new Pet("Betsy","Domestic Short Hair", "https://cdn.pixabay.com/photo/2016/09/18/22/41/cat-1679193_960_720.jpg"));
-
-        adapter = new RVAdapter(data);
-        recyclerView.setAdapter(adapter);
-    }
-/*
-    @Override
-    public void initScrollListener(List<Pet> petList) {
+    /*
+    public void initScrollListener() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -239,53 +231,55 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
 
                 if (!isLoading) {
-                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == petList.size() - 1) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == searchFragmentPresenter.getPetList().size() - 1) {
                         //bottom of list!
-                        loadMore();
+                        searchFragmentPresenter.loadMore();
                         isLoading = true;
                     }
                 }
             }
         });
-
-
     }
+    */
 
-
-    @Override
-    public void loadMore(List<Pet> petList) {
-        rowsArrayList.add(null);
-        recyclerViewAdapter.notifyItemInserted(rowsArrayList.size() - 1);
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                rowsArrayList.remove(rowsArrayList.size() - 1);
-                int scrollPosition = rowsArrayList.size();
-                recyclerViewAdapter.notifyItemRemoved(scrollPosition);
-                int currentSize = scrollPosition;
-                int nextLimit = currentSize + 10;
-
-                while (currentSize - 1 < nextLimit) {
-                    rowsArrayList.add("Item " + currentSize);
-                    currentSize++;
-                }
-
-                recyclerViewAdapter.notifyDataSetChanged();
-                isLoading = false;
-            }
-        }, 2000);
-    }
-*/
     @Override
     public void populateRV(List<Pet> petList) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter = new RVAdapter(petList);
-                recyclerView.setAdapter(adapter);
+                //rViewAdapter = new RViewAdapter(petList);
+                //recyclerView.setAdapter(rViewAdapter);
+                rvAdapter = new RVAdapter(petList);
+                recyclerView.setAdapter(rvAdapter);
             }
         });
     }
+
+    @Override
+    public void updateRV() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                rvAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    /*
+    @Override
+    public void insertRVWithNull(int scrollPosition) {
+        rViewAdapter.notifyItemInserted(scrollPosition);
+    }
+
+    @Override
+    public void removeRVWithNull(int scrollPosition) {
+        rViewAdapter.notifyItemRemoved(scrollPosition);
+    }
+
+    @Override
+    public void updateRV(boolean isLoadingFlag) {
+        rViewAdapter.notifyDataSetChanged();
+        isLoading = false;
+    }
+    */
 }

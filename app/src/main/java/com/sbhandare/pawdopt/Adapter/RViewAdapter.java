@@ -12,6 +12,8 @@ import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.R;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -20,13 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int VIEW_TYPE_ITEM = 0;
-    private final int VIEW_TYPE_LOADING = 1;
+    private final int VIEW_TYPE_RESULT = 1;
 
     private List<Pet> dataSet;
+    private long totalResults;
 
-
-    public RViewAdapter(List<Pet> data) {
+    public RViewAdapter(List<Pet> data, long totalResults) {
         this.dataSet = data;
+        this.totalResults = totalResults;
     }
 
     @NonNull
@@ -36,8 +39,8 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_pet_item, parent, false);
             return new ItemViewHolder(view);
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_loading_item, parent, false);
-            return new LoadingViewHolder(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_results_item, parent, false);
+            return new ResultsViewHolder(view);
         }
     }
 
@@ -46,8 +49,8 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         if (viewHolder instanceof ItemViewHolder) {
             populateItemRows((ItemViewHolder) viewHolder, position);
-        } else if (viewHolder instanceof LoadingViewHolder) {
-            showLoadingView((LoadingViewHolder) viewHolder, position);
+        } else if (viewHolder instanceof ResultsViewHolder) {
+            showResultsView((ResultsViewHolder) viewHolder, position);
         }
 
     }
@@ -65,7 +68,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     @Override
     public int getItemViewType(int position) {
-        return dataSet.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+        return dataSet.get(position) == null ? VIEW_TYPE_RESULT : VIEW_TYPE_ITEM;
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -84,19 +87,20 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    private class LoadingViewHolder extends RecyclerView.ViewHolder {
+    private class ResultsViewHolder extends RecyclerView.ViewHolder {
 
-        ProgressBar progressBar;
+        TextView resultsTV;
 
-        private LoadingViewHolder(@NonNull View itemView) {
+        private ResultsViewHolder(@NonNull View itemView) {
             super(itemView);
-            progressBar = itemView.findViewById(R.id.progressBar);
+            resultsTV = itemView.findViewById(R.id.totalResultsTV);
         }
     }
 
-    private void showLoadingView(LoadingViewHolder viewHolder, int position) {
+    private void showResultsView(ResultsViewHolder viewHolder, int position) {
         //ProgressBar would be displayed
-
+        TextView resultsTV = viewHolder.resultsTV;
+        resultsTV.setText(String.format("%,d", totalResults));
     }
 
     private void populateItemRows(ItemViewHolder viewHolder, int position) {

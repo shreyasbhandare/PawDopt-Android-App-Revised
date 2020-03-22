@@ -47,9 +47,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private static RVAdapter rvAdapter;
     private EndlessRecyclerViewScrollListener scrollListener;
-
     private static RViewAdapter rViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
@@ -216,70 +214,24 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-    /*
-    public void initScrollListener() {
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-
-                if (!isLoading) {
-                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == searchFragmentPresenter.getPetList().size() - 1) {
-                        //bottom of list!
-                        searchFragmentPresenter.loadMore();
-                        isLoading = true;
-                    }
-                }
-            }
-        });
-    }
-    */
-
     @Override
-    public void populateRV(List<Pet> petList) {
-        getActivity().runOnUiThread(new Runnable() {
+    public void populateRV(List<Pet> petList, long totalResults) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //rViewAdapter = new RViewAdapter(petList);
-                //recyclerView.setAdapter(rViewAdapter);
-                rvAdapter = new RVAdapter(petList);
-                recyclerView.setAdapter(rvAdapter);
+                rViewAdapter = new RViewAdapter(petList, totalResults);
+                recyclerView.setAdapter(rViewAdapter);
             }
         });
     }
 
     @Override
     public void updateRV() {
-        getActivity().runOnUiThread(new Runnable() {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                rvAdapter.notifyDataSetChanged();
+                rViewAdapter.notifyDataSetChanged();
             }
         });
     }
-
-    /*
-    @Override
-    public void insertRVWithNull(int scrollPosition) {
-        rViewAdapter.notifyItemInserted(scrollPosition);
-    }
-
-    @Override
-    public void removeRVWithNull(int scrollPosition) {
-        rViewAdapter.notifyItemRemoved(scrollPosition);
-    }
-
-    @Override
-    public void updateRV(boolean isLoadingFlag) {
-        rViewAdapter.notifyDataSetChanged();
-        isLoading = false;
-    }
-    */
 }

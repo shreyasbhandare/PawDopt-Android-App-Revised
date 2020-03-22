@@ -6,6 +6,7 @@ import android.os.Handler;
 import com.google.gson.Gson;
 import com.sbhandare.pawdopt.Model.Organization;
 import com.sbhandare.pawdopt.Model.Page;
+import com.sbhandare.pawdopt.Model.PageDetails;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Model.SecurityUser;
 import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
@@ -30,6 +31,7 @@ import okhttp3.Response;
 
 public class SearchFragmentPresenter {
     private List<Pet> petList;
+    private long totalResults;
     private View view;
     private Context context;
     private SecurityUserRepository securityUserRepository;
@@ -44,10 +46,7 @@ public class SearchFragmentPresenter {
         this.petList = new ArrayList<>();
         this.okhttpProcessor = new OkhttpProcessor();
         pageCt = 0;
-    }
-
-    public List<Pet> getPetList(){
-        return petList;
+        totalResults = 0;
     }
 
     public void populatePetList(){
@@ -70,8 +69,11 @@ public class SearchFragmentPresenter {
                         // Do what you want to do with the response.
                         if (response.body() != null) {
                             Page petsPage = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(), Page.class);
-                            if (petsPage != null && petsPage.getListObj() != null) {
+                            if (petsPage != null && petsPage.getListObj() != null && petsPage.getPageDetails() != null) {
                                 List<Pet> tempPetList = (List<Pet>) (Object) petsPage.getListObj();
+                                PageDetails pageDetails = (PageDetails) petsPage.getPageDetails();
+                                totalResults = pageDetails.getTotalResults();
+                                petList.add(null);
 
                                 for (int i = 0; i < tempPetList.size(); i++) {
                                     String name = tempPetList.get(i).getName();
@@ -85,7 +87,7 @@ public class SearchFragmentPresenter {
                         }
 
                         // call populateRV() method on view to update recycler view
-                        view.populateRV(petList);
+                        view.populateRV(petList, totalResults);
                     } else {
                         // Request not successful
                         System.out.println("no success");
@@ -94,40 +96,6 @@ public class SearchFragmentPresenter {
             });
         }
     }
-
-    /*
-    public void loadMore(){
-        petList.add(null);
-        view.insertRVWithNull(petList.size() - 1);
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                petList.remove(petList.size() - 1);
-                int scrollPosition = petList.size();
-                view.removeRVWithNull(scrollPosition);
-                ++pageCt;
-                /*
-                int pos = 0;
-                List<Pet> pets = new ArrayList<>();
-                for(Pet pet : petList){
-                    if(pos==10)
-                        break;
-                    pets.add(pet);
-                    pos++;
-                }
-                pos=0;
-
-                List<Pet> morePets = getMorePets();
-                petList.addAll(morePets);
-
-                getMorePets();
-                view.updateRV(false);
-            }
-        }, 2000);
-    }
-    */
 
     public void getMorePets(){
         ++pageCt;
@@ -176,10 +144,7 @@ public class SearchFragmentPresenter {
 
 
     public interface View{
-        void populateRV(List<Pet> petList);
-        //void insertRVWithNull(int scrollPosition);
-        //void removeRVWithNull(int scrollPosition);
-        //void updateRV(boolean isLoadingFlag);
+        void populateRV(List<Pet> petList, long totalResults);
         void updateRV();
     }
 }

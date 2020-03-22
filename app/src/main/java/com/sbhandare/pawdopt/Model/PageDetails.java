@@ -6,6 +6,8 @@ public class PageDetails
 
     private int resultsPerPage;
 
+    private long totalResults;
+
     public void setCurrentPage(int currentPage){
         this.currentPage = currentPage;
     }
@@ -17,5 +19,13 @@ public class PageDetails
     }
     public int getResultsPerPage(){
         return this.resultsPerPage;
+    }
+
+    public long getTotalResults() {
+        return totalResults;
+    }
+
+    public void setTotalResults(long totalResults) {
+        this.totalResults = totalResults;
     }
 }

@@ -48,7 +48,8 @@ public class Pet
 
     private Organization organization;
 
-    public Pet(String name, String breed, String img){
+    public Pet(int id, String name, String breed, String img){
+        this.petid = id;
         this.name = name;
         this.breed = breed;
         this.image = img;

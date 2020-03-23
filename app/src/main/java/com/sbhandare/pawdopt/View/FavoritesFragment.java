@@ -91,12 +91,12 @@ public class FavoritesFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         data = new ArrayList<>();
-        data.add(new Pet("Pumpkin","Persian", "https://cdn.pixabay.com/photo/2017/09/25/08/04/cat-2784291_960_720.jpg"));
-        data.add(new Pet("Cinnamon","siamese", "https://cdn.pixabay.com/photo/2017/02/15/12/12/cat-2068462_960_720.jpg"));
-        data.add(new Pet("Buddy","labrador", "https://cdn.pixabay.com/photo/2016/02/25/10/31/puppy-1221791_960_720.jpg"));
-        data.add(new Pet("Pikachu","Mouse", "https://cdn.pixabay.com/photo/2017/04/05/08/56/mouse-2204321_960_720.jpg"));
-        data.add(new Pet("Ruckus","Pit Bull", "https://cdn.pixabay.com/photo/2019/04/13/13/58/pit-bull-4124677_960_720.jpg"));
-        data.add(new Pet("Betsy","Domestic Short Hair", "https://cdn.pixabay.com/photo/2016/09/18/22/41/cat-1679193_960_720.jpg"));
+        data.add(new Pet(0,"Pumpkin","Persian", "https://cdn.pixabay.com/photo/2017/09/25/08/04/cat-2784291_960_720.jpg"));
+        data.add(new Pet(1,"Cinnamon","siamese", "https://cdn.pixabay.com/photo/2017/02/15/12/12/cat-2068462_960_720.jpg"));
+        data.add(new Pet(2,"Buddy","labrador", "https://cdn.pixabay.com/photo/2016/02/25/10/31/puppy-1221791_960_720.jpg"));
+        data.add(new Pet(3,"Pikachu","Mouse", "https://cdn.pixabay.com/photo/2017/04/05/08/56/mouse-2204321_960_720.jpg"));
+        data.add(new Pet(4,"Ruckus","Pit Bull", "https://cdn.pixabay.com/photo/2019/04/13/13/58/pit-bull-4124677_960_720.jpg"));
+        data.add(new Pet(5,"Betsy","Domestic Short Hair", "https://cdn.pixabay.com/photo/2016/09/18/22/41/cat-1679193_960_720.jpg"));
 
         adapter = new RVAdapter(data);
         recyclerView.setAdapter(adapter);

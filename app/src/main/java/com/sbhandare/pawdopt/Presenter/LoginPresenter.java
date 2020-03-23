@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.sbhandare.pawdopt.Model.Oauth2Token;
+import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Model.SecurityUser;
 import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
@@ -24,7 +25,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class LoginPresenter {
+public class LoginPresenter implements PawDoptPresenter {
     private View view;
     private Context context;
     private SecurityUserRepository securityUserRepository;
@@ -75,6 +76,11 @@ public class LoginPresenter {
                 }
             }
         });
+    }
+
+    @Override
+    public void addUserFavorite(Pet pet, int pos) {
+
     }
 
     public interface View{

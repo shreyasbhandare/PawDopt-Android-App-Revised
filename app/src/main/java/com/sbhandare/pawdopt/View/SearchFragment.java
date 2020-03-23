@@ -21,6 +21,7 @@ import android.widget.Button;
 import com.sbhandare.pawdopt.Adapter.EndlessRecyclerViewScrollListener;
 import com.sbhandare.pawdopt.Adapter.RVAdapter;
 import com.sbhandare.pawdopt.Adapter.RViewAdapter;
+import com.sbhandare.pawdopt.Component.PawDoptToast;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
@@ -216,7 +217,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                rViewAdapter = new RViewAdapter(getContext(), petList, totalResults);
+                rViewAdapter = new RViewAdapter(getContext(), petList, totalResults, searchFragmentPresenter);
                 recyclerView.setAdapter(rViewAdapter);
             }
         });
@@ -230,5 +231,18 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 rViewAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void removeFavoriteFromRV(String name, int pos, int size) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PawDoptToast.showFavoritesToast(getContext(), name);
+            }
+        });
+
+        rViewAdapter.notifyItemRemoved(pos);
+        rViewAdapter.notifyItemRangeChanged(pos, size);
     }
 }

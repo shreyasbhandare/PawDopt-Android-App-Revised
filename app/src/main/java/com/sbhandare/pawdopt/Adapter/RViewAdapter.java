@@ -14,6 +14,7 @@ import com.sbhandare.pawdopt.Presenter.FavoritesFragmentPresenter;
 import com.sbhandare.pawdopt.Presenter.PawDoptPresenter;
 import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -96,10 +97,12 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private class ResultsViewHolder extends RecyclerView.ViewHolder {
 
         TextView resultsTV;
+        TextView resultsLabelTV;
 
         private ResultsViewHolder(@NonNull View itemView) {
             super(itemView);
             resultsTV = itemView.findViewById(R.id.totalResultsTV);
+            resultsLabelTV = itemView.findViewById(R.id.totalResultsLabelTV);
         }
     }
 
@@ -107,7 +110,10 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private void showResultsView(ResultsViewHolder viewHolder, int position) {
         //ProgressBar would be displayed
         TextView resultsTV = viewHolder.resultsTV;
+        TextView resultsLabelTV = viewHolder.resultsLabelTV;
         resultsTV.setText(String.format("%,d", totalResults));
+        if(presenter instanceof FavoritesFragmentPresenter)
+            resultsLabelTV.setText(PawDoptUtil.RESULTS_LABEL_FAVORITES);
     }
 
     private void populateItemRows(ItemViewHolder viewHolder, int position) {

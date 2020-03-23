@@ -144,7 +144,7 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                rViewAdapter = new RViewAdapter(getContext(), favPetList, 0, favoritesFragmentPresenter);
+                rViewAdapter = new RViewAdapter(getContext(), favPetList, favPetList.size(), favoritesFragmentPresenter);
                 recyclerView.setAdapter(rViewAdapter);
             }
         });

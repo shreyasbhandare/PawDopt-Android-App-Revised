@@ -62,6 +62,7 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
                         Type listType = new TypeToken<List<Pet>>() {}.getType();
                         List<Pet> tempPetList = GSON.getGson().fromJson(Objects.requireNonNull(response.body().string()), listType);
 
+                        favPetList.add(null);
                         for (int i = 0; i < tempPetList.size(); i++) {
                             int id = tempPetList.get(i).getPetid();
                             String name = tempPetList.get(i).getName();

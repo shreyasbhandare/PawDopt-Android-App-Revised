@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -12,14 +11,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.sbhandare.pawdopt.Adapter.EndlessRecyclerViewScrollListener;
-import com.sbhandare.pawdopt.Adapter.RVAdapter;
 import com.sbhandare.pawdopt.Adapter.RViewAdapter;
 import com.sbhandare.pawdopt.Component.PawDoptToast;
 import com.sbhandare.pawdopt.Model.Pet;
@@ -27,9 +24,7 @@ import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 
 import org.michaelbel.bottomsheet.BottomSheet;
-import org.michaelbel.bottomsheet.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,8 +51,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private Button petCategoryBtn;
     private AppCompatImageView filterBtn;
     private SearchFragmentPresenter searchFragmentPresenter;
-
-    private boolean isLoading = false;
 
     // TODO: Rename and change types of parameters
     private String mParam1;

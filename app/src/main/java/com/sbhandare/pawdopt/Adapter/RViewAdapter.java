@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sbhandare.pawdopt.Model.Pet;
+import com.sbhandare.pawdopt.Presenter.FavoritesFragmentPresenter;
 import com.sbhandare.pawdopt.Presenter.PawDoptPresenter;
+import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 import com.squareup.picasso.Picasso;
 
@@ -119,12 +121,17 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         textViewPetBreed.setText(dataSet.get(position).getBreed());
         Picasso.get().load(dataSet.get(position).getImage()).fit().into(imageViewPetPhoto);
         checkBoxPetLike.setChecked(false);
-
-        checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked) {
-                presenter.addUserFavorite(dataSet.get(position), position);
-            }
-        });
+        if(presenter instanceof FavoritesFragmentPresenter) {
+            checkBoxPetLike.setChecked(true);
+            checkBoxPetLike.setClickable(false);
+        }
+        else if(presenter instanceof SearchFragmentPresenter) {
+            checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+                if (isChecked) {
+                    presenter.addUserFavorite(dataSet.get(position), position);
+                }
+            });
+        }
     }
 }
 

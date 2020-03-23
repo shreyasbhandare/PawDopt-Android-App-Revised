@@ -1,9 +1,7 @@
 package com.sbhandare.pawdopt.Presenter;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
-import com.sbhandare.pawdopt.Component.PawDoptToast;
 import com.sbhandare.pawdopt.Model.Page;
 import com.sbhandare.pawdopt.Model.PageDetails;
 import com.sbhandare.pawdopt.Model.Pet;

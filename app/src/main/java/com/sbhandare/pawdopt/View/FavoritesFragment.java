@@ -13,11 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sbhandare.pawdopt.Adapter.RVAdapter;
+import com.sbhandare.pawdopt.Adapter.RViewAdapter;
 import com.sbhandare.pawdopt.Model.Pet;
+import com.sbhandare.pawdopt.Presenter.FavoritesFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -28,16 +31,17 @@ import java.util.ArrayList;
  * Use the {@link FavoritesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FavoritesFragment extends Fragment {
+public class FavoritesFragment extends Fragment implements FavoritesFragmentPresenter.View {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private static RVAdapter adapter;
+    private static RViewAdapter rViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private static ArrayList<Pet> data;
+    private FavoritesFragmentPresenter favoritesFragmentPresenter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -81,25 +85,10 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        initUIElements(view);
+        favoritesFragmentPresenter = new FavoritesFragmentPresenter(this,getContext());
+        favoritesFragmentPresenter.populateFavoritesList();
 
-        // Inflate the layout for this fragment
-        recyclerView = view.findViewById(R.id.petFavoriteListRV);
-        recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        data = new ArrayList<>();
-        data.add(new Pet(0,"Pumpkin","Persian", "https://cdn.pixabay.com/photo/2017/09/25/08/04/cat-2784291_960_720.jpg"));
-        data.add(new Pet(1,"Cinnamon","siamese", "https://cdn.pixabay.com/photo/2017/02/15/12/12/cat-2068462_960_720.jpg"));
-        data.add(new Pet(2,"Buddy","labrador", "https://cdn.pixabay.com/photo/2016/02/25/10/31/puppy-1221791_960_720.jpg"));
-        data.add(new Pet(3,"Pikachu","Mouse", "https://cdn.pixabay.com/photo/2017/04/05/08/56/mouse-2204321_960_720.jpg"));
-        data.add(new Pet(4,"Ruckus","Pit Bull", "https://cdn.pixabay.com/photo/2019/04/13/13/58/pit-bull-4124677_960_720.jpg"));
-        data.add(new Pet(5,"Betsy","Domestic Short Hair", "https://cdn.pixabay.com/photo/2016/09/18/22/41/cat-1679193_960_720.jpg"));
-
-        adapter = new RVAdapter(data);
-        recyclerView.setAdapter(adapter);
         return view;
     }
 
@@ -140,5 +129,24 @@ public class FavoritesFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void initUIElements(View view){
+        recyclerView = view.findViewById(R.id.petFavoriteListRV);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    @Override
+    public void populateRV(List<Pet> favPetList) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                rViewAdapter = new RViewAdapter(getContext(), favPetList, 0, favoritesFragmentPresenter);
+                recyclerView.setAdapter(rViewAdapter);
+            }
+        });
     }
 }

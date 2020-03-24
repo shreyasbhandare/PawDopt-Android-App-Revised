@@ -15,6 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,6 +43,7 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
 
     public void populateFavoritesList(){
         // rest api call to pawdopt service
+        this.favPetList.clear();
         securityUsers = securityUserRepository.getAllSecurityUsers();
 
         if(securityUsers!=null && !securityUsers.isEmpty() && securityUsers.get(0).getToken()!=null) {
@@ -72,7 +75,6 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
                             Pet newPet = new Pet(id, name, breed, image);
                             favPetList.add(newPet);
                         }
-
                         // call populateRV() method on view to update recycler view
                         view.populateRV(favPetList);
                     } else {

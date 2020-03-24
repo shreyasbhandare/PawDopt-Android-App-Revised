@@ -87,7 +87,7 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         initUIElements(view);
         favoritesFragmentPresenter = new FavoritesFragmentPresenter(this,getContext());
-        favoritesFragmentPresenter.populateFavoritesList();
+        //favoritesFragmentPresenter.populateFavoritesList();
 
         return view;
     }
@@ -144,9 +144,17 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                rViewAdapter = new RViewAdapter(getContext(), favPetList, favPetList.size(), favoritesFragmentPresenter);
+                rViewAdapter = new RViewAdapter(getContext(), favPetList, favPetList.size()-1, favoritesFragmentPresenter);
                 recyclerView.setAdapter(rViewAdapter);
             }
         });
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            favoritesFragmentPresenter.populateFavoritesList();
+        }
     }
 }

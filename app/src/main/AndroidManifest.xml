@@ -20,7 +20,9 @@
         <activity android:name=".View.LoginActivity"
             android:noHistory="true">
         </activity>
-        <activity android:name=".View.MainActivity"></activity>
+        <activity android:name=".View.MainActivity"
+            android:noHistory="true">
+        </activity>
         <activity android:name=".View.BaseActivity"
             android:noHistory="true">
             <intent-filter>

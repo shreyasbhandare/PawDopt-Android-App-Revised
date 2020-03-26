@@ -21,6 +21,9 @@ public interface SecurityUserDAO {
     @Delete
     public void delete(SecurityUser securityUser);
 
+    @Query("DELETE FROM security_user")
+    public void deleteAll();
+
     @Query("SELECT * FROM security_user")
     public List<SecurityUser> getSecurityUsers();
 

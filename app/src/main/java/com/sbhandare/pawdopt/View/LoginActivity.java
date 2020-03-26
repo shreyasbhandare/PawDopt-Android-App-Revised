@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sbhandare.pawdopt.Component.PawDoptPasswordTransform;
 import com.sbhandare.pawdopt.Presenter.LoginPresenter;
 import com.sbhandare.pawdopt.R;
 
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
         loginBtn = findViewById(R.id.loginBtn);
         usernameEditTxt = findViewById(R.id.emailEdit);
         passwordEditTxt = findViewById(R.id.passwordEdit);
+        passwordEditTxt.setTransformationMethod(new PawDoptPasswordTransform());
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.sbhandare.pawdopt.View;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sbhandare.pawdopt.Presenter.AccountFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 
 
@@ -23,7 +25,7 @@ import com.sbhandare.pawdopt.R;
  * Use the {@link AccountFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragment extends Fragment {
+public class AccountFragment extends Fragment implements AccountFragmentPresenter.View {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +36,8 @@ public class AccountFragment extends Fragment {
     private String mParam2;
 
     private TextView aboutTv;
-
+    private TextView logoutTv;
+    private AccountFragmentPresenter accountFragmentPresenter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -74,7 +77,9 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        aboutTv = view.findViewById(R.id.aboutTxt);
+        initUIElements(view);
+        accountFragmentPresenter = new AccountFragmentPresenter(this, getContext());
+
         aboutTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,8 +89,13 @@ public class AccountFragment extends Fragment {
                         .setMessage(getString(R.string.aboutParaTxt))
                         .setCancelable(true)
                         .show();
+            }
+        });
 
-
+        logoutTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accountFragmentPresenter.logout();
             }
         });
 
@@ -129,5 +139,16 @@ public class AccountFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void initUIElements(View view){
+        aboutTv = view.findViewById(R.id.aboutTxt);
+        logoutTv = view.findViewById(R.id.logoutTxt);
+    }
+
+    @Override
+    public void loadLoginAcitivity() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
     }
 }

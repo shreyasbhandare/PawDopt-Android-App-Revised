@@ -78,6 +78,20 @@ public class SecurityUserRepository {
         }
     }
 
+    public void deleteAllSecurityUsers(){
+        delAllSecurityUsers();
+    }
+
+    private static void delAllSecurityUsers(){
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                appDatabase.getSecurityUserDAO().deleteAll();
+                return null;
+            }
+        }.execute();
+    }
+
     public SecurityUser getSecurityUserByUsername(String username){
         return appDatabase.getSecurityUserDAO().getSecurityUserWithUsername(username);
     }

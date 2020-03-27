@@ -2,7 +2,6 @@ package com.sbhandare.pawdopt.Presenter;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
 import com.sbhandare.pawdopt.Model.Oauth2Token;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Model.SecurityUser;
@@ -34,7 +33,7 @@ public class BaseActivityPresenter implements PawDoptPresenter {
     }
 
     public boolean isUserAlreadyLoggedIn(){
-        List<SecurityUser> securityUserList = securityUserRepository.getAllSecurityUsers();
+        //List<SecurityUser> securityUserList = securityUserRepository.getAllSecurityUsers();
         return securityUserRepository.getAllSecurityUsers() != null && !securityUserRepository.getAllSecurityUsers().isEmpty();
     }
 
@@ -56,8 +55,6 @@ public class BaseActivityPresenter implements PawDoptPresenter {
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
-                            //System.out.println(Objects.requireNonNull(response.body()).string());
-
                             Oauth2Token oauth2Token = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(), Oauth2Token.class);
 
                             if(oauth2Token!=null) {

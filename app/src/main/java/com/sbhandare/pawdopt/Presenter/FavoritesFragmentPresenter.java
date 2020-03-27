@@ -2,12 +2,12 @@ package com.sbhandare.pawdopt.Presenter;
 
 import android.content.Context;
 
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Model.SecurityUser;
 import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
+import com.sbhandare.pawdopt.Service.Location.LocationService;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
 
 import org.jetbrains.annotations.NotNull;
@@ -15,8 +15,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,6 +30,7 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
     private SecurityUserRepository securityUserRepository;
     private OkhttpProcessor okhttpProcessor;
     private List<SecurityUser> securityUsers;
+    private LocationService locationService;
 
     public FavoritesFragmentPresenter(View view, Context context){
         this.view = view;
@@ -39,6 +38,7 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
         this.securityUserRepository = new SecurityUserRepository(context);
         this.favPetList = new ArrayList<>();
         this.okhttpProcessor = new OkhttpProcessor();
+        this.locationService = new LocationService(context);
     }
 
     public void populateFavoritesList(){
@@ -71,8 +71,13 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
                             String name = tempPetList.get(i).getName();
                             String breed = tempPetList.get(i).getBreed();
                             String image = tempPetList.get(i).getImage();
+                            long distance=0;
 
-                            Pet newPet = new Pet(id, name, breed, image);
+                            if(tempPetList.get(i).getOrganization()!=null && tempPetList.get(i).getOrganization().getAddress()!=null){
+                                distance = locationService.getDistanceInMiles(tempPetList.get(i).getOrganization().getAddress());
+                            }
+
+                            Pet newPet = new Pet(id, name, breed, image, distance);
                             favPetList.add(newPet);
                         }
                         // call populateRV() method on view to update recycler view

@@ -48,11 +48,14 @@ public class Pet
 
     private Organization organization;
 
-    public Pet(int id, String name, String breed, String img){
+    private long distance;
+
+    public Pet(int id, String name, String breed, String img, long distance){
         this.petid = id;
         this.name = name;
         this.breed = breed;
         this.image = img;
+        this.distance = distance;
     }
 
     public void setPetid(int petid){
@@ -192,6 +195,14 @@ public class Pet
     }
     public Organization getOrganization(){
         return this.organization;
+    }
+
+    public long getDistance() {
+        return distance;
+    }
+
+    public void setDistance(long distance) {
+        this.distance = distance;
     }
 }
 

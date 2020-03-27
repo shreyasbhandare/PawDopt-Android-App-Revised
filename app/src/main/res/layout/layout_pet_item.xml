@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:id="@+id/petName"
-                    android:text="Pet 1 y Name"
+                    android:text="Pet 1 Name"
                     android:fontFamily="@font/montserrat"
                     android:textColor="@color/appPrimaryGreenColor"
                     android:textSize="@dimen/txtSemiLgeFontSize"
@@ -47,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:id="@+id/petBreed"
+                    android:text="Pet 1 Breed"
                     android:fontFamily="@font/montserrat"
                     android:textColor="@color/appSecondaryGreyColor"
                     android:textSize="@dimen/txtSmlFontSize"
@@ -54,6 +55,34 @@
                     app:layout_constraintLeft_toRightOf="@id/petPhoto"
                     android:gravity="center"
                     android:layout_marginStart="@dimen/margin16dp"
+                    android:maxLength="20"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/petDitanceImg"
+                    android:src="@drawable/ic_location_marker_96"
+                    app:layout_constraintTop_toBottomOf="@+id/petBreed"
+                    app:layout_constraintLeft_toRightOf="@id/petPhoto"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:id="@+id/petDistance"
+                    android:text="5 mi"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/appSecondaryGreyColor"
+                    android:textSize="@dimen/txtSmlFontSize"
+                    app:layout_constraintTop_toTopOf="@id/petDitanceImg"
+                    app:layout_constraintBottom_toBottomOf="@id/petDitanceImg"
+                    app:layout_constraintLeft_toRightOf="@id/petDitanceImg"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin8dp"
                     android:maxLength="20"
                     android:ellipsize="end"
                     android:maxLines="1"/>

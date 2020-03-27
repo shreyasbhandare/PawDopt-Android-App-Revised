@@ -1,13 +1,17 @@
 package com.sbhandare.pawdopt.View;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.sbhandare.pawdopt.Presenter.BaseActivityPresenter;
 import com.sbhandare.pawdopt.R;
-import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class BaseActivity extends AppCompatActivity implements BaseActivityPresenter.View {
 

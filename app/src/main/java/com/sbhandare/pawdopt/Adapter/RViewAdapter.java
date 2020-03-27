@@ -82,6 +82,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         TextView tvPetName;
         TextView tvPetBreed;
+        TextView tvPetDistance;
         ImageView ivPetPhoto;
         CheckBox cbLike;
 
@@ -89,6 +90,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             this.tvPetName = itemView.findViewById(R.id.petName);
             this.tvPetBreed = itemView.findViewById(R.id.petBreed);
+            this.tvPetDistance = itemView.findViewById(R.id.petDistance);
             this.ivPetPhoto = itemView.findViewById(R.id.petPhoto);
             this.cbLike = itemView.findViewById(R.id.petLike);
         }
@@ -120,12 +122,15 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         TextView textViewPetName = viewHolder.tvPetName;
         TextView textViewPetBreed = viewHolder.tvPetBreed;
+        TextView textViewPetDistance = viewHolder.tvPetDistance;
         ImageView imageViewPetPhoto = viewHolder.ivPetPhoto;
         CheckBox checkBoxPetLike = viewHolder.cbLike;
 
         textViewPetName.setText(dataSet.get(position).getName());
         textViewPetBreed.setText(dataSet.get(position).getBreed());
         Picasso.get().load(dataSet.get(position).getImage()).fit().into(imageViewPetPhoto);
+        String posTxt = dataSet.get(position).getDistance()<=0 ? "" : dataSet.get(position).getDistance()+" mi";
+        textViewPetDistance.setText(posTxt);
         checkBoxPetLike.setChecked(false);
         if(presenter instanceof FavoritesFragmentPresenter) {
             checkBoxPetLike.setChecked(true);

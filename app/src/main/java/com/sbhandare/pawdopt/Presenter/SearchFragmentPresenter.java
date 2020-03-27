@@ -8,6 +8,7 @@ import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Model.SecurityUser;
 import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
+import com.sbhandare.pawdopt.Service.Location.LocationService;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,7 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
     private OkhttpProcessor okhttpProcessor;
     private int pageCt;
     private List<SecurityUser> securityUsers;
+    private LocationService locationService;
 
     public SearchFragmentPresenter(View view, Context context){
         this.view = view;
@@ -37,6 +39,7 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
         this.securityUserRepository = new SecurityUserRepository(context);
         this.petList = new ArrayList<>();
         this.okhttpProcessor = new OkhttpProcessor();
+        this.locationService = new LocationService(context);
         pageCt = 0;
         totalResults = 0;
     }
@@ -72,8 +75,13 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
                                     String name = tempPetList.get(i).getName();
                                     String breed = tempPetList.get(i).getBreed();
                                     String image = tempPetList.get(i).getImage();
+                                    long distance=0;
 
-                                    Pet newPet = new Pet(id, name, breed, image);
+                                    if(tempPetList.get(i).getOrganization()!=null && tempPetList.get(i).getOrganization().getAddress()!=null){
+                                        distance = locationService.getDistanceInMiles(tempPetList.get(i).getOrganization().getAddress());
+                                    }
+
+                                    Pet newPet = new Pet(id, name, breed, image, distance);
                                     petList.add(newPet);
                                 }
                             }
@@ -118,8 +126,13 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
                                     String name = tempPetList.get(i).getName();
                                     String breed = tempPetList.get(i).getBreed();
                                     String image = tempPetList.get(i).getImage();
+                                    long distance=0;
 
-                                    Pet newPet = new Pet(id, name, breed, image);
+                                    if(tempPetList.get(i).getOrganization()!=null && tempPetList.get(i).getOrganization().getAddress()!=null){
+                                        distance = locationService.getDistanceInMiles(tempPetList.get(i).getOrganization().getAddress());
+                                    }
+
+                                    Pet newPet = new Pet(id, name, breed, image, distance);
                                     petList.add(newPet);
                                 }
                                 view.updateRV();

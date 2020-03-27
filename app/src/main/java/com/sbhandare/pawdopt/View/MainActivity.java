@@ -1,8 +1,11 @@
 package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,8 +13,7 @@ import com.fxn.BubbleTabBar;
 import com.fxn.OnBubbleClickListener;
 import com.sbhandare.pawdopt.R;
 import com.sbhandare.pawdopt.Adapter.ViewPagerAdapter;
-
-import java.util.ArrayList;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 public class MainActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener,
                                                                FavoritesFragment.OnFragmentInteractionListener,

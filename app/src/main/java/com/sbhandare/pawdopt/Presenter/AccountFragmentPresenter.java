@@ -22,6 +22,16 @@ public class AccountFragmentPresenter {
         this.okhttpProcessor = new OkhttpProcessor();
     }
 
+    public void populateUserInfo(){
+        SecurityUser securityUser = securityUserRepository.getAllSecurityUsers().get(0);
+        String username;
+        if(securityUser != null){
+            username = securityUser.getUsername();
+            view.populateEmailTextView(username);
+        }
+
+    }
+
     public void logout(){
         securityUserRepository.deleteAllSecurityUsers();
         view.loadLoginAcitivity();
@@ -29,5 +39,6 @@ public class AccountFragmentPresenter {
 
     public interface View{
         void loadLoginAcitivity();
+        void populateEmailTextView(String email);
     }
 }

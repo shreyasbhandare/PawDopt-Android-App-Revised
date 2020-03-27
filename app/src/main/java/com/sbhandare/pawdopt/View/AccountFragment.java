@@ -35,6 +35,7 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     private String mParam1;
     private String mParam2;
 
+    private TextView emailTv;
     private TextView aboutTv;
     private TextView logoutTv;
     private AccountFragmentPresenter accountFragmentPresenter;
@@ -79,6 +80,7 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         initUIElements(view);
         accountFragmentPresenter = new AccountFragmentPresenter(this, getContext());
+        accountFragmentPresenter.populateUserInfo();
 
         aboutTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +144,7 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     }
 
     private void initUIElements(View view){
+        emailTv = view.findViewById(R.id.emailTxt);
         aboutTv = view.findViewById(R.id.aboutTxt);
         logoutTv = view.findViewById(R.id.logoutTxt);
     }
@@ -150,5 +153,10 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     public void loadLoginAcitivity() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void populateEmailTextView(String email) {
+        emailTv.setText(email);
     }
 }

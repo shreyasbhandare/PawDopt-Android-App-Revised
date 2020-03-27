@@ -52,24 +52,14 @@ public class LoginPresenter implements PawDoptPresenter {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (response.isSuccessful()) {
                     if(response.body() != null) {
-                        //System.out.println(Objects.requireNonNull(response.body()).string());
                         Oauth2Token oauth2Token = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(), Oauth2Token.class);
 
                         if(oauth2Token!=null) {
-                            if(securityUserRepository.getSecurityUserByUsername(username)==null)
-                                securityUserRepository.insertSecurityUser(username,
-                                        oauth2Token.getAccess_token(),
-                                        oauth2Token.getRefresh_token(),
-                                        password);
-                            else {
-                                SecurityUser securityUser =  securityUserRepository.getSecurityUserByUsername(username);
-                                securityUser.setToken(oauth2Token.getAccess_token());
-                                securityUser.setRefreshToken(oauth2Token.getRefresh_token());
-                                securityUserRepository.updateSecurityUser(securityUser);
-                            }
+                            securityUserRepository.deleteAllSecurityUsers();
+                            securityUserRepository.insertSecurityUser(username, oauth2Token.getAccess_token(), oauth2Token.getRefresh_token(), password);
+                            view.loadMainActivity();
                         }
                     }
-                    view.loadMainActivity();
                 } else {
                     // Request not successful
                     System.out.println("no success");

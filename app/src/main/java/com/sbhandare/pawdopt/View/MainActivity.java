@@ -1,11 +1,8 @@
 package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,19 +10,22 @@ import com.fxn.BubbleTabBar;
 import com.fxn.OnBubbleClickListener;
 import com.sbhandare.pawdopt.R;
 import com.sbhandare.pawdopt.Adapter.ViewPagerAdapter;
-import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 public class MainActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener,
                                                                FavoritesFragment.OnFragmentInteractionListener,
                                                                AccountFragment.OnFragmentInteractionListener,
-                                                               FilterFragment.OnFragmentInteractionListener {
+                                                               FilterFragment.OnFragmentInteractionListener,
+                                                               PetDetailsFragment.OnFragmentInteractionListener {
 
     BubbleTabBar bubbleTabBar;
     private ViewPager viewPager;
 
+    SearchFragmentRoot searchFragmentRoot;
     SearchFragment searchFragment;
+    FavoritesFragmentRoot favoritesFragmentRoot;
     FavoritesFragment favoritesFragment;
     AccountFragment accountFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +58,19 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        /*
         searchFragment = new SearchFragment();
         favoritesFragment = new FavoritesFragment();
         accountFragment = new AccountFragment();
         adapter.addFragment(searchFragment);
         adapter.addFragment(favoritesFragment);
+        adapter.addFragment(accountFragment);
+        */
+        searchFragmentRoot = new SearchFragmentRoot();
+        favoritesFragmentRoot = new FavoritesFragmentRoot();
+        accountFragment = new AccountFragment();
+        adapter.addFragment(searchFragmentRoot);
+        adapter.addFragment(favoritesFragmentRoot);
         adapter.addFragment(accountFragment);
         viewPager.setAdapter(adapter);
     }

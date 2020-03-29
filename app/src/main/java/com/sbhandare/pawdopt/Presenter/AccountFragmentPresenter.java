@@ -6,8 +6,6 @@ import com.sbhandare.pawdopt.Model.SecurityUser;
 import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
 
-import java.util.List;
-
 public class AccountFragmentPresenter {
 
     private View view;
@@ -29,7 +27,6 @@ public class AccountFragmentPresenter {
             username = securityUser.getUsername();
             view.populateEmailTextView(username);
         }
-
     }
 
     public void logout(){

@@ -15,11 +15,14 @@ import com.sbhandare.pawdopt.Presenter.PawDoptPresenter;
 import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 import com.sbhandare.pawdopt.Util.PawDoptUtil;
+import com.sbhandare.pawdopt.View.PetDetailsFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -119,7 +122,6 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private void populateItemRows(ItemViewHolder viewHolder, int position) {
-
         TextView textViewPetName = viewHolder.tvPetName;
         TextView textViewPetBreed = viewHolder.tvPetBreed;
         TextView textViewPetDistance = viewHolder.tvPetDistance;
@@ -132,14 +134,39 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         String posTxt = dataSet.get(position).getDistance()<=0 ? "" : dataSet.get(position).getDistance()+" mi";
         textViewPetDistance.setText(posTxt);
         checkBoxPetLike.setChecked(false);
+
         if(presenter instanceof FavoritesFragmentPresenter) {
             checkBoxPetLike.setChecked(true);
             checkBoxPetLike.setClickable(false);
+
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.favorites_fragment_root, new PetDetailsFragment())
+                            .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
         }
         else if(presenter instanceof SearchFragmentPresenter) {
             checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
                 if (isChecked) {
                     presenter.addUserFavorite(dataSet.get(position), position);
+                }
+            });
+
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.search_fragment_root, new PetDetailsFragment())
+                            .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .addToBackStack(null)
+                            .commit();
                 }
             });
         }

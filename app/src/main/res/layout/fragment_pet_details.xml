@@ -1,134 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.PetDetailsFragment">
 
-    <com.github.florent37.shapeofview.shapes.ArcView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:elevation="4dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:shape_arc_cropDirection="outside"
-        app:shape_arc_height="20dp"
-        app:shape_arc_position="bottom">
+        android:layout_height="wrap_content">
 
-        <!-- YOUR CONTENT -->
-        <ImageView
+        <com.github.florent37.shapeofview.shapes.ArcView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:foreground="@color/appPrimaryGreenColor"/>
+            android:layout_height="200dp"
+            android:elevation="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:shape_arc_cropDirection="outside"
+            app:shape_arc_height="20dp"
+            app:shape_arc_position="bottom">
 
-    </com.github.florent37.shapeofview.shapes.ArcView>
+            <!-- YOUR CONTENT -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:foreground="@color/appPrimaryGreenColor"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        app:cardCornerRadius="250dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:translationZ="2dp"
-        android:layout_marginTop="80dp"
-        android:id="@+id/pet_profile_image"
-        app:cardBackgroundColor="@color/white">
+        </com.github.florent37.shapeofview.shapes.ArcView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="250dp"
-            android:layout_gravity="center">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:translationZ="2dp"
+            android:layout_marginTop="80dp"
+            android:id="@+id/pet_profile_image"
+            app:cardBackgroundColor="@color/white">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/user_avatar"
-                android:scaleType="centerCrop"/>
+                app:cardCornerRadius="250dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/user_avatar"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
+
         </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/name_txt"
-        app:layout_constraintTop_toBottomOf="@+id/pet_profile_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="@dimen/txtLgeFontSize"
-        android:fontFamily="@font/montserrat"
-        android:textColor="@color/appSecondaryBlackColor"
-        android:text="Name"
-        />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/age_gender_breed_layout"
-        app:layout_constraintTop_toBottomOf="@+id/name_txt"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/age_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
+            android:id="@+id/name_txt"
+            app:layout_constraintTop_toBottomOf="@+id/pet_profile_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/txtLgeFontSize"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="Age"
+            android:textColor="@color/appPrimaryGreenColor"
+            android:text="Name"
             />
 
-        <TextView
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dot1"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="●"
-            />
+            android:id="@+id/age_gender_breed_layout"
+            app:layout_constraintTop_toBottomOf="@+id/name_txt"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/age_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Age"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dot1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="●"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/gender_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Gender"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dot2"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="●"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/breed_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Breed"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <include layout="@layout/layout_phy_charact"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/gender_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="Gender"
+            android:id="@+id/layout_phy_char"
+            app:layout_constraintTop_toBottomOf="@+id/age_gender_breed_layout"
+            android:layout_margin="@dimen/margin8dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <include layout="@layout/layout_health_charact"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dot2"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="●"
+            android:id="@+id/layout_health_char"
+            app:layout_constraintTop_toBottomOf="@+id/layout_phy_char"
+            android:layout_margin="@dimen/margin8dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <include layout="@layout/layout_behavior_charact"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/breed_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="Breed"
+            android:id="@+id/layout_behav_char"
+            app:layout_constraintTop_toBottomOf="@+id/layout_health_char"
+            android:layout_margin="@dimen/margin8dp"
             />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

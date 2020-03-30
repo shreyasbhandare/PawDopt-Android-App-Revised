@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="15dp"
+    card_view:cardElevation="2dp"
+    android:layout_margin="8dp"
+    card_view:cardUseCompatPadding="true"
+    android:id="@+id/layout_behav_charact">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txtMedFontSize"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Behavior"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/house_train_txt"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/appSecondaryGreyColor"
+            android:text="House Trained"
+            android:layout_marginStart="@dimen/margin32dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/good_cats_txt"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/appSecondaryGreyColor"
+            android:text="Good with Cats"
+            android:layout_marginStart="@dimen/margin32dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/good_dogs_txt"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/appSecondaryGreyColor"
+            android:text="Good with Dogs"
+            android:layout_marginStart="@dimen/margin32dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/good_kids_txt"
+            android:textSize="@dimen/txtSemiMedFontSize"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/appSecondaryGreyColor"
+            android:text="Good with Kids"
+            android:layout_marginStart="@dimen/margin32dp"
+            />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

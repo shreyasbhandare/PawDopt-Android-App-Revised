@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="15dp"
+    card_view:cardElevation="2dp"
+    android:layout_margin="8dp"
+    card_view:cardUseCompatPadding="true"
+    android:id="@+id/layout_org_detail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin8dp"
+        android:orientation="vertical">
+        
+        <com.sbhandare.pawdopt.Component.PawDoptImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/dummy_org"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/org_name_txt"
+            android:textSize="@dimen/txtMedFontSize"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/appSecondaryBlackColor"
+            android:text="Organization Name"
+            android:layout_gravity="center"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin8dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_marker_black_96"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/address_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Street, City, State"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin8dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_email_open_100"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/email_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="org@hmail.com"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin8dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_phone_96"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="+1234567890"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

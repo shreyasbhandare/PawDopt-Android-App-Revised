@@ -55,7 +55,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="@dimen/margin32dp"
         android:layout_marginTop="@dimen/margin16dp"
-        android:src="@drawable/email_black_100"
+        android:src="@drawable/ic_email_black_100"
         />
 
     <TextView

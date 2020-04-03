@@ -1,16 +1,31 @@
 package com.sbhandare.pawdopt.View;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.sbhandare.pawdopt.Model.Address;
+import com.sbhandare.pawdopt.Model.Organization;
+import com.sbhandare.pawdopt.Model.Pet;
+import com.sbhandare.pawdopt.Presenter.PetDetailsFragmentPresenter;
 import com.sbhandare.pawdopt.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,15 +35,43 @@ import com.sbhandare.pawdopt.R;
  * Use the {@link PetDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PetDetailsFragment extends Fragment {
+public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPresenter.View {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    @BindView(R.id.pet_image) ImageView petPhotoIv;
+    @BindView(R.id.name_txt) TextView nameTv;
+    @BindView(R.id.age_txt) TextView ageTv;
+    @BindView(R.id.gender_txt) TextView genderTv;
+    @BindView(R.id.breed_txt) TextView breedTv;
+    @BindView(R.id.size_txt) TextView sizeTv;
+    @BindView(R.id.coat_txt) TextView coatTv;
+    @BindView(R.id.color_txt) TextView colorTv;
+    @BindView(R.id.vaccinated_txt) TextView vaccinatedTv;
+    @BindView(R.id.spayed_txt) TextView spayedNeuterTv;
+    @BindView(R.id.declaw_txt) TextView declawTv;
+    @BindView(R.id.specialneeds_txt) TextView specNeedsTv;
+    @BindView(R.id.house_train_txt) TextView houseTrainedTv;
+    @BindView(R.id.good_dogs_txt) TextView goodWithDogsTv;
+    @BindView(R.id.good_cats_txt) TextView goodWithCatsTv;
+    @BindView(R.id.good_kids_txt) TextView goodWithKidsTv;
+    @BindView(R.id.know_more_name_txt) TextView bioNameTv;
+    @BindView(R.id.bio_txt) TextView bioTv;
+    @BindView(R.id.tag_txt) TextView tagsTv;
+    @BindView(R.id.org_name_txt) TextView orgNameTv;
+    @BindView(R.id.address_txt) TextView orgAddressTv;
+    @BindView(R.id.email_txt) TextView orgEmailTv;
+    @BindView(R.id.phone_txt) TextView orgPhoneTv;
+    @BindView(R.id.org_photo) ImageView orgPhotoIv;
+    @BindView(R.id.petLike) CheckBox likeCb;
+    @BindView(R.id.no_data_txt) TextView noDataTv;
+    private ProgressDialog progDialog;
+
+    private PetDetailsFragmentPresenter petDetailsFragmentPresenter;
+
+    private int petId;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,8 +101,7 @@ public class PetDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            petId = getArguments().getInt("petid");
         }
     }
 
@@ -67,7 +109,16 @@ public class PetDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pet_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_pet_details, container, false);
+        ButterKnife.bind(this,view);
+        petDetailsFragmentPresenter = new PetDetailsFragmentPresenter(this, getContext());
+
+        progDialog = ProgressDialog.show( getContext(), null, null, false, true );
+        Objects.requireNonNull(progDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progDialog.setContentView(R.layout.progress_dialog);
+        petDetailsFragmentPresenter.populatePetDetails(petId);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -107,5 +158,82 @@ public class PetDetailsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void populateUI(Pet pet) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(pet != null){
+                    if(pet.getImage()!=null)
+                        Picasso.get().load(pet.getImage()).fit().into(petPhotoIv);
+                    if(pet.getName()!=null) {
+                        nameTv.setText(pet.getName());
+                        bioNameTv.setText(pet.getName());
+                    }
+                    if(pet.getAge()!=null)
+                        ageTv.setText(pet.getName());
+                    if(pet.getGender()!=null)
+                        genderTv.setText(pet.getGender());
+                    if(pet.getBreed()!=null)
+                        breedTv.setText(pet.getBreed());
+                    if(pet.getSize()!=null)
+                        sizeTv.setText(pet.getSize());
+                    if(pet.getCoat()!=null)
+                        coatTv.setText(pet.getCoat());
+                    if(pet.getColor()!=null)
+                        colorTv.setText(pet.getColor());
+                    if(pet.getIsVaccinated().equals("N") || pet.getIsVaccinated().equals("D"))
+                        vaccinatedTv.setVisibility(View.INVISIBLE);
+                    if(pet.getIsSpayedNeutered().equals("N") || pet.getIsSpayedNeutered().equals("D"))
+                        spayedNeuterTv.setVisibility(View.INVISIBLE);
+                    if(pet.getIsDeclawed().equals("N") || pet.getIsDeclawed().equals("D"))
+                        declawTv.setVisibility(View.INVISIBLE);
+                    if(pet.getIsSpecialNeeds().equals("N") || pet.getIsSpecialNeeds().equals("D"))
+                        specNeedsTv.setVisibility(View.INVISIBLE);
+                    if(pet.getIsHouseTrained().equals("N") || pet.getIsHouseTrained().equals("D"))
+                        houseTrainedTv.setVisibility(View.INVISIBLE);
+                    if(pet.getIsGoodWithCats().equals("N") || pet.getIsGoodWithCats().equals("D"))
+                        goodWithCatsTv.setVisibility(View.INVISIBLE);
+                    if(pet.getIsGoodWithDogs().equals("N") || pet.getIsGoodWithDogs().equals("D"))
+                        goodWithDogsTv.setVisibility(View.INVISIBLE);
+                    if(pet.getIsGoodWithChildren().equals("N") || pet.getIsGoodWithChildren().equals("D"))
+                        goodWithKidsTv.setVisibility(View.INVISIBLE);
+                    if(pet.getBio()!=null)
+                        bioTv.setText(pet.getBio());
+                    if(pet.getTags()!=null)
+                        tagsTv.setText(pet.getTags());
+                    if(pet.getOrganization()!=null){
+                        Organization organization = pet.getOrganization();
+                        if(organization.getName()!=null)
+                            orgNameTv.setText(organization.getName());
+                        if(organization.getEmail()!=null)
+                            orgEmailTv.setText(organization.getEmail());
+                        if(organization.getPhone()!=null)
+                            orgPhoneTv.setText(organization.getPhone());
+                        if(organization.getImage()!=null)
+                            Picasso.get().load(organization.getImage()).fit().into(orgPhotoIv);
+                        if(organization.getAddress()!=null){
+                            Address address = organization.getAddress();
+                            String addressStr = address.getStreet1()+", "+address.getStreet2()+", "+address.getCity()+", "+address.getState();
+                            orgAddressTv.setText(addressStr);
+                        }
+                    }
+                }
+                progDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void populateDataNotFound() {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                noDataTv.setVisibility(View.VISIBLE);
+                progDialog.dismiss();
+            }
+        });
     }
 }

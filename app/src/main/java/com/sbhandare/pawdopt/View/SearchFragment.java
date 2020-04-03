@@ -1,6 +1,9 @@
 package com.sbhandare.pawdopt.View;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -51,6 +54,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private Button petCategoryBtn;
     private AppCompatImageView filterBtn;
     private SearchFragmentPresenter searchFragmentPresenter;
+    private ProgressDialog progDialog;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -97,6 +101,10 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         // Inflate the layout for this fragment
         initUIElements(view);
         searchFragmentPresenter = new SearchFragmentPresenter(this,getContext());
+
+        progDialog = ProgressDialog.show( getContext(), null, null, false, true );
+        Objects.requireNonNull(progDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progDialog.setContentView(R.layout.progress_dialog);
         searchFragmentPresenter.populatePetList();
 
         String[] distance_array = getResources().getStringArray(R.array.distance_array);
@@ -105,7 +113,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         petDistanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BottomSheet.Builder builder = new BottomSheet.Builder(getContext());
+                BottomSheet.Builder builder = new BottomSheet.Builder(Objects.requireNonNull(getContext()));
                 builder.setTitle(R.string.distanceTitle);
                 builder.setDarkTheme(false);
                 builder.setItems(distance_array,(dialogInterface, i) -> {
@@ -121,7 +129,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         petCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BottomSheet.Builder builder = new BottomSheet.Builder(getContext());
+                BottomSheet.Builder builder = new BottomSheet.Builder(Objects.requireNonNull(getContext()));
                 builder.setTitle(R.string.categoryTitle);
                 builder.setDarkTheme(false);
                 builder.setItems(categoy_text_array,(dialogInterface, i) -> {
@@ -212,6 +220,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             public void run() {
                 rViewAdapter = new RViewAdapter(getContext(), petList, totalResults, searchFragmentPresenter);
                 recyclerView.setAdapter(rViewAdapter);
+                progDialog.dismiss();
             }
         });
     }

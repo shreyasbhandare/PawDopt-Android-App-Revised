@@ -46,7 +46,6 @@
             android:textSize="@dimen/txtSemiMedFontSize"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/appSecondaryGreyColor"
-            android:text="Size"
             android:layout_marginStart="@dimen/margin32dp"
             />
 
@@ -57,7 +56,6 @@
             android:textSize="@dimen/txtSemiMedFontSize"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/appSecondaryGreyColor"
-            android:text="Coat"
             android:layout_marginStart="@dimen/margin32dp"
             />
 
@@ -68,7 +66,6 @@
             android:textSize="@dimen/txtSemiMedFontSize"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/appSecondaryGreyColor"
-            android:text="Color"
             android:layout_marginStart="@dimen/margin32dp"
             />
     </LinearLayout>

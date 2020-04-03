@@ -2,6 +2,7 @@ package com.sbhandare.pawdopt.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,8 +144,12 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                    PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
+                    Bundle args = new Bundle();
+                    args.putInt("petid",dataSet.get(position).getPetid());
+                    petDetailsFragment.setArguments(args);
                     fragmentManager.beginTransaction()
-                            .replace(R.id.favorites_fragment_root, new PetDetailsFragment())
+                            .replace(R.id.favorites_fragment_root, petDetailsFragment)
                             .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .addToBackStack(null)
                             .commit();
@@ -162,8 +167,12 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                    PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
+                    Bundle args = new Bundle();
+                    args.putInt("petid",dataSet.get(position).getPetid());
+                    petDetailsFragment.setArguments(args);
                     fragmentManager.beginTransaction()
-                            .replace(R.id.search_fragment_root, new PetDetailsFragment())
+                            .replace(R.id.search_fragment_root, petDetailsFragment)
                             .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .addToBackStack(null)
                             .commit();

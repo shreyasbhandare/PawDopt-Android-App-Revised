@@ -41,6 +41,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:id="@+id/address_img"
                 android:src="@drawable/ic_marker_black_96"
                 android:layout_gravity="center"/>
 
@@ -65,6 +66,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:id="@+id/email_img"
                 android:src="@drawable/ic_email_open_100"
                 android:layout_gravity="center"/>
 
@@ -89,6 +91,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:id="@+id/phone_img"
                 android:src="@drawable/ic_phone_96"
                 android:layout_gravity="center"/>
 

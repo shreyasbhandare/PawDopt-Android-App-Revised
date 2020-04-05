@@ -1,5 +1,7 @@
 package com.sbhandare.pawdopt.Adapter;
 
+import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -27,4 +29,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         mFragmentList.add(fragment);
     }
 
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+    }
 }

@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,18 +46,29 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     @BindView(R.id.name_txt) TextView nameTv;
     @BindView(R.id.age_txt) TextView ageTv;
     @BindView(R.id.gender_txt) TextView genderTv;
-    @BindView(R.id.breed_txt) TextView breedTv;
     @BindView(R.id.size_txt) TextView sizeTv;
+    @BindView(R.id.breed_txt) TextView breedTv;
     @BindView(R.id.coat_txt) TextView coatTv;
     @BindView(R.id.color_txt) TextView colorTv;
+    @BindView(R.id.breed_img) ImageView breedIv;
+    @BindView(R.id.coat_img) ImageView coatIv;
+    @BindView(R.id.color_img) ImageView colorIv;
     @BindView(R.id.vaccinated_txt) TextView vaccinatedTv;
     @BindView(R.id.spayed_txt) TextView spayedNeuterTv;
     @BindView(R.id.declaw_txt) TextView declawTv;
     @BindView(R.id.specialneeds_txt) TextView specNeedsTv;
+    @BindView(R.id.vaccinated_img) ImageView vaccinatedIv;
+    @BindView(R.id.spayed_img) ImageView spayedNeuterIv;
+    @BindView(R.id.declaw_img) ImageView declawIv;
+    @BindView(R.id.specialneeds_img) ImageView specNeedsIv;
     @BindView(R.id.house_train_txt) TextView houseTrainedTv;
     @BindView(R.id.good_dogs_txt) TextView goodWithDogsTv;
     @BindView(R.id.good_cats_txt) TextView goodWithCatsTv;
     @BindView(R.id.good_kids_txt) TextView goodWithKidsTv;
+    @BindView(R.id.house_train_img) ImageView houseTrainedIv;
+    @BindView(R.id.good_cats_img) ImageView goodWithCatsIv;
+    @BindView(R.id.good_dogs_img) ImageView goodWithDogsIv;
+    @BindView(R.id.good_kids_img) ImageView goodWithKidsIv;
     @BindView(R.id.know_more_name_txt) TextView bioNameTv;
     @BindView(R.id.bio_txt) TextView bioTv;
     @BindView(R.id.tag_txt) TextView tagsTv;
@@ -65,8 +77,12 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     @BindView(R.id.email_txt) TextView orgEmailTv;
     @BindView(R.id.phone_txt) TextView orgPhoneTv;
     @BindView(R.id.org_photo) ImageView orgPhotoIv;
+    @BindView(R.id.address_img) ImageView addressIv;
+    @BindView(R.id.email_img) ImageView emailIv;
+    @BindView(R.id.phone_img) ImageView phoneIv;
     @BindView(R.id.petLike) CheckBox likeCb;
     @BindView(R.id.no_data_txt) TextView noDataTv;
+    @BindView(R.id.layout_pet_details) ConstraintLayout dataLayout;
     private ProgressDialog progDialog;
 
     private PetDetailsFragmentPresenter petDetailsFragmentPresenter;
@@ -173,51 +189,110 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
                         bioNameTv.setText(pet.getName());
                     }
                     if(pet.getAge()!=null)
-                        ageTv.setText(pet.getName());
+                        ageTv.setText(pet.getAge());
+                    else
+                        ageTv.setVisibility(View.GONE);
                     if(pet.getGender()!=null)
                         genderTv.setText(pet.getGender());
-                    if(pet.getBreed()!=null)
-                        breedTv.setText(pet.getBreed());
+                    else
+                        genderTv.setVisibility(View.GONE);
                     if(pet.getSize()!=null)
                         sizeTv.setText(pet.getSize());
+                    else
+                        sizeTv.setVisibility(View.GONE);
+                    if(pet.getBreed()!=null)
+                        breedTv.setText(pet.getBreed());
+                    else {
+                        breedTv.setVisibility(View.GONE);
+                        breedIv.setVisibility(View.GONE);
+                    }
                     if(pet.getCoat()!=null)
                         coatTv.setText(pet.getCoat());
+                    else {
+                        coatTv.setVisibility(View.GONE);
+                        coatIv.setVisibility(View.GONE);
+                    }
                     if(pet.getColor()!=null)
                         colorTv.setText(pet.getColor());
-                    if(pet.getIsVaccinated().equals("N") || pet.getIsVaccinated().equals("D"))
-                        vaccinatedTv.setVisibility(View.INVISIBLE);
-                    if(pet.getIsSpayedNeutered().equals("N") || pet.getIsSpayedNeutered().equals("D"))
-                        spayedNeuterTv.setVisibility(View.INVISIBLE);
-                    if(pet.getIsDeclawed().equals("N") || pet.getIsDeclawed().equals("D"))
-                        declawTv.setVisibility(View.INVISIBLE);
-                    if(pet.getIsSpecialNeeds().equals("N") || pet.getIsSpecialNeeds().equals("D"))
-                        specNeedsTv.setVisibility(View.INVISIBLE);
-                    if(pet.getIsHouseTrained().equals("N") || pet.getIsHouseTrained().equals("D"))
-                        houseTrainedTv.setVisibility(View.INVISIBLE);
-                    if(pet.getIsGoodWithCats().equals("N") || pet.getIsGoodWithCats().equals("D"))
-                        goodWithCatsTv.setVisibility(View.INVISIBLE);
-                    if(pet.getIsGoodWithDogs().equals("N") || pet.getIsGoodWithDogs().equals("D"))
-                        goodWithDogsTv.setVisibility(View.INVISIBLE);
-                    if(pet.getIsGoodWithChildren().equals("N") || pet.getIsGoodWithChildren().equals("D"))
-                        goodWithKidsTv.setVisibility(View.INVISIBLE);
+                    else {
+                        colorTv.setVisibility(View.GONE);
+                        colorIv.setVisibility(View.GONE);
+                    }
+                    if(pet.getIsVaccinated().equals("N") || pet.getIsVaccinated().equals("D")) {
+                        vaccinatedTv.setVisibility(View.GONE);
+                        vaccinatedIv.setVisibility(View.GONE);
+                    }
+                    if(pet.getIsSpayedNeutered().equals("N") || pet.getIsSpayedNeutered().equals("D")) {
+                        spayedNeuterTv.setVisibility(View.GONE);
+                        spayedNeuterIv.setVisibility(View.GONE);
+                    }
+                    if(pet.getIsDeclawed().equals("N") || pet.getIsDeclawed().equals("D")) {
+                        declawTv.setVisibility(View.GONE);
+                        declawIv.setVisibility(View.GONE);
+                    }
+                    if(pet.getIsSpecialNeeds().equals("N") || pet.getIsSpecialNeeds().equals("D")) {
+                        specNeedsTv.setVisibility(View.GONE);
+                        specNeedsIv.setVisibility(View.GONE);
+                    }
+                    if(pet.getIsHouseTrained().equals("N") || pet.getIsHouseTrained().equals("D")) {
+                        houseTrainedTv.setVisibility(View.GONE);
+                        houseTrainedIv.setVisibility(View.GONE);
+                    }
+                    if(pet.getIsGoodWithCats().equals("N") || pet.getIsGoodWithCats().equals("D")) {
+                        goodWithCatsTv.setVisibility(View.GONE);
+                        goodWithCatsIv.setVisibility(View.GONE);
+                    }
+                    if(pet.getIsGoodWithDogs().equals("N") || pet.getIsGoodWithDogs().equals("D")) {
+                        goodWithDogsTv.setVisibility(View.GONE);
+                        goodWithDogsIv.setVisibility(View.GONE);
+                    }
+                    if(pet.getIsGoodWithChildren().equals("N") || pet.getIsGoodWithChildren().equals("D")) {
+                        goodWithKidsTv.setVisibility(View.GONE);
+                        goodWithKidsIv.setVisibility(View.GONE);
+                    }
                     if(pet.getBio()!=null)
                         bioTv.setText(pet.getBio());
+                    else
+                        bioTv.setVisibility(View.GONE);
                     if(pet.getTags()!=null)
                         tagsTv.setText(pet.getTags());
+                    else
+                        tagsTv.setVisibility(View.GONE);
                     if(pet.getOrganization()!=null){
                         Organization organization = pet.getOrganization();
                         if(organization.getName()!=null)
                             orgNameTv.setText(organization.getName());
                         if(organization.getEmail()!=null)
                             orgEmailTv.setText(organization.getEmail());
+                        else{
+                            orgEmailTv.setVisibility(View.GONE);
+                            emailIv.setVisibility(View.GONE);
+                        }
                         if(organization.getPhone()!=null)
                             orgPhoneTv.setText(organization.getPhone());
+                        else{
+                            orgPhoneTv.setVisibility(View.GONE);
+                            phoneIv.setVisibility(View.GONE);
+                        }
                         if(organization.getImage()!=null)
                             Picasso.get().load(organization.getImage()).fit().into(orgPhotoIv);
+                        else
+                            orgPhotoIv.setVisibility(View.GONE);
                         if(organization.getAddress()!=null){
                             Address address = organization.getAddress();
-                            String addressStr = address.getStreet1()+", "+address.getStreet2()+", "+address.getCity()+", "+address.getState();
-                            orgAddressTv.setText(addressStr);
+                            StringBuilder addressSb = new StringBuilder();
+                            if(address.getStreet1()!=null)
+                                addressSb.append(address.getStreet1()).append(", ");
+                            if(address.getStreet2()!=null)
+                                addressSb.append(address.getStreet2()).append(", ");
+                            if(address.getCity()!=null)
+                                addressSb.append(address.getCity()).append(", ");
+                            if(address.getState()!=null)
+                                addressSb.append(address.getState());
+                            orgAddressTv.setText(addressSb.toString());
+                        }else {
+                            orgAddressTv.setVisibility(View.GONE);
+                            addressIv.setVisibility(View.GONE);
                         }
                     }
                 }
@@ -231,6 +306,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                dataLayout.setVisibility(View.GONE);
                 noDataTv.setVisibility(View.VISIBLE);
                 progDialog.dismiss();
             }

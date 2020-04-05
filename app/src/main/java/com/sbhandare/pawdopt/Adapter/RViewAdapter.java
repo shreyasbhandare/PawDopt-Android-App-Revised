@@ -149,7 +149,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     args.putInt("petid",dataSet.get(position).getPetid());
                     petDetailsFragment.setArguments(args);
                     fragmentManager.beginTransaction()
-                            .replace(R.id.favorites_fragment_root, petDetailsFragment)
+                            .add(R.id.favorites_fragment_root, petDetailsFragment)
                             .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .addToBackStack(null)
                             .commit();
@@ -172,7 +172,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     args.putInt("petid",dataSet.get(position).getPetid());
                     petDetailsFragment.setArguments(args);
                     fragmentManager.beginTransaction()
-                            .replace(R.id.search_fragment_root, petDetailsFragment)
+                            .add(R.id.search_fragment_root, petDetailsFragment)
                             .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .addToBackStack(null)
                             .commit();

@@ -8,7 +8,28 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/appSecondaryWhiteColor"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/no_data_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="300dp"
+            android:visibility="invisible"
+            android:text="Something went wrong, please try later"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/layout_pet_details">
 
         <com.github.florent37.shapeofview.shapes.ArcView
             android:layout_width="match_parent"
@@ -30,28 +51,28 @@
         </com.github.florent37.shapeofview.shapes.ArcView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="210dp"
+            android:layout_height="210dp"
             app:cardCornerRadius="250dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:translationZ="2dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="60dp"
             android:id="@+id/pet_profile_image"
             app:cardBackgroundColor="@color/white">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 app:cardCornerRadius="250dp"
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:id="@+id/pet_image"
-                    android:src="@drawable/user_avatar"
+                    android:src="@drawable/cat_avatar"
                     android:scaleType="centerCrop"/>
             </androidx.cardview.widget.CardView>
 
@@ -77,7 +98,8 @@
             android:checked="false"
             android:background="@drawable/like_icon"
             android:stateListAnimator="@animator/scale"
-            app:layout_constraintTop_toBottomOf="@+id/pet_profile_image"
+            app:layout_constraintTop_toTopOf="@+id/name_txt"
+            app:layout_constraintBottom_toBottomOf="@+id/name_txt"
             app:layout_constraintStart_toEndOf="@+id/name_txt"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -135,7 +157,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/breed_txt"
+                android:id="@+id/size_txt"
                 android:textSize="@dimen/txtSemiMedFontSize"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/appSecondaryGreyColor"
@@ -245,16 +267,7 @@
             android:layout_margin="@dimen/margin8dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/no_data_txt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="300dp"
-            android:visibility="invisible"
-            android:text="Something went wrong, please try later"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

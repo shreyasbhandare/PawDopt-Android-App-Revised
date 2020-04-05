@@ -39,34 +39,80 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/size_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:layout_marginStart="@dimen/margin32dp"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/coat_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:layout_marginStart="@dimen/margin32dp"
-            />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/breed_img"
+                android:src="@drawable/ic_claw_100"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin16dp"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/color_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:layout_marginStart="@dimen/margin32dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/breed_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/coat_img"
+                android:src="@drawable/ic_comb_100"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/coat_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/color_img"
+                android:src="@drawable/ic_paint_palette_64"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/color_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

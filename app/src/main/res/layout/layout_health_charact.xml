@@ -36,51 +36,111 @@
                 android:textColor="@color/appSecondaryGreyColor"
                 android:text="Heath"
                 />
-
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vaccinated_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="Vaccinated"
-            android:layout_marginStart="@dimen/margin32dp"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spayed_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="Spayed and Neutered"
-            android:layout_marginStart="@dimen/margin32dp"
-            />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/vaccinated_img"
+                android:src="@drawable/ic_syringe_100"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin16dp"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/declaw_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="Declawed"
-            android:layout_marginStart="@dimen/margin32dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vaccinated_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Vaccinated"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/specialneeds_txt"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/appSecondaryGreyColor"
-            android:text="Special Needs"
-            android:layout_marginStart="@dimen/margin32dp"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/spayed_img"
+                android:src="@drawable/ic_bandage_64"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spayed_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Spayed and Neutered"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/declaw_img"
+                android:src="@drawable/ic_claw_100"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/declaw_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Declawed"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/specialneeds_img"
+                android:src="@drawable/ic_note_52"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/specialneeds_txt"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/appSecondaryGreyColor"
+                android:text="Special Needs"
+                android:layout_marginStart="@dimen/margin8dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

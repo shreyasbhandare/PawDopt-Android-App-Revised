@@ -39,6 +39,20 @@
 
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/house_train_img"
+            android:src="@drawable/ic_home_80"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin16dp"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +61,23 @@
             android:fontFamily="@font/montserrat"
             android:textColor="@color/appSecondaryGreyColor"
             android:text="House Trained"
-            android:layout_marginStart="@dimen/margin32dp"
+            android:layout_marginStart="@dimen/margin8dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/good_cats_img"
+            android:src="@drawable/ic_cat_64"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin16dp"
             />
 
         <TextView
@@ -58,7 +88,23 @@
             android:fontFamily="@font/montserrat"
             android:textColor="@color/appSecondaryGreyColor"
             android:text="Good with Cats"
-            android:layout_marginStart="@dimen/margin32dp"
+            android:layout_marginStart="@dimen/margin8dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/good_dogs_img"
+            android:src="@drawable/ic_dog_64"
+            android:layout_marginStart="@dimen/margin16dp"
+            android:layout_gravity="center"
             />
 
         <TextView
@@ -69,7 +115,23 @@
             android:fontFamily="@font/montserrat"
             android:textColor="@color/appSecondaryGreyColor"
             android:text="Good with Dogs"
-            android:layout_marginStart="@dimen/margin32dp"
+            android:layout_marginStart="@dimen/margin8dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/good_kids_img"
+            android:src="@drawable/ic_baby_64"
+            android:layout_marginStart="@dimen/margin16dp"
+            android:layout_gravity="center"
             />
 
         <TextView
@@ -80,8 +142,10 @@
             android:fontFamily="@font/montserrat"
             android:textColor="@color/appSecondaryGreyColor"
             android:text="Good with Kids"
-            android:layout_marginStart="@dimen/margin32dp"
+            android:layout_marginStart="@dimen/margin8dp"
             />
+
+    </LinearLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

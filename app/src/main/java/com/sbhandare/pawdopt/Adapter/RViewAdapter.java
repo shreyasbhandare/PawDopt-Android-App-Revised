@@ -131,7 +131,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         textViewPetName.setText(dataSet.get(position).getName());
         textViewPetBreed.setText(dataSet.get(position).getBreed());
-        Picasso.get().load(dataSet.get(position).getImage()).fit().into(imageViewPetPhoto);
+        Picasso.get().load(dataSet.get(position).getImage()).fit().centerCrop().into(imageViewPetPhoto);
         String posTxt = dataSet.get(position).getDistance()<=0 ? "" : dataSet.get(position).getDistance()+" mi";
         textViewPetDistance.setText(posTxt);
         checkBoxPetLike.setChecked(false);

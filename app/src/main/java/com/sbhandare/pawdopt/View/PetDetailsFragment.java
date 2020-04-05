@@ -1,5 +1,6 @@
 package com.sbhandare.pawdopt.View;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -134,6 +135,13 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
         progDialog.setContentView(R.layout.progress_dialog);
         petDetailsFragmentPresenter.populatePetDetails(petId);
 
+        petPhotoIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petDetailsFragmentPresenter.openFullImage();
+            }
+        });
+
         return view;
     }
 
@@ -183,7 +191,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
             public void run() {
                 if(pet != null){
                     if(pet.getImage()!=null)
-                        Picasso.get().load(pet.getImage()).fit().into(petPhotoIv);
+                        Picasso.get().load(pet.getImage()).fit().centerCrop().into(petPhotoIv);
                     if(pet.getName()!=null) {
                         nameTv.setText(pet.getName());
                         bioNameTv.setText(pet.getName());
@@ -275,7 +283,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
                             phoneIv.setVisibility(View.GONE);
                         }
                         if(organization.getImage()!=null)
-                            Picasso.get().load(organization.getImage()).fit().into(orgPhotoIv);
+                            Picasso.get().load(organization.getImage()).fit().centerCrop().into(orgPhotoIv);
                         else
                             orgPhotoIv.setVisibility(View.GONE);
                         if(organization.getAddress()!=null){
@@ -309,6 +317,28 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
                 dataLayout.setVisibility(View.GONE);
                 noDataTv.setVisibility(View.VISIBLE);
                 progDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void populateDialog(String imgUrl) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder alertadd = new AlertDialog.Builder(getContext());
+                LayoutInflater factory = LayoutInflater.from(getContext());
+                final View view = factory.inflate(R.layout.layout_full_pet_image, null);
+                ImageView imageView = view.findViewById(R.id.dialog_imageview);
+                /*
+                int ht = PawDoptImageUtil.getImgHt(imgUrl);
+                int wd = PawDoptImageUtil.getImgWd(imgUrl);
+                imageView.getLayoutParams().width = (int) PawDoptImageUtil.dpFromPx(getContext(), ht);
+                imageView.getLayoutParams().height = (int) PawDoptImageUtil.dpFromPx(getContext(), wd);
+                */
+                Picasso.get().load(imgUrl).fit().centerInside().into(imageView);
+                alertadd.setView(view);
+                alertadd.show();
             }
         });
     }

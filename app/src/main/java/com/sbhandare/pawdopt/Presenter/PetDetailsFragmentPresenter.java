@@ -24,6 +24,7 @@ public class PetDetailsFragmentPresenter {
     private SecurityUserRepository securityUserRepository;
     private OkhttpProcessor okhttpProcessor;
     private List<SecurityUser> securityUsers;
+    private Pet pet;
 
     public PetDetailsFragmentPresenter(View view, Context context){
         this.view = view;
@@ -51,7 +52,7 @@ public class PetDetailsFragmentPresenter {
                     if (response.isSuccessful()) {
                         // Do what you want to do with the response.
                         if (response.body() != null) {
-                            Pet pet = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(),Pet.class);
+                            pet = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(),Pet.class);
                             if(pet!=null)
                                 view.populateUI(pet);
                             else
@@ -68,6 +69,11 @@ public class PetDetailsFragmentPresenter {
         }
     }
 
+    public void openFullImage(){
+        if(pet.getImage()!=null)
+            view.populateDialog(pet.getImage());
+    }
+
     public void addFavorite(){
 
     }
@@ -75,5 +81,6 @@ public class PetDetailsFragmentPresenter {
     public interface View{
         void populateUI(Pet pet);
         void populateDataNotFound();
+        void populateDialog(String imgUrl);
     }
 }

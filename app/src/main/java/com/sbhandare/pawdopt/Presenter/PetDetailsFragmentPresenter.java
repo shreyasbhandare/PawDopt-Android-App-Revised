@@ -8,6 +8,7 @@ import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -74,6 +75,11 @@ public class PetDetailsFragmentPresenter {
             view.populateDialog(pet.getImage());
     }
 
+    public void sendEmailWithBody(){
+        if(pet.getOrganization()!=null && !StringUtils.isEmpty(pet.getOrganization().getEmail()))
+            view.openEmail(true,pet.getOrganization().getEmail(),"Checking in about "+pet.getName(),"Hello, is "+pet.getName()+" available for adoption?");
+    }
+
     public void addFavorite(){
 
     }
@@ -82,5 +88,6 @@ public class PetDetailsFragmentPresenter {
         void populateUI(Pet pet);
         void populateDataNotFound();
         void populateDialog(String imgUrl);
+        void openEmail(boolean hasBody, String toEmail, String subject, String body);
     }
 }

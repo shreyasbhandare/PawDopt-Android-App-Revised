@@ -79,6 +79,7 @@
                 android:textColor="@color/appSecondaryGreyColor"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/margin8dp"
+                android:autoLink="email"
                 />
         </LinearLayout>
 

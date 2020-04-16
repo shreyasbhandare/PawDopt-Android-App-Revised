@@ -3,6 +3,7 @@ package com.sbhandare.pawdopt.View;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +28,8 @@ import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.PetDetailsFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 import com.squareup.picasso.Picasso;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -82,6 +86,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     @BindView(R.id.email_img) ImageView emailIv;
     @BindView(R.id.phone_img) ImageView phoneIv;
     @BindView(R.id.petLike) CheckBox likeCb;
+    @BindView(R.id.ask_details_btn) Button askDetailsBtn;
     @BindView(R.id.no_data_txt) TextView noDataTv;
     @BindView(R.id.layout_pet_details) ConstraintLayout dataLayout;
     private ProgressDialog progDialog;
@@ -142,6 +147,13 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
             }
         });
 
+        askDetailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petDetailsFragmentPresenter.sendEmailWithBody();
+            }
+        });
+
         return view;
     }
 
@@ -190,112 +202,116 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
             @Override
             public void run() {
                 if(pet != null){
-                    if(pet.getImage()!=null)
+                    if(!StringUtils.isEmpty(pet.getImage()))
                         Picasso.get().load(pet.getImage()).fit().centerCrop().into(petPhotoIv);
-                    if(pet.getName()!=null) {
+                    if(!StringUtils.isEmpty(pet.getName())) {
                         nameTv.setText(pet.getName());
                         bioNameTv.setText(pet.getName());
+                        String askDetalsStr = "Ask about "+pet.getName();
+                        askDetailsBtn.setText(askDetalsStr);
                     }
-                    if(pet.getAge()!=null)
+                    else
+                        askDetailsBtn.setVisibility(View.GONE);
+                    if(!StringUtils.isEmpty(pet.getAge()))
                         ageTv.setText(pet.getAge());
                     else
                         ageTv.setVisibility(View.GONE);
-                    if(pet.getGender()!=null)
+                    if(!StringUtils.isEmpty(pet.getGender()))
                         genderTv.setText(pet.getGender());
                     else
                         genderTv.setVisibility(View.GONE);
-                    if(pet.getSize()!=null)
+                    if(!StringUtils.isEmpty(pet.getSize()))
                         sizeTv.setText(pet.getSize());
                     else
                         sizeTv.setVisibility(View.GONE);
-                    if(pet.getBreed()!=null)
+                    if(!StringUtils.isEmpty(pet.getBreed()))
                         breedTv.setText(pet.getBreed());
                     else {
                         breedTv.setVisibility(View.GONE);
                         breedIv.setVisibility(View.GONE);
                     }
-                    if(pet.getCoat()!=null)
+                    if(!StringUtils.isEmpty(pet.getCoat()))
                         coatTv.setText(pet.getCoat());
                     else {
                         coatTv.setVisibility(View.GONE);
                         coatIv.setVisibility(View.GONE);
                     }
-                    if(pet.getColor()!=null)
+                    if(!StringUtils.isEmpty(pet.getColor()))
                         colorTv.setText(pet.getColor());
                     else {
                         colorTv.setVisibility(View.GONE);
                         colorIv.setVisibility(View.GONE);
                     }
-                    if(pet.getIsVaccinated().equals("N") || pet.getIsVaccinated().equals("D")) {
+                    if(pet.getIsVaccinated().equals("N") || pet.getIsVaccinated().equals("D") || StringUtils.isEmpty(pet.getIsVaccinated())) {
                         vaccinatedTv.setVisibility(View.GONE);
                         vaccinatedIv.setVisibility(View.GONE);
                     }
-                    if(pet.getIsSpayedNeutered().equals("N") || pet.getIsSpayedNeutered().equals("D")) {
+                    if(pet.getIsSpayedNeutered().equals("N") || pet.getIsSpayedNeutered().equals("D") || StringUtils.isEmpty(pet.getIsSpayedNeutered())) {
                         spayedNeuterTv.setVisibility(View.GONE);
                         spayedNeuterIv.setVisibility(View.GONE);
                     }
-                    if(pet.getIsDeclawed().equals("N") || pet.getIsDeclawed().equals("D")) {
+                    if(pet.getIsDeclawed().equals("N") || pet.getIsDeclawed().equals("D") || StringUtils.isEmpty(pet.getIsDeclawed())) {
                         declawTv.setVisibility(View.GONE);
                         declawIv.setVisibility(View.GONE);
                     }
-                    if(pet.getIsSpecialNeeds().equals("N") || pet.getIsSpecialNeeds().equals("D")) {
+                    if(pet.getIsSpecialNeeds().equals("N") || pet.getIsSpecialNeeds().equals("D") || StringUtils.isEmpty(pet.getIsSpecialNeeds())) {
                         specNeedsTv.setVisibility(View.GONE);
                         specNeedsIv.setVisibility(View.GONE);
                     }
-                    if(pet.getIsHouseTrained().equals("N") || pet.getIsHouseTrained().equals("D")) {
+                    if(pet.getIsHouseTrained().equals("N") || pet.getIsHouseTrained().equals("D") || StringUtils.isEmpty(pet.getIsHouseTrained())) {
                         houseTrainedTv.setVisibility(View.GONE);
                         houseTrainedIv.setVisibility(View.GONE);
                     }
-                    if(pet.getIsGoodWithCats().equals("N") || pet.getIsGoodWithCats().equals("D")) {
+                    if(pet.getIsGoodWithCats().equals("N") || pet.getIsGoodWithCats().equals("D") || StringUtils.isEmpty(pet.getIsGoodWithCats())) {
                         goodWithCatsTv.setVisibility(View.GONE);
                         goodWithCatsIv.setVisibility(View.GONE);
                     }
-                    if(pet.getIsGoodWithDogs().equals("N") || pet.getIsGoodWithDogs().equals("D")) {
+                    if(pet.getIsGoodWithDogs().equals("N") || pet.getIsGoodWithDogs().equals("D") || StringUtils.isEmpty(pet.getIsGoodWithDogs())) {
                         goodWithDogsTv.setVisibility(View.GONE);
                         goodWithDogsIv.setVisibility(View.GONE);
                     }
-                    if(pet.getIsGoodWithChildren().equals("N") || pet.getIsGoodWithChildren().equals("D")) {
+                    if(pet.getIsGoodWithChildren().equals("N") || pet.getIsGoodWithChildren().equals("D") || StringUtils.isEmpty(pet.getIsGoodWithChildren())) {
                         goodWithKidsTv.setVisibility(View.GONE);
                         goodWithKidsIv.setVisibility(View.GONE);
                     }
-                    if(pet.getBio()!=null)
+                    if(!StringUtils.isEmpty(pet.getBio()))
                         bioTv.setText(pet.getBio());
                     else
                         bioTv.setVisibility(View.GONE);
-                    if(pet.getTags()!=null)
+                    if(!StringUtils.isEmpty(pet.getTags()))
                         tagsTv.setText(pet.getTags());
                     else
                         tagsTv.setVisibility(View.GONE);
                     if(pet.getOrganization()!=null){
                         Organization organization = pet.getOrganization();
-                        if(organization.getName()!=null)
+                        if(!StringUtils.isEmpty(organization.getName()))
                             orgNameTv.setText(organization.getName());
-                        if(organization.getEmail()!=null)
+                        if(!StringUtils.isEmpty(organization.getEmail()))
                             orgEmailTv.setText(organization.getEmail());
                         else{
                             orgEmailTv.setVisibility(View.GONE);
                             emailIv.setVisibility(View.GONE);
                         }
-                        if(organization.getPhone()!=null)
+                        if(!StringUtils.isEmpty(organization.getPhone()))
                             orgPhoneTv.setText(organization.getPhone());
                         else{
                             orgPhoneTv.setVisibility(View.GONE);
                             phoneIv.setVisibility(View.GONE);
                         }
-                        if(organization.getImage()!=null)
+                        if(!StringUtils.isEmpty(organization.getImage()))
                             Picasso.get().load(organization.getImage()).fit().centerCrop().into(orgPhotoIv);
                         else
                             orgPhotoIv.setVisibility(View.GONE);
                         if(organization.getAddress()!=null){
                             Address address = organization.getAddress();
                             StringBuilder addressSb = new StringBuilder();
-                            if(address.getStreet1()!=null)
+                            if(!StringUtils.isEmpty(address.getStreet1()))
                                 addressSb.append(address.getStreet1()).append(", ");
-                            if(address.getStreet2()!=null)
+                            if(!StringUtils.isEmpty(address.getStreet2()))
                                 addressSb.append(address.getStreet2()).append(", ");
-                            if(address.getCity()!=null)
+                            if(!StringUtils.isEmpty(address.getCity()))
                                 addressSb.append(address.getCity()).append(", ");
-                            if(address.getState()!=null)
+                            if(!StringUtils.isEmpty(address.getState()))
                                 addressSb.append(address.getState());
                             orgAddressTv.setText(addressSb.toString());
                         }else {
@@ -341,5 +357,21 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
                 alertadd.show();
             }
         });
+    }
+
+    @Override
+    public void openEmail(boolean hasBody, String toEmail, String subject, String body) {
+        if(hasBody){
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri data = Uri.parse("mailto:"+toEmail+"?subject=" + subject + "&body=" + body);
+            intent.setData(data);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri data = Uri.parse("mailto:"+toEmail);
+            intent.setData(data);
+            startActivity(intent);
+        }
     }
 }

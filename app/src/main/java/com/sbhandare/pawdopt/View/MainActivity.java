@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
                                                                FavoritesFragment.OnFragmentInteractionListener,
                                                                AccountFragment.OnFragmentInteractionListener,
                                                                FilterFragment.OnFragmentInteractionListener,
+                                                               CategoryFilterFragment.OnFragmentInteractionListener,
+                                                               DistanceFilterFragment.OnFragmentInteractionListener,
                                                                PetDetailsFragment.OnFragmentInteractionListener {
 
     BubbleTabBar bubbleTabBar;

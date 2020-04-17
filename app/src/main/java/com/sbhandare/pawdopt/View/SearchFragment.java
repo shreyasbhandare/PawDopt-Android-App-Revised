@@ -27,8 +27,6 @@ import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 
-import org.michaelbel.bottomsheet.BottomSheet;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -108,23 +106,12 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         progDialog.setContentView(R.layout.progress_dialog);
         searchFragmentPresenter.populatePetList();
 
-        String[] distance_array = getResources().getStringArray(R.array.distance_array);
-        String[] categoy_text_array = getResources().getStringArray(R.array.pettype_array);
-
         petDistanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((AnimationDrawable)petDistanceBtn.getBackground()).start();
-                BottomSheet.Builder builder = new BottomSheet.Builder(Objects.requireNonNull(getContext()));
-                builder.setTitle(R.string.distanceTitle);
-                builder.setDarkTheme(false);
-                builder.setItems(distance_array,(dialogInterface, i) -> {
-                    petDistanceBtn.setText(distance_array[i]);
-                });
-                builder.setDividers(false);
-                builder.setFullWidth(false);
-                builder.setItemTextColor(ResourcesCompat.getColor(getResources(), R.color.appPrimaryGreenColor, null));
-                builder.show();
+                DistanceFilterFragment distanceFilterFragment = new DistanceFilterFragment();
+                distanceFilterFragment.show(getFragmentManager(),"distFiler");
                 //((AnimationDrawable)petCategoryBtn.getBackground()).stop();
             }
         });
@@ -133,16 +120,8 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             @Override
             public void onClick(View view) {
                 ((AnimationDrawable)petCategoryBtn.getBackground()).start();
-                BottomSheet.Builder builder = new BottomSheet.Builder(Objects.requireNonNull(getContext()));
-                builder.setTitle(R.string.categoryTitle);
-                builder.setDarkTheme(false);
-                builder.setItems(categoy_text_array,(dialogInterface, i) -> {
-                    petCategoryBtn.setText(categoy_text_array[i]);
-                });
-                builder.setDividers(false);
-                builder.setFullWidth(false);
-                builder.setItemTextColor(ResourcesCompat.getColor(getResources(), R.color.appPrimaryGreenColor, null));
-                builder.show();
+                CategoryFilterFragment categoryFilterFragment = new CategoryFilterFragment();
+                categoryFilterFragment.show(getFragmentManager(),"catFilter");
                 //((AnimationDrawable)petCategoryBtn.getBackground()).stop();
             }
         });

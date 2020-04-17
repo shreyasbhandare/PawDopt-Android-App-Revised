@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".View.DistanceFilterFragment">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.CategoryFilterFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/category_tv"
+        android:textColor="@color/appSecondaryGreyColor"
+        android:fontFamily="@font/montserrat"
+        android:textSize="@dimen/txtSemiMedFontSize"
+        android:text="Filter by Distance"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/margin16dp"/>
 
-</FrameLayout>
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexWrap="wrap"
+        app:justifyContent="center"
+        android:layout_margin="@dimen/margin16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category_tv">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin8dp"
+                android:background="@drawable/rounded_filter_button"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/five_mile"
+                android:textAllCaps="false"
+                android:textColor="@color/appSecondaryWhiteColor"
+                android:layout_gravity="center"
+                android:textSize="@dimen/txtSemiMedFontSize" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin8dp"
+                android:background="@drawable/rounded_filter_button"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/fifty_mile"
+                android:textAllCaps="false"
+                android:textColor="@color/appSecondaryWhiteColor"
+                android:layout_gravity="center"
+                android:textSize="@dimen/txtSemiMedFontSize" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin8dp"
+                android:background="@drawable/rounded_filter_button"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/hundred_mile"
+                android:textAllCaps="false"
+                android:textColor="@color/appSecondaryWhiteColor"
+                android:layout_gravity="center"
+                android:textSize="@dimen/txtSemiMedFontSize" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin8dp"
+                android:background="@drawable/rounded_filter_button"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/five_hundred_mile"
+                android:textAllCaps="false"
+                android:textColor="@color/appSecondaryWhiteColor"
+                android:layout_gravity="center"
+                android:textSize="@dimen/txtSemiMedFontSize" />
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

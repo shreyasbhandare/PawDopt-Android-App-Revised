@@ -80,6 +80,51 @@ public class PetDetailsFragmentPresenter {
             view.openEmail(true,pet.getOrganization().getEmail(),"Checking in about "+pet.getName(),"Hello, is "+pet.getName()+" available for adoption?");
     }
 
+    public void openWeblink(){
+        if(pet.getOrganization()!=null && !StringUtils.isEmpty(pet.getOrganization().getWebLink())) {
+            String url = pet.getOrganization().getWebLink();
+            if (!url.startsWith("http://") && !url.startsWith("https://"))
+                url = "http://" + url;
+            view.openUrl(url);
+        }
+    }
+
+    public void openFb(){
+        if(pet.getOrganization()!=null && !StringUtils.isEmpty(pet.getOrganization().getFbLink())) {
+            String url = pet.getOrganization().getFbLink();
+            if (!url.startsWith("http://") && !url.startsWith("https://"))
+                url = "http://" + url;
+            view.openUrl(url);
+        }
+    }
+
+    public void openTwitter(){
+        if(pet.getOrganization()!=null && !StringUtils.isEmpty(pet.getOrganization().getTwitterLink())) {
+            String url = pet.getOrganization().getTwitterLink();
+            if (!url.startsWith("http://") && !url.startsWith("https://"))
+                url = "http://" + url;
+            view.openUrl(url);
+        }
+    }
+
+    public void openInstagram(){
+        if(pet.getOrganization()!=null && !StringUtils.isEmpty(pet.getOrganization().getInstaLink())) {
+            String url = pet.getOrganization().getInstaLink();
+            if (!url.startsWith("http://") && !url.startsWith("https://"))
+                url = "http://" + url;
+            view.openUrl(url);
+        }
+    }
+
+    public void openYoutube(){
+        if(pet.getOrganization()!=null && !StringUtils.isEmpty(pet.getOrganization().getYoutubeLink())) {
+            String url = pet.getOrganization().getYoutubeLink();
+            if (!url.startsWith("http://") && !url.startsWith("https://"))
+                url = "http://" + url;
+            view.openUrl(url);
+        }
+    }
+
     public void addFavorite(){
 
     }
@@ -89,5 +134,6 @@ public class PetDetailsFragmentPresenter {
         void populateDataNotFound();
         void populateDialog(String imgUrl);
         void openEmail(boolean hasBody, String toEmail, String subject, String body);
+        void openUrl(String url);
     }
 }

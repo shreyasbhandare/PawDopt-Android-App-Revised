@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -85,6 +86,11 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     @BindView(R.id.address_img) ImageView addressIv;
     @BindView(R.id.email_img) ImageView emailIv;
     @BindView(R.id.phone_img) ImageView phoneIv;
+    @BindView(R.id.weblink_iv) ImageView weblinkIv;
+    @BindView(R.id.fb_iv) ImageView fbIv;
+    @BindView(R.id.twitter_iv) ImageView twitterIv;
+    @BindView(R.id.insta_iv) ImageView instaIv;
+    @BindView(R.id.youtube_iv) ImageView youtubeIv;
     @BindView(R.id.petLike) CheckBox likeCb;
     @BindView(R.id.ask_details_btn) Button askDetailsBtn;
     @BindView(R.id.no_data_txt) TextView noDataTv;
@@ -144,6 +150,41 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
             @Override
             public void onClick(View view) {
                 petDetailsFragmentPresenter.openFullImage();
+            }
+        });
+
+        weblinkIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petDetailsFragmentPresenter.openWeblink();
+            }
+        });
+
+        fbIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petDetailsFragmentPresenter.openFb();
+            }
+        });
+
+        twitterIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petDetailsFragmentPresenter.openTwitter();
+            }
+        });
+
+        instaIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petDetailsFragmentPresenter.openInstagram();
+            }
+        });
+
+        youtubeIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petDetailsFragmentPresenter.openYoutube();
             }
         });
 
@@ -318,6 +359,16 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
                             orgAddressTv.setVisibility(View.GONE);
                             addressIv.setVisibility(View.GONE);
                         }
+                        if(StringUtils.isEmpty(organization.getWebLink()))
+                            weblinkIv.setVisibility(View.GONE);
+                        if(StringUtils.isEmpty(organization.getFbLink()))
+                            fbIv.setVisibility(View.GONE);
+                        if(StringUtils.isEmpty(organization.getTwitterLink()))
+                            twitterIv.setVisibility(View.GONE);
+                        if(StringUtils.isEmpty(organization.getInstaLink()))
+                            instaIv.setVisibility(View.GONE);
+                        if(StringUtils.isEmpty(organization.getYoutubeLink()))
+                            youtubeIv.setVisibility(View.GONE);
                     }
                 }
                 progDialog.dismiss();
@@ -373,5 +424,11 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
             intent.setData(data);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void openUrl(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 }

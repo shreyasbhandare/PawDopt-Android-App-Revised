@@ -3,6 +3,7 @@ package com.sbhandare.pawdopt.View;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -113,6 +114,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         petDistanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((AnimationDrawable)petDistanceBtn.getBackground()).start();
                 BottomSheet.Builder builder = new BottomSheet.Builder(Objects.requireNonNull(getContext()));
                 builder.setTitle(R.string.distanceTitle);
                 builder.setDarkTheme(false);
@@ -123,12 +125,14 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 builder.setFullWidth(false);
                 builder.setItemTextColor(ResourcesCompat.getColor(getResources(), R.color.appPrimaryGreenColor, null));
                 builder.show();
+                //((AnimationDrawable)petCategoryBtn.getBackground()).stop();
             }
         });
 
         petCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((AnimationDrawable)petCategoryBtn.getBackground()).start();
                 BottomSheet.Builder builder = new BottomSheet.Builder(Objects.requireNonNull(getContext()));
                 builder.setTitle(R.string.categoryTitle);
                 builder.setDarkTheme(false);
@@ -139,6 +143,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 builder.setFullWidth(false);
                 builder.setItemTextColor(ResourcesCompat.getColor(getResources(), R.color.appPrimaryGreenColor, null));
                 builder.show();
+                //((AnimationDrawable)petCategoryBtn.getBackground()).stop();
             }
         });
 
@@ -220,6 +225,9 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             public void run() {
                 rViewAdapter = new RViewAdapter(getContext(), petList, totalResults, searchFragmentPresenter);
                 recyclerView.setAdapter(rViewAdapter);
+                petCategoryBtn.setVisibility(View.VISIBLE);
+                petDistanceBtn.setVisibility(View.VISIBLE);
+                filterBtn.setVisibility(View.VISIBLE);
                 progDialog.dismiss();
             }
         });

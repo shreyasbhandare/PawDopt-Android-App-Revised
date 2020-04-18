@@ -30,7 +30,7 @@ public class FavoritesFragmentRoot extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorites_fragment_root, container, false);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.favorites_fragment_root, new FavoritesFragment())
+                .replace(R.id.favorites_fragment_root, new FavoritesFragment(),"favoritesFragment")
                 .commit();
 
         return view;

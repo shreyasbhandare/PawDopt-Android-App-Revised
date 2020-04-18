@@ -29,6 +29,12 @@
     <string name="hundred_mile">&lt; 100 Miles</string>
     <string name="five_hundred_mile">&lt; 500 Miles</string>
 
+    <string name="dog">Dog</string>
+    <string name="cat">Cat</string>
+    <string name="horse">Horse</string>
+    <string name="mouse">Mouse</string>
+    <string name="rabbit">Rabbit</string>
+
     <string-array name="distance_array">
         <item>&lt; 5 Miles</item>
         <item>&lt; 50 Miles</item>

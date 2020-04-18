@@ -1,6 +1,7 @@
 package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.net.Uri;
@@ -10,6 +11,8 @@ import com.fxn.BubbleTabBar;
 import com.fxn.OnBubbleClickListener;
 import com.sbhandare.pawdopt.R;
 import com.sbhandare.pawdopt.Adapter.ViewPagerAdapter;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener,
                                                                FavoritesFragment.OnFragmentInteractionListener,
@@ -23,11 +26,8 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
     private ViewPager viewPager;
 
     SearchFragmentRoot searchFragmentRoot;
-    SearchFragment searchFragment;
     FavoritesFragmentRoot favoritesFragmentRoot;
-    FavoritesFragment favoritesFragment;
     AccountFragment accountFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +60,7 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        /*
-        searchFragment = new SearchFragment();
-        favoritesFragment = new FavoritesFragment();
-        accountFragment = new AccountFragment();
-        adapter.addFragment(searchFragment);
-        adapter.addFragment(favoritesFragment);
-        adapter.addFragment(accountFragment);
-        */
+
         searchFragmentRoot = new SearchFragmentRoot();
         favoritesFragmentRoot = new FavoritesFragmentRoot();
         accountFragment = new AccountFragment();
@@ -79,5 +72,17 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
 
     @Override
     public void onFragmentInteraction(Uri uri){
+    }
+
+    @Override
+    public void onDistanceSelected(String distance) {
+        SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag("searchFragment");
+        Objects.requireNonNull(searchFragment).onDistanceSelected(distance);
+    }
+
+    @Override
+    public void onCategorySelected(String category) {
+        SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag("searchFragment");
+        Objects.requireNonNull(searchFragment).onCategorySelected(category);
     }
 }

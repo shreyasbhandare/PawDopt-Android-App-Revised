@@ -1,10 +1,15 @@
 package com.sbhandare.pawdopt.View;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.sbhandare.pawdopt.R;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +32,17 @@ public class CategoryFilterFragment extends BottomSheetDialogFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @BindView(R.id.selection_cat) LinearLayoutCompat catBox;
+    @BindView(R.id.selection_dog) LinearLayoutCompat dogBox;
+    @BindView(R.id.selection_horse) LinearLayoutCompat horseBox;
+    @BindView(R.id.selection_mouse) LinearLayoutCompat mouseBox;
+    @BindView(R.id.selection_rabbit) LinearLayoutCompat rabbitBox;
+    @BindView(R.id.cat_tv) AppCompatTextView catTv;
+    @BindView(R.id.dog_tv) AppCompatTextView dogTv;
+    @BindView(R.id.horse_tv) AppCompatTextView horseTv;
+    @BindView(R.id.mouse_tv) AppCompatTextView mouseTv;
+    @BindView(R.id.rabbit_tv) AppCompatTextView rabbitTv;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,13 +85,56 @@ public class CategoryFilterFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category_filter, container, false);
+        View view = inflater.inflate(R.layout.fragment_category_filter, container, false);
+        ButterKnife.bind(this,view);
+
+        catBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onCategorySelected(catTv.getText().toString());
+                dismiss();
+            }
+        });
+
+        dogBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onCategorySelected(dogTv.getText().toString());
+                dismiss();
+            }
+        });
+
+        horseBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onCategorySelected(horseTv.getText().toString());
+                dismiss();
+            }
+        });
+
+        mouseBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onCategorySelected(mouseTv.getText().toString());
+                dismiss();
+            }
+        });
+
+        rabbitBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onCategorySelected(rabbitTv.getText().toString());
+                dismiss();
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onCategorySelected(PawDoptUtil.NO_SELECTION);
         }
     }
 
@@ -95,6 +155,12 @@ public class CategoryFilterFragment extends BottomSheetDialogFragment {
         mListener = null;
     }
 
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        mListener.onCategorySelected(PawDoptUtil.NO_SELECTION);
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -107,6 +173,6 @@ public class CategoryFilterFragment extends BottomSheetDialogFragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onCategorySelected(String category);
     }
 }

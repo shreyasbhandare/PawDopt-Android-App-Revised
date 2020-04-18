@@ -16,12 +16,9 @@ import com.sbhandare.pawdopt.R;
  * A simple {@link Fragment} subclass.
  */
 public class SearchFragmentRoot extends Fragment {
-
-
     public SearchFragmentRoot() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,10 +27,9 @@ public class SearchFragmentRoot extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_fragment_root, container, false);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.search_fragment_root, new SearchFragment())
+                .replace(R.id.search_fragment_root, new SearchFragment(),"searchFragment")
                 .commit();
 
         return view;
     }
-
 }

@@ -2,6 +2,7 @@ package com.sbhandare.pawdopt.View;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -25,6 +26,9 @@ import com.sbhandare.pawdopt.Component.PawDoptToast;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -112,20 +116,20 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         petDistanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((AnimationDrawable)petDistanceBtn.getBackground()).start();
+                //((AnimationDrawable)petDistanceBtn.getBackground()).start();
+                petDistanceBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_inverted);
                 distanceFilterFragment = new DistanceFilterFragment();
                 distanceFilterFragment.show(getFragmentManager(),"distFiler");
-                //((AnimationDrawable)petCategoryBtn.getBackground()).stop();
             }
         });
 
         petCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((AnimationDrawable)petCategoryBtn.getBackground()).start();
+                //((AnimationDrawable)petCategoryBtn.getBackground()).start();
+                petCategoryBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_inverted);
                 categoryFilterFragment = new CategoryFilterFragment();
                 categoryFilterFragment.show(getFragmentManager(),"catFilter");
-                //((AnimationDrawable)petCategoryBtn.getBackground()).stop();
             }
         });
 
@@ -236,5 +240,19 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
 
         rViewAdapter.notifyItemRemoved(pos);
         rViewAdapter.notifyItemRangeChanged(pos, size);
+    }
+
+    void onDistanceSelected(String distance){
+        if(!StringUtils.equals(distance, PawDoptUtil.NO_SELECTION)) {
+            petDistanceBtn.setText(distance);
+        }
+        petDistanceBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
+    }
+
+    void onCategorySelected(String category){
+        if(!StringUtils.equals(category, PawDoptUtil.NO_SELECTION)) {
+            petCategoryBtn.setText(category);
+        }
+        petCategoryBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
     }
 }

@@ -1,17 +1,22 @@
 package com.sbhandare.pawdopt.View;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.sbhandare.pawdopt.R;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +31,11 @@ public class DistanceFilterFragment extends BottomSheetDialogFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @BindView(R.id.five_mi_btn) Button fiveMileBtn;
+    @BindView(R.id.fifty_mi_btn) Button fiftyMileBtn;
+    @BindView(R.id.hundred_mi_btn) Button hundredMileBtn;
+    @BindView(R.id.five_hundred_mi_btn) Button fiveHundredMileBtn;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,13 +78,48 @@ public class DistanceFilterFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_distance_filter, container, false);
+        View view = inflater.inflate(R.layout.fragment_distance_filter, container, false);
+        ButterKnife.bind(this,view);
+
+        fiveMileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onDistanceSelected(fiveMileBtn.getText().toString());
+                dismiss();
+            }
+        });
+
+        fiftyMileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onDistanceSelected(fiftyMileBtn.getText().toString());
+                dismiss();
+            }
+        });
+
+        hundredMileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onDistanceSelected(hundredMileBtn.getText().toString());
+                dismiss();
+            }
+        });
+
+        fiveHundredMileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onDistanceSelected(fiveHundredMileBtn.getText().toString());
+                dismiss();
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onDistanceSelected(PawDoptUtil.NO_SELECTION);
         }
     }
 
@@ -95,6 +140,12 @@ public class DistanceFilterFragment extends BottomSheetDialogFragment {
         mListener = null;
     }
 
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        mListener.onDistanceSelected(PawDoptUtil.NO_SELECTION);
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -106,7 +157,6 @@ public class DistanceFilterFragment extends BottomSheetDialogFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onDistanceSelected(String distance);
     }
 }

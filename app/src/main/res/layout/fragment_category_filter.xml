@@ -32,6 +32,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/selection_cat"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/margin16dp"
             android:layout_marginStart="@dimen/margin24dp"
@@ -46,8 +47,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/cat_tv"
                 android:fontFamily="@font/montserrat"
-                android:text="Cat"
+                android:text="@string/cat"
                 android:textColor="@color/appSecondaryGreyColor"
                 android:layout_gravity="center"
                 android:textSize="@dimen/txtSemiMedFontSize" />
@@ -56,6 +58,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/selection_dog"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/margin16dp"
             android:layout_marginStart="@dimen/margin24dp"
@@ -70,8 +73,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/dog_tv"
                 android:fontFamily="@font/montserrat"
-                android:text="Dog"
+                android:text="@string/dog"
                 android:textColor="@color/appSecondaryGreyColor"
                 android:layout_gravity="center"
                 android:textSize="@dimen/txtSemiMedFontSize" />
@@ -80,6 +84,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/selection_horse"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/margin16dp"
             android:layout_marginStart="@dimen/margin24dp"
@@ -94,8 +99,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/horse_tv"
                 android:fontFamily="@font/montserrat"
-                android:text="Horse"
+                android:text="@string/horse"
                 android:textColor="@color/appSecondaryGreyColor"
                 android:layout_gravity="center"
                 android:textSize="@dimen/txtSemiMedFontSize" />
@@ -104,6 +110,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/selection_mouse"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/margin16dp"
             android:layout_marginStart="@dimen/margin24dp"
@@ -118,8 +125,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/mouse_tv"
                 android:fontFamily="@font/montserrat"
-                android:text="Mouse"
+                android:text="@string/mouse"
                 android:textColor="@color/appSecondaryGreyColor"
                 android:layout_gravity="center"
                 android:textSize="@dimen/txtSemiMedFontSize" />
@@ -128,6 +136,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/selection_rabbit"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/margin16dp"
             android:layout_marginStart="@dimen/margin24dp"
@@ -142,8 +151,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/rabbit_tv"
                 android:fontFamily="@font/montserrat"
-                android:text="Rabbit"
+                android:text="@string/rabbit"
                 android:textColor="@color/appSecondaryGreyColor"
                 android:layout_gravity="center"
                 android:textSize="@dimen/txtSemiMedFontSize" />

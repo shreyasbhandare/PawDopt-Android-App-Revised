@@ -12,7 +12,7 @@
     <dimen name="careIconDimenX">150dp</dimen>
     <dimen name="careIconDimenY">150dp</dimen>
 
-    <dimen name="splashScreenIconDimenX">250dp</dimen>
+    <dimen name="splashScreenIconDimenX">270dp</dimen>
     <dimen name="splashScreenIconDimenY">250dp</dimen>
 
     <dimen name="authPagesFieldHt">50dp</dimen>

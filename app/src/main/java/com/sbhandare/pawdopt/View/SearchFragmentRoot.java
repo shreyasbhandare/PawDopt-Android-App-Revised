@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.sbhandare.pawdopt.R;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -23,9 +25,8 @@ public class SearchFragmentRoot extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_fragment_root, container, false);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.search_fragment_root, new SearchFragment(),"searchFragment")
                 .commit();

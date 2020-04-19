@@ -11,7 +11,6 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -139,6 +138,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pet_details, container, false);
         ButterKnife.bind(this,view);
+
         petDetailsFragmentPresenter = new PetDetailsFragmentPresenter(this, getContext());
 
         progDialog = ProgressDialog.show( getContext(), null, null, false, true );
@@ -397,12 +397,6 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
                 LayoutInflater factory = LayoutInflater.from(getContext());
                 final View view = factory.inflate(R.layout.layout_full_pet_image, null);
                 ImageView imageView = view.findViewById(R.id.dialog_imageview);
-                /*
-                int ht = PawDoptImageUtil.getImgHt(imgUrl);
-                int wd = PawDoptImageUtil.getImgWd(imgUrl);
-                imageView.getLayoutParams().width = (int) PawDoptImageUtil.dpFromPx(getContext(), ht);
-                imageView.getLayoutParams().height = (int) PawDoptImageUtil.dpFromPx(getContext(), wd);
-                */
                 Picasso.get().load(imgUrl).fit().centerInside().into(imageView);
                 alertadd.setView(view);
                 alertadd.show();

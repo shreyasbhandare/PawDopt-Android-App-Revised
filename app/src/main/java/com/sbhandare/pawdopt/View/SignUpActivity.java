@@ -1,6 +1,8 @@
 package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +13,14 @@ import com.sbhandare.pawdopt.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private TextView loginTxt;
+    @BindView(R.id.loginTxt) TextView loginTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-        loginTxt = findViewById(R.id.loginTxt);
+        ButterKnife.bind(this);
 
         loginTxt.setOnClickListener(new View.OnClickListener() {
             @Override

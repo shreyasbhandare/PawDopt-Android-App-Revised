@@ -2,6 +2,8 @@ package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,20 +23,19 @@ import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity implements LoginPresenter.View {
 
-    private EditText usernameEditTxt;
-    private EditText passwordEditTxt;
-    private TextView signUpTxt;
-    private Button loginBtn;
-
-    private boolean hasLocationPermission;
+    @BindView(R.id.emailEdit) EditText usernameEditTxt;
+    @BindView(R.id.passwordEdit) EditText passwordEditTxt;
+    @BindView(R.id.signUpTxt) TextView signUpTxt;
+    @BindView(R.id.loginBtn) Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
-        hasLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        boolean hasLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         if (!hasLocationPermission) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PawDoptUtil.REQUEST_LOCATION);
@@ -70,10 +71,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
     }
 
     private void initUIElements(){
-        signUpTxt = findViewById(R.id.signUpTxt);
-        loginBtn = findViewById(R.id.loginBtn);
-        usernameEditTxt = findViewById(R.id.emailEdit);
-        passwordEditTxt = findViewById(R.id.passwordEdit);
         passwordEditTxt.setTransformationMethod(new PawDoptPasswordTransform());
     }
 

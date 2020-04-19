@@ -49,9 +49,9 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private static final String ARG_PARAM2 = "param2";
 
     private EndlessRecyclerViewScrollListener scrollListener;
-    private static RViewAdapter rViewAdapter;
+    private RViewAdapter rViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private Button petDistanceBtn;
     private Button petCategoryBtn;
     private AppCompatImageView filterBtn;
@@ -62,7 +62,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private DistanceFilterFragment distanceFilterFragment;
     private CategoryFilterFragment categoryFilterFragment;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -80,7 +79,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
      * @param param2 Parameter 2.
      * @return A new instance of fragment SearchFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static SearchFragment newInstance(String param1, String param2) {
         SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
@@ -104,7 +102,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        // Inflate the layout for this fragment
         initUIElements(view);
         searchFragmentPresenter = new SearchFragmentPresenter(this,getContext());
 
@@ -116,20 +113,18 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         petDistanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //((AnimationDrawable)petDistanceBtn.getBackground()).start();
                 petDistanceBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_inverted);
                 distanceFilterFragment = new DistanceFilterFragment();
-                distanceFilterFragment.show(getFragmentManager(),"distFiler");
+                distanceFilterFragment.show(Objects.requireNonNull(getFragmentManager()),"distFiler");
             }
         });
 
         petCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //((AnimationDrawable)petCategoryBtn.getBackground()).start();
                 petCategoryBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_inverted);
                 categoryFilterFragment = new CategoryFilterFragment();
-                categoryFilterFragment.show(getFragmentManager(),"catFilter");
+                categoryFilterFragment.show(Objects.requireNonNull(getFragmentManager()),"catFilter");
             }
         });
 
@@ -137,7 +132,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             @Override
             public void onClick(View view) {
                 filterFragment = new FilterFragment();
-                filterFragment.show(getFragmentManager(),"filter");
+                filterFragment.show(Objects.requireNonNull(getFragmentManager()),"filter");
             }
         });
 
@@ -147,7 +142,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 searchFragmentPresenter.getMorePets();
             }
         };
-        // Adds the scroll listener to RecyclerView
+
         recyclerView.addOnScrollListener(scrollListener);
 
         return view;

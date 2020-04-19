@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +37,11 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     private String mParam1;
     private String mParam2;
 
-    private TextView emailTv;
-    private TextView aboutTv;
-    private TextView logoutTv;
-    private AccountFragmentPresenter accountFragmentPresenter;
+    @BindView(R.id.emailTxt) TextView emailTv;
+    @BindView(R.id.aboutTxt) TextView aboutTv;
+    @BindView(R.id.logoutTxt) TextView logoutTv;
 
+    private AccountFragmentPresenter accountFragmentPresenter;
     private OnFragmentInteractionListener mListener;
 
     public AccountFragment() {
@@ -78,7 +80,8 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        initUIElements(view);
+        ButterKnife.bind(this, view);
+
         accountFragmentPresenter = new AccountFragmentPresenter(this, getContext());
         accountFragmentPresenter.populateUserInfo();
 
@@ -141,12 +144,6 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    private void initUIElements(View view){
-        emailTv = view.findViewById(R.id.emailTxt);
-        aboutTv = view.findViewById(R.id.aboutTxt);
-        logoutTv = view.findViewById(R.id.logoutTxt);
     }
 
     @Override

@@ -37,9 +37,9 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private static RViewAdapter rViewAdapter;
+    private RViewAdapter rViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private static ArrayList<Pet> data;
     private FavoritesFragmentPresenter favoritesFragmentPresenter;
 
@@ -149,14 +149,4 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
             }
         });
     }
-
-    /*
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser) {
-            favoritesFragmentPresenter.populateFavoritesList();
-        }
-    }
-    */
 }

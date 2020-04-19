@@ -2,9 +2,7 @@ package com.sbhandare.pawdopt.View;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +10,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -21,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.sbhandare.pawdopt.Adapter.EndlessRecyclerViewScrollListener;
-import com.sbhandare.pawdopt.Adapter.RViewAdapter;
+import com.sbhandare.pawdopt.Adapter.RViewGridAdapter;
 import com.sbhandare.pawdopt.Component.PawDoptToast;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
@@ -49,8 +47,8 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private static final String ARG_PARAM2 = "param2";
 
     private EndlessRecyclerViewScrollListener scrollListener;
-    private RViewAdapter rViewAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private RViewGridAdapter rViewAdapter;
+    private GridLayoutManager gridLayoutManager;
     private RecyclerView recyclerView;
     private Button petDistanceBtn;
     private Button petCategoryBtn;
@@ -136,7 +134,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             }
         });
 
-        scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
+        scrollListener = new EndlessRecyclerViewScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 searchFragmentPresenter.getMorePets();
@@ -194,8 +192,17 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
 
         recyclerView = view.findViewById(R.id.petSearchListRV);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (rViewAdapter.getItemViewType(position) == 1) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
@@ -204,7 +211,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                rViewAdapter = new RViewAdapter(getContext(), petList, totalResults, searchFragmentPresenter);
+                rViewAdapter = new RViewGridAdapter(getContext(), petList, totalResults, searchFragmentPresenter);
                 recyclerView.setAdapter(rViewAdapter);
                 petCategoryBtn.setVisibility(View.VISIBLE);
                 petDistanceBtn.setVisibility(View.VISIBLE);

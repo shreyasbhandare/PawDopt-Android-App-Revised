@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    app:cardPreventCornerOverlap="false"
+    android:id="@+id/petListItemGrid"
+    android:background="@color/appSecondaryWhiteColor"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/petPhotoGrid"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:contentDescription="@string/pet_img"
+                android:src="@drawable/cat_avatar" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:id="@+id/petNameGrid"
+                    android:text="Pet 1 Name"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/appPrimaryGreenColor"
+                    android:textSize="@dimen/txtSemiLgeFontSize"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/margin8dp"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/petDitanceImgGrid"
+                    android:src="@drawable/ic_location_marker_96"
+                    app:layout_constraintTop_toBottomOf="@+id/petNameGrid"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/margin8dp"
+                    android:layout_marginBottom="@dimen/margin16dp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:id="@+id/petDistanceGrid"
+                    android:text="5 mi"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/appSecondaryGreyColor"
+                    android:textSize="@dimen/txtSmlFontSize"
+                    app:layout_constraintTop_toBottomOf="@+id/petNameGrid"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/petDitanceImgGrid"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/margin8dp"
+                    android:layout_marginBottom="@dimen/margin16dp"
+                    android:layout_marginStart="@dimen/margin4dp"
+                    android:maxLength="20"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
+
+                <CheckBox
+                    android:id="@+id/petLikeGrid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:checked="false"
+                    android:background="@drawable/like_icon"
+                    android:stateListAnimator="@animator/scale"
+                    app:layout_constraintTop_toBottomOf="@+id/petNameGrid"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/margin8dp"
+                    android:layout_marginBottom="@dimen/margin16dp"
+                    android:layout_marginEnd="@dimen/margin8dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+</androidx.cardview.widget.CardView>

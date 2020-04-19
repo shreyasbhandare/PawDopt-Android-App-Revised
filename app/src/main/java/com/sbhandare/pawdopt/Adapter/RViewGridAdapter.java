@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_RESULT = 1;
@@ -36,7 +36,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private long totalResults;
     private PawDoptPresenter presenter;
 
-    public RViewAdapter(Context context, List<Pet> data, long totalResults, PawDoptPresenter presenter) {
+    public RViewGridAdapter(Context context, List<Pet> data, long totalResults, PawDoptPresenter presenter) {
         this.context = context;
         this.dataSet = data;
         this.totalResults = totalResults;
@@ -47,7 +47,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_ITEM) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_pet_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_pet_item_grid, parent, false);
             return new ItemViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_results_item, parent, false);
@@ -57,13 +57,11 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-
         if (viewHolder instanceof ItemViewHolder) {
             populateItemRows((ItemViewHolder) viewHolder, position);
         } else if (viewHolder instanceof ResultsViewHolder) {
             showResultsView((ResultsViewHolder) viewHolder, position);
         }
-
     }
 
     @Override
@@ -79,24 +77,25 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     @Override
     public int getItemViewType(int position) {
-        return dataSet.get(position) == null ? VIEW_TYPE_RESULT : VIEW_TYPE_ITEM;
+        if(position==0){
+            return VIEW_TYPE_RESULT;
+        }
+        return VIEW_TYPE_ITEM;
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvPetName;
-        TextView tvPetBreed;
         TextView tvPetDistance;
         ImageView ivPetPhoto;
         CheckBox cbLike;
 
         private ItemViewHolder(View itemView) {
             super(itemView);
-            this.tvPetName = itemView.findViewById(R.id.petName);
-            this.tvPetBreed = itemView.findViewById(R.id.petBreed);
-            this.tvPetDistance = itemView.findViewById(R.id.petDistance);
-            this.ivPetPhoto = itemView.findViewById(R.id.petPhoto);
-            this.cbLike = itemView.findViewById(R.id.petLike);
+            this.tvPetName = itemView.findViewById(R.id.petNameGrid);
+            this.tvPetDistance = itemView.findViewById(R.id.petDistanceGrid);
+            this.ivPetPhoto = itemView.findViewById(R.id.petPhotoGrid);
+            this.cbLike = itemView.findViewById(R.id.petLikeGrid);
         }
     }
 
@@ -124,13 +123,11 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private void populateItemRows(ItemViewHolder viewHolder, int position) {
         TextView textViewPetName = viewHolder.tvPetName;
-        TextView textViewPetBreed = viewHolder.tvPetBreed;
         TextView textViewPetDistance = viewHolder.tvPetDistance;
         ImageView imageViewPetPhoto = viewHolder.ivPetPhoto;
         CheckBox checkBoxPetLike = viewHolder.cbLike;
 
         textViewPetName.setText(dataSet.get(position).getName());
-        textViewPetBreed.setText(dataSet.get(position).getBreed());
         Picasso.get().load(dataSet.get(position).getImage()).fit().centerCrop().into(imageViewPetPhoto);
         String posTxt = dataSet.get(position).getDistance()<=0 ? "" : dataSet.get(position).getDistance()+" mi";
         textViewPetDistance.setText(posTxt);
@@ -143,7 +140,6 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    checkBoxPetLike.setStateListAnimator(null);
                     FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
                     PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
                     Bundle args = new Bundle();
@@ -182,4 +178,3 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 }
-

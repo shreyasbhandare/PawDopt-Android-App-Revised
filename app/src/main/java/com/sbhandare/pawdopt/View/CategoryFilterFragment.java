@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
@@ -43,6 +44,7 @@ public class CategoryFilterFragment extends BottomSheetDialogFragment {
     @BindView(R.id.horse_tv) AppCompatTextView horseTv;
     @BindView(R.id.mouse_tv) AppCompatTextView mouseTv;
     @BindView(R.id.rabbit_tv) AppCompatTextView rabbitTv;
+    @BindView(R.id.clear_categroy_filter) AppCompatImageView clearCatFilterIv;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -124,6 +126,14 @@ public class CategoryFilterFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 mListener.onCategorySelected(rabbitTv.getText().toString());
+                dismiss();
+            }
+        });
+
+        clearCatFilterIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onCategorySelected(PawDoptUtil.NO_SELECTION);
                 dismiss();
             }
         });

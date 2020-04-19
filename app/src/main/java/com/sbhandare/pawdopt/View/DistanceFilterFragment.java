@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +37,7 @@ public class DistanceFilterFragment extends BottomSheetDialogFragment {
     @BindView(R.id.fifty_mi_btn) Button fiftyMileBtn;
     @BindView(R.id.hundred_mi_btn) Button hundredMileBtn;
     @BindView(R.id.five_hundred_mi_btn) Button fiveHundredMileBtn;
+    @BindView(R.id.clear_distance_filter) AppCompatImageView clearDistFilterIv;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -109,6 +111,14 @@ public class DistanceFilterFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 mListener.onDistanceSelected(fiveHundredMileBtn.getText().toString());
+                dismiss();
+            }
+        });
+
+        clearDistFilterIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onDistanceSelected(PawDoptUtil.NO_SELECTION);
                 dismiss();
             }
         });

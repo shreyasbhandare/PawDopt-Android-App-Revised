@@ -247,6 +247,8 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     void onDistanceSelected(String distance){
         if(!StringUtils.equals(distance, PawDoptUtil.NO_SELECTION)) {
             petDistanceBtn.setText(distance);
+        }else{
+            petDistanceBtn.setText(R.string.distanceTitle);
         }
         petDistanceBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
     }
@@ -254,6 +256,8 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     void onCategorySelected(String category){
         if(!StringUtils.equals(category, PawDoptUtil.NO_SELECTION)) {
             petCategoryBtn.setText(category);
+        }else{
+            petCategoryBtn.setText(R.string.categoryTitle);
         }
         petCategoryBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
     }

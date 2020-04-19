@@ -81,6 +81,14 @@
                 android:layout_gravity="center"
                 android:textSize="@dimen/txtSemiMedFontSize" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/clear_distance_filter"
+                app:srcCompat="@drawable/ic_clear_filters_80"
+                android:layout_marginStart="@dimen/margin8dp"
+                android:layout_marginTop="12dp"/>
+
     </com.google.android.flexbox.FlexboxLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

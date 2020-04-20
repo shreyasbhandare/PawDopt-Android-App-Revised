@@ -2,6 +2,7 @@ package com.sbhandare.pawdopt.View;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -100,7 +101,24 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
         logoutTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                accountFragmentPresenter.logout();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                accountFragmentPresenter.logout();
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Are you sure?")
+                        .setMessage("Are you sure you want to log out from PawDopt?")
+                        .setPositiveButton("LOG OUT", dialogClickListener)
+                        .setNegativeButton("CANCEL", dialogClickListener)
+                        .show();
             }
         });
 

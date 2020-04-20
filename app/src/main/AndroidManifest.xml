@@ -16,9 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher">
-        <activity android:name=".View.SignUpActivity"
-            android:noHistory="true">
-        </activity>
         <activity android:name=".View.LoginActivity"
             android:noHistory="true">
         </activity>

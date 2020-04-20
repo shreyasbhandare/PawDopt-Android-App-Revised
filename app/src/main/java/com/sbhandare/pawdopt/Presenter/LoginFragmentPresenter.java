@@ -25,13 +25,13 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class LoginPresenter implements PawDoptPresenter {
+public class LoginFragmentPresenter implements PawDoptPresenter {
     private View view;
     private Context context;
     private SecurityUserRepository securityUserRepository;
     private OkhttpProcessor okhttpProcessor;
 
-    public LoginPresenter(View view, Context context) {
+    public LoginFragmentPresenter(View view, Context context) {
         this.view = view;
         this.context = context;
         this.securityUserRepository = new SecurityUserRepository(context);

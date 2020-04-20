@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.SignupFragment"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_fname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginLeft="@dimen/margin16dp"
+        android:layout_marginRight="@dimen/margin16dp">
+
+        <EditText
+            android:id="@+id/firstNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtMedFontSize"
+            android:hint="@string/firstNameHint" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_lname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="@dimen/margin16dp"
+        android:layout_marginLeft="@dimen/margin16dp"
+        android:layout_marginRight="@dimen/margin16dp">
+
+        <EditText
+            android:id="@+id/lastNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtMedFontSize"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:hint="@string/lastNameHint" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_email_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="@dimen/margin16dp"
+        android:layout_marginLeft="@dimen/margin16dp"
+        android:layout_marginRight="@dimen/margin16dp">
+
+        <EditText
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtMedFontSize"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:hint="@string/emailHint" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_pass_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="@dimen/margin16dp"
+        android:layout_marginLeft="@dimen/margin16dp"
+        android:layout_marginRight="@dimen/margin16dp">
+
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/txtMedFontSize"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:hint="@string/passHint" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/signUpBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/authPagesFieldHt"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginLeft="@dimen/margin16dp"
+            android:layout_marginTop="@dimen/margin32dp"
+            android:layout_marginRight="@dimen/margin16dp"
+            android:textAllCaps="false"
+            android:textSize="@dimen/txtMedFontSize"
+            android:background="@drawable/rounded_button"
+            android:text="@string/signUpBtnTxt"
+            android:textColor="@color/appSecondaryWhiteColor" />
+
+</LinearLayout>

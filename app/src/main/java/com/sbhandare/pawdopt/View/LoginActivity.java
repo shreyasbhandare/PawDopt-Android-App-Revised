@@ -2,31 +2,33 @@ package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.FrameLayout;
 
-import com.sbhandare.pawdopt.Component.PawDoptPasswordTransform;
-import com.sbhandare.pawdopt.Presenter.LoginPresenter;
+import com.google.android.material.tabs.TabLayout;
+import com.sbhandare.pawdopt.Adapter.TabFragmentAdapter;
 import com.sbhandare.pawdopt.R;
 import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
-import java.io.IOException;
+public class LoginActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,
+                                                                SignupFragment.OnFragmentInteractionListener {
 
-public class LoginActivity extends AppCompatActivity implements LoginPresenter.View {
+    @BindView(R.id.tab) TabLayout mTabs;
+    @BindView(R.id.indicator) View mIndicator;
+    @BindView(R.id.viewPager) ViewPager mViewPager;
 
-    @BindView(R.id.emailEdit) EditText usernameEditTxt;
-    @BindView(R.id.passwordEdit) EditText passwordEditTxt;
-    @BindView(R.id.signUpTxt) TextView signUpTxt;
-    @BindView(R.id.loginBtn) Button loginBtn;
+    private LoginFragment loginFragment;
+    private SignupFragment signupFragment;
+
+    private int indicatorWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,42 +43,60 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PawDoptUtil.REQUEST_LOCATION);
         }
 
-        LoginPresenter loginPresenter = new LoginPresenter(this, getApplicationContext());
-        initUIElements();
+        setupViewPager();
 
-        signUpTxt.setOnClickListener(view -> {
-            Intent myIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-            LoginActivity.this.startActivity(myIntent);
+        mTabs.post(new Runnable() {
+            @Override
+            public void run() {
+                indicatorWidth = mTabs.getWidth() / mTabs.getTabCount();
+
+                //Assign new width
+                FrameLayout.LayoutParams indicatorParams = (FrameLayout.LayoutParams) mIndicator.getLayoutParams();
+                indicatorParams.width = indicatorWidth;
+                mIndicator.setLayoutParams(indicatorParams);
+            }
         });
 
-        loginBtn.setOnClickListener(view -> {
-            try {
-                if(TextUtils.isEmpty(usernameEditTxt.getText()) && TextUtils.isEmpty(passwordEditTxt.getText())){
-                    usernameEditTxt.setError( "Email is required!" );
-                    passwordEditTxt.setError( "Password is required!" );
-                }
-                else if(TextUtils.isEmpty(usernameEditTxt.getText()))
-                    usernameEditTxt.setError( "Email is required!" );
-                else if(TextUtils.isEmpty(passwordEditTxt.getText()))
-                    passwordEditTxt.setError( "Password is required!" );
-                else {
-                    String username = usernameEditTxt.getText().toString();
-                    String password = passwordEditTxt.getText().toString();
-                    loginPresenter.login(username, password);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            //To move the indicator as the user scroll, we will need the scroll offset values
+            //positionOffset is a value from [0..1] which represents how far the page has been scrolled
+            //see https://developer.android.com/reference/android/support/v4/view/ViewPager.OnPageChangeListener
+            @Override
+            public void onPageScrolled(int i, float positionOffset, int positionOffsetPx) {
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)mIndicator.getLayoutParams();
+
+                //Multiply positionOffset with indicatorWidth to get translation
+                float translationOffset =  (positionOffset+i) * indicatorWidth ;
+                params.leftMargin = (int) translationOffset;
+                mIndicator.setLayoutParams(params);
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
             }
         });
     }
 
-    private void initUIElements(){
-        passwordEditTxt.setTransformationMethod(new PawDoptPasswordTransform());
+    private void setupViewPager(){
+        loginFragment = new LoginFragment();
+        signupFragment = new SignupFragment();
+
+        TabFragmentAdapter adapter = new TabFragmentAdapter(getSupportFragmentManager());
+        adapter.addFragment(loginFragment, "login");
+        adapter.addFragment(signupFragment, "sign up");
+        mViewPager.setAdapter(adapter);
+        mTabs.setupWithViewPager(mViewPager);
     }
 
     @Override
-    public void loadMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        LoginActivity.this.startActivity(intent);
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

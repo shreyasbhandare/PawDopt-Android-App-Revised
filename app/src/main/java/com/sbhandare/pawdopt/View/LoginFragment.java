@@ -150,7 +150,7 @@ public class LoginFragment extends Fragment implements LoginFragmentPresenter.Vi
     }
 
     private void initUIElements(){
-        passwordEditTxt.setTransformationMethod(new PawDoptPasswordTransform());
+        //passwordEditTxt.setTransformationMethod(new PawDoptPasswordTransform());
     }
 
     @Override

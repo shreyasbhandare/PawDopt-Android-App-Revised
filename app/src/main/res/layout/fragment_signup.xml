@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.SignupFragment"
     android:orientation="vertical"
     android:gravity="bottom|center"
@@ -74,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:passwordToggleEnabled="true"
         android:layout_marginTop="@dimen/margin16dp"
         android:layout_marginLeft="@dimen/margin16dp"
         android:layout_marginRight="@dimen/margin16dp">

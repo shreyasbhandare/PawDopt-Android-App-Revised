@@ -79,8 +79,8 @@
         android:background="@color/appSecondaryGreyColor"
         app:layout_constraintTop_toBottomOf="@id/email_image"
         android:layout_marginTop="@dimen/margin16dp"
-        android:layout_marginStart="@dimen/margin16dp"
-        android:layout_marginEnd="@dimen/margin16dp"
+        android:layout_marginStart="@dimen/margin32dp"
+        android:layout_marginEnd="@dimen/margin32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 

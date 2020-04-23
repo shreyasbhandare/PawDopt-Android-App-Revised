@@ -51,7 +51,8 @@
             android:fontFamily="@font/montserrat"
             android:hint="@string/emailHint"
             android:maxLines="1"
-            android:textSize="@dimen/txtSmlFontSize" />
+            android:singleLine="true"
+            android:textSize="@dimen/txtSmlFontSize"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,6 +72,7 @@
             android:inputType="textPassword"
             android:hint="@string/passHint"
             android:maxLines="1"
+            android:singleLine="true"
             android:fontFamily="@font/montserrat"
             android:textSize="@dimen/txtSmlFontSize"/>
     </com.google.android.material.textfield.TextInputLayout>

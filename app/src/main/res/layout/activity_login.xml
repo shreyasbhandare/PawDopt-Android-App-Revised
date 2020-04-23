@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg_app_color_gradient"
     tools:context=".View.LoginActivity">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:fontFamily="@font/fredoka_one"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textColor="@color/appPrimaryGreenColor"
+            android:textColor="@color/appSecondaryWhiteColor"
             android:textSize="@dimen/txtXLFontSize"/>
 
         <ImageView
@@ -29,40 +30,51 @@
             android:layout_height="50dp"
             android:layout_marginStart="@dimen/margin8dp"
             android:layout_gravity="center"
-            android:src="@drawable/animal_prints"/>
+            android:src="@drawable/animal_prints_white"/>
 
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:layout_marginTop="@dimen/margin16dp"
-        android:clipToPadding="false">
+        android:layout_margin="@dimen/padding32dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="false">
 
-        <View
-            android:id="@+id/indicator"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:background="@drawable/gradient_bg"/>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/tab_bg"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="#ffffff"
-            app:tabIndicatorColor="@null"
-            app:tabRippleColor="@null"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin64dp"
+            android:layout_marginEnd="@dimen/margin64dp"
+            android:layout_marginBottom="@dimen/margin32dp"
+            android:layout_marginTop="@dimen/margin48dp"
+            android:clipToPadding="false">
 
-    </FrameLayout>
+            <View
+                android:id="@+id/indicator"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@drawable/gradient_bg"/>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:overScrollMode="never"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/tab_bg"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/appSecondaryWhiteColor"
+                app:tabIndicatorColor="@null"
+                app:tabRippleColor="@null"/>
+
+        </FrameLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

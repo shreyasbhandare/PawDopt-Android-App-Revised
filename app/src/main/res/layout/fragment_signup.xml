@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".View.SignupFragment"
     android:orientation="vertical"
-    android:layout_gravity="center"
-    android:gravity="center">
+    android:gravity="bottom|center"
+    android:paddingBottom="@dimen/margin16dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_layout_fname"
@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/txtMedFontSize"
+            android:textSize="@dimen/txtSmlFontSize"
+            android:maxLines="1"
             android:hint="@string/firstNameHint" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -40,8 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/txtMedFontSize"
+            android:textSize="@dimen/txtSmlFontSize"
             android:layout_marginTop="@dimen/margin16dp"
+            android:maxLines="1"
             android:hint="@string/lastNameHint" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -60,8 +62,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/txtMedFontSize"
+            android:textSize="@dimen/txtSmlFontSize"
             android:layout_marginTop="@dimen/margin16dp"
+            android:maxLines="1"
             android:hint="@string/emailHint" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -81,8 +84,9 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/txtMedFontSize"
+            android:textSize="@dimen/txtSmlFontSize"
             android:layout_marginTop="@dimen/margin16dp"
+            android:maxLines="1"
             android:hint="@string/passHint" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +100,7 @@
             android:layout_marginTop="@dimen/margin32dp"
             android:layout_marginRight="@dimen/margin16dp"
             android:textAllCaps="false"
-            android:textSize="@dimen/txtMedFontSize"
+            android:textSize="@dimen/txtSemiMedFontSize"
             android:background="@drawable/rounded_button"
             android:text="@string/signUpBtnTxt"
             android:textColor="@color/appSecondaryWhiteColor" />

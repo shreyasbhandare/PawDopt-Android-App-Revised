@@ -3,10 +3,12 @@
     android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <corners android:radius="25dp"/>
+    <corners android:radius="10dp"/>
     <gradient
         android:type="linear"
         android:angle="45"
         android:startColor="@color/appPrimaryGreenColor"
-        android:endColor="@color/appSecondaryLightGreenColor"/>
+        android:endColor="@color/appPrimaryGreenColor"
+        android:centerColor="@color/appSecondaryLightGreenColor"/>
+
 </shape>

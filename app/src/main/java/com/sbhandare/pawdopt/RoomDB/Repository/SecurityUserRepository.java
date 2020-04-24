@@ -15,7 +15,7 @@ public class SecurityUserRepository {
     private static AppDatabase appDatabase;
 
     public SecurityUserRepository(Context context) {
-        appDatabase = Room.databaseBuilder(context, AppDatabase.class, DB_NAME).allowMainThreadQueries().build();
+        appDatabase = Room.databaseBuilder(context, AppDatabase.class, DB_NAME).allowMainThreadQueries().fallbackToDestructiveMigration().build();
     }
 
     public void insertSecurityUser(String username,
@@ -28,10 +28,10 @@ public class SecurityUserRepository {
         securityUser.setRefreshToken(refreshToken);
         securityUser.setPassword(password);
 
-        insertSecurityUser(securityUser);
+        insertSecurityUserTask(securityUser);
     }
 
-    private static void insertSecurityUser(final SecurityUser securityUser) {
+    private static void insertSecurityUserTask(final SecurityUser securityUser) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {

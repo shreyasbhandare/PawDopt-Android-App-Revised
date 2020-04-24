@@ -6,6 +6,7 @@ import com.sbhandare.pawdopt.Model.Oauth2Token;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Model.SecurityUser;
 import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
+import com.sbhandare.pawdopt.RoomDB.Repository.UserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
 
@@ -23,12 +24,14 @@ public class BaseActivityPresenter implements PawDoptPresenter {
     private View view;
     private Context context;
     private SecurityUserRepository securityUserRepository;
+    private UserRepository userRepository;
     private OkhttpProcessor okhttpProcessor;
 
     public BaseActivityPresenter(View view, Context context){
         this.view = view;
         this.context = context;
         this.securityUserRepository = new SecurityUserRepository(context);
+        this.userRepository = new UserRepository(context);
         this.okhttpProcessor = new OkhttpProcessor();
     }
 

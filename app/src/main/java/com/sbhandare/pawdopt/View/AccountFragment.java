@@ -38,6 +38,7 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     private String mParam1;
     private String mParam2;
 
+    @BindView(R.id.usernameTxt) TextView nameTv;
     @BindView(R.id.emailTxt) TextView emailTv;
     @BindView(R.id.aboutTxt) TextView aboutTv;
     @BindView(R.id.logoutTxt) TextView logoutTv;
@@ -173,5 +174,10 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     @Override
     public void populateEmailTextView(String email) {
         emailTv.setText(email);
+    }
+
+    @Override
+    public void populateNameTextView(String name) {
+        nameTv.setText(name);
     }
 }

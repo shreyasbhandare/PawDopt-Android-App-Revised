@@ -8,15 +8,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sbhandare.pawdopt.Adapter.RViewAdapter;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.FavoritesFragmentPresenter;
 import com.sbhandare.pawdopt.R;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +42,8 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @BindView(R.id.favroitesErrTV) TextView favoritesErrTV;
 
     private RViewAdapter rViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -85,6 +93,8 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        ButterKnife.bind(this,view);
+
         initUIElements(view);
         favoritesFragmentPresenter = new FavoritesFragmentPresenter(this,getContext());
         favoritesFragmentPresenter.populateFavoritesList();
@@ -144,9 +154,32 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                hideErrorTV();
                 rViewAdapter = new RViewAdapter(getContext(), favPetList, favPetList.size()-1, favoritesFragmentPresenter);
                 recyclerView.setAdapter(rViewAdapter);
             }
         });
+    }
+
+    @Override
+    public void showErrorTV(String errType) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(StringUtils.equals(errType,PawDoptUtil.ERR_TYPE_NO_DATA)){
+                    favoritesErrTV.setText(R.string.err_message_1);
+                }
+                else if(StringUtils.equals(errType,PawDoptUtil.ERR_TYPE_NO_FAVORITES)) {
+                    favoritesErrTV.setText(R.string.err_message_2);
+                }
+                recyclerView.setVisibility(View.GONE);
+                favoritesErrTV.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void hideErrorTV(){
+        recyclerView.setVisibility(View.VISIBLE);
+        favoritesErrTV.setVisibility(View.GONE);
     }
 }

@@ -9,6 +9,7 @@ import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
 import com.sbhandare.pawdopt.Service.Location.LocationService;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -53,8 +54,7 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
             okhttpProcessor.get(url, new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    // Something went wrong
-                    System.out.println("failure");
+                    view.showErrorTV(PawDoptUtil.ERR_TYPE_NO_DATA);
                 }
 
                 @Override
@@ -63,7 +63,7 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
                         // Do what you want to do with the response.
 
                         Type listType = new TypeToken<List<Pet>>() {}.getType();
-                        List<Pet> tempPetList = GSON.getGson().fromJson(Objects.requireNonNull(response.body().string()), listType);
+                        List<Pet> tempPetList = GSON.getGson().fromJson(Objects.requireNonNull(Objects.requireNonNull(response.body()).string()), listType);
 
                         favPetList.add(null);
                         for (int i = 0; i < tempPetList.size(); i++) {
@@ -81,10 +81,13 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
                             favPetList.add(newPet);
                         }
                         // call populateRV() method on view to update recycler view
-                        view.populateRV(favPetList);
+                        if(favPetList.size() <= 1)
+                            view.showErrorTV(PawDoptUtil.ERR_TYPE_NO_FAVORITES);
+                        else
+                            view.populateRV(favPetList);
                     } else {
                         // Request not successful
-                        System.out.println("no success");
+                        view.showErrorTV(PawDoptUtil.ERR_TYPE_NO_FAVORITES);
                     }
                 }
             });
@@ -98,5 +101,6 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
 
     public interface View{
         void populateRV(List<Pet> favPetList);
+        void showErrorTV(String errType);
     }
 }

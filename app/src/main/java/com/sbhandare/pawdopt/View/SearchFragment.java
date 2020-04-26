@@ -8,15 +8,19 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.sbhandare.pawdopt.Adapter.EndlessRecyclerViewScrollListener;
 import com.sbhandare.pawdopt.Adapter.RViewGridAdapter;
@@ -45,6 +49,9 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @BindView(R.id.searchErrTV) TextView searchErrTV;
+    @BindView(R.id.layout_search) ConstraintLayout searchLayout;
 
     private EndlessRecyclerViewScrollListener scrollListener;
     private RViewGridAdapter rViewAdapter;
@@ -99,6 +106,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        ButterKnife.bind(this,view);
 
         initUIElements(view);
         searchFragmentPresenter = new SearchFragmentPresenter(this,getContext());
@@ -211,6 +219,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                hideErrorTV();
                 rViewAdapter = new RViewGridAdapter(getContext(), petList, totalResults, searchFragmentPresenter);
                 recyclerView.setAdapter(rViewAdapter);
                 petCategoryBtn.setVisibility(View.VISIBLE);
@@ -242,6 +251,28 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
 
         rViewAdapter.notifyItemRemoved(pos);
         rViewAdapter.notifyItemRangeChanged(pos, size);
+    }
+
+    @Override
+    public void showErrorTV(String errType) {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(StringUtils.equals(errType,PawDoptUtil.ERR_TYPE_NO_DATA)){
+                    searchErrTV.setText(R.string.err_message_1);
+                }
+                else if(StringUtils.equals(errType,PawDoptUtil.ERR_TYPE_NO_FAVORITES)) {
+                    searchErrTV.setText(R.string.err_message_2);
+                }
+                searchLayout.setVisibility(View.GONE);
+                searchErrTV.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void hideErrorTV(){
+        searchLayout.setVisibility(View.VISIBLE);
+        searchErrTV.setVisibility(View.GONE);
     }
 
     void onDistanceSelected(String distance){

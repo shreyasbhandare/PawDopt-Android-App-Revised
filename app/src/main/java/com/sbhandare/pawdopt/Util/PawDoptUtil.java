@@ -6,4 +6,6 @@ public class PawDoptUtil {
     public static final String NO_SELECTION = "NO_SELECTION";
     public static final String TAB_LOGIN = "Login";
     public static final String TAB_SIGNUP = "Sign Up";
+    public static final String ERR_TYPE_NO_FAVORITES = "NO_FAVORITES";
+    public static final String ERR_TYPE_NO_DATA = "NO_DATA";
 }

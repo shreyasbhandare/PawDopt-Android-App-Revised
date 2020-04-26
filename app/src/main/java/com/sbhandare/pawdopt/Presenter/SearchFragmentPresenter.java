@@ -10,6 +10,7 @@ import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
 import com.sbhandare.pawdopt.Service.Location.LocationService;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +56,7 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     // Something went wrong
-                    System.out.println("failure");
+                    view.showErrorTV(PawDoptUtil.ERR_TYPE_NO_DATA);
                 }
 
                 @Override
@@ -91,7 +92,7 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
                         view.populateRV(petList, totalResults);
                     } else {
                         // Request not successful
-                        System.out.println("no success");
+                        view.showErrorTV(PawDoptUtil.ERR_TYPE_NO_DATA);
                     }
                 }
             });
@@ -187,5 +188,6 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
         void populateRV(List<Pet> petList, long totalResults);
         void updateRV();
         void removeFavoriteFromRV(String name, int pos, int size);
+        void showErrorTV(String errType);
     }
 }

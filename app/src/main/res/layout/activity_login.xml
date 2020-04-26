@@ -45,6 +45,7 @@
                     android:background="@drawable/tab_bg"
                     app:tabGravity="fill"
                     app:tabMode="fixed"
+                    app:tabTextAppearance="@style/CustomTextAppearanceTab"
                     app:tabSelectedTextColor="@color/appSecondaryWhiteColor"
                     app:tabIndicatorColor="@null"
                     app:tabRippleColor="@null"/>

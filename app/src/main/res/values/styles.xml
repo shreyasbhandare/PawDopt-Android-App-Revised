@@ -35,4 +35,12 @@
         <item name="android:background">@drawable/rounded_bottomsheet_dialog</item>
     </style>
 
+    <style name="CustomTextAppearanceTab" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="CustomBottonNavFontFamily" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/montserrat</item>
+    </style>
+
 </resources>

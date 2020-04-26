@@ -22,6 +22,7 @@
         android:id="@+id/bubbleTabBar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        android:theme="@style/CustomBottonNavFontFamily"
         android:background="@color/appSecondaryWhiteColor"
         android:elevation="@dimen/margin16dp"
         android:padding="8dp"

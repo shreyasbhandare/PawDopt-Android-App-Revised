@@ -89,8 +89,8 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
         signupFragment = new SignupFragment();
 
         TabFragmentAdapter adapter = new TabFragmentAdapter(getSupportFragmentManager());
-        adapter.addFragment(loginFragment, "login");
-        adapter.addFragment(signupFragment, "sign up");
+        adapter.addFragment(loginFragment, PawDoptUtil.TAB_LOGIN);
+        adapter.addFragment(signupFragment, PawDoptUtil.TAB_SIGNUP);
         mViewPager.setAdapter(adapter);
         mTabs.setupWithViewPager(mViewPager);
     }

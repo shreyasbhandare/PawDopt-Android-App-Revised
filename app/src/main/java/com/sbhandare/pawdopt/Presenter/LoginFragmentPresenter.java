@@ -40,8 +40,7 @@ public class LoginFragmentPresenter implements PawDoptPresenter {
         okhttpProcessor.post(url, "", new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                // Something went wrong
-                System.out.println("failure");
+                view.showLoginErrorToast();
             }
 
             @Override
@@ -60,7 +59,7 @@ public class LoginFragmentPresenter implements PawDoptPresenter {
                             okhttpProcessor.get(urlUser, new Callback() {
                                 @Override
                                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-
+                                    view.showLoginErrorToast();
                                 }
 
                                 @Override
@@ -72,16 +71,15 @@ public class LoginFragmentPresenter implements PawDoptPresenter {
                                                 userRepository.insertUser(user.getId(),user.getEmail(),user.getFirstName(),user.getLastName(),user.getImage());
                                             }
                                         }
-                                    }
+                                        view.loadMainActivity();
+                                    }else
+                                        view.showLoginErrorToast();
                                 }
                             });
-
-                            view.loadMainActivity();
                         }
                     }
                 } else {
-                    // Request not successful
-                    System.out.println("no success");
+                    view.showLoginErrorToast();
                 }
             }
         });
@@ -94,5 +92,6 @@ public class LoginFragmentPresenter implements PawDoptPresenter {
 
     public interface View{
         void loadMainActivity();
+        void showLoginErrorToast();
     }
 }

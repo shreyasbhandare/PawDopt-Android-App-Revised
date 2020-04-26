@@ -1,7 +1,10 @@
 package com.sbhandare.pawdopt.View;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,12 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sbhandare.pawdopt.Component.PawDoptPasswordTransform;
 import com.sbhandare.pawdopt.Presenter.LoginFragmentPresenter;
 import com.sbhandare.pawdopt.R;
+import com.sbhandare.pawdopt.Service.PawDoptValidationService;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +45,8 @@ public class LoginFragment extends Fragment implements LoginFragmentPresenter.Vi
     @BindView(R.id.emailEdit) EditText usernameEditTxt;
     @BindView(R.id.passwordEdit) EditText passwordEditTxt;
     @BindView(R.id.loginBtn) Button loginBtn;
+
+    private ProgressDialog progDialog;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -100,7 +108,21 @@ public class LoginFragment extends Fragment implements LoginFragmentPresenter.Vi
                 else {
                     String username = usernameEditTxt.getText().toString();
                     String password = passwordEditTxt.getText().toString();
-                    loginFragmentPresenter.login(username, password);
+
+                    boolean isValidEmail = PawDoptValidationService.isValidEmail(username);
+                    boolean isValidPass = PawDoptValidationService.isValidPassword(password);
+
+                    if(!isValidEmail){
+                        usernameEditTxt.setError("Email not valid!");
+                    }
+                    if(!isValidPass){
+                        passwordEditTxt.setError("Password not valid!");
+                    }
+
+                    if(isValidEmail && isValidPass){
+                        showProgressDialog();
+                        loginFragmentPresenter.login(username, password);
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -155,7 +177,29 @@ public class LoginFragment extends Fragment implements LoginFragmentPresenter.Vi
 
     @Override
     public void loadMainActivity() {
+        stopProgressDialog();
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void showLoginErrorToast(){
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                stopProgressDialog();
+                Toast.makeText(getActivity(), "Sorry, can't Login at this time!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showProgressDialog(){
+        progDialog = ProgressDialog.show( getContext(), null, null, false, true );
+        Objects.requireNonNull(progDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progDialog.setContentView(R.layout.progress_dialog);
+    }
+
+    private void stopProgressDialog(){
+        progDialog.dismiss();
     }
 }

@@ -17,6 +17,7 @@ import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 import com.sbhandare.pawdopt.Util.PawDoptUtil;
 import com.sbhandare.pawdopt.View.PetDetailsFragment;
+import com.sbhandare.pawdopt.View.SearchFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -35,12 +36,14 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<Pet> dataSet;
     private long totalResults;
     private PawDoptPresenter presenter;
+    private SearchFragment.OnFragmentInteractionListener mListener;
 
-    public RViewGridAdapter(Context context, List<Pet> data, long totalResults, PawDoptPresenter presenter) {
+    public RViewGridAdapter(Context context, List<Pet> data, long totalResults, PawDoptPresenter presenter, SearchFragment.OnFragmentInteractionListener mListener) {
         this.context = context;
         this.dataSet = data;
         this.totalResults = totalResults;
         this.presenter = presenter;
+        this.mListener = mListener;
     }
 
     @NonNull
@@ -157,6 +160,7 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
                 if (isChecked) {
                     presenter.addUserFavorite(dataSet.get(position), position);
+                    mListener.onFavoriteAdded(dataSet.get(position));
                 }
             });
 

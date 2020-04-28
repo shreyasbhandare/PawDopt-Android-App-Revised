@@ -51,7 +51,7 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
             String url = "https://pawdopt.herokuapp.com/api/v1/pet?username="+securityUsers.get(0).getUsername()
                     +"&access_token=" + securityUsers.get(0).getToken();
 
-            okhttpProcessor.get(url, new Callback() {
+            okhttpProcessor.postWithUserInfo(url,"", new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     view.showErrorTV(PawDoptUtil.ERR_TYPE_NO_DATA);
@@ -94,6 +94,12 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
         }
     }
 
+    public void updateFavorites(Pet pet){
+        favPetList.add(pet);
+        view.updateRV();
+    }
+
+
     @Override
     public void addUserFavorite(Pet pet, int pos) {
 
@@ -101,6 +107,7 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
 
     public interface View{
         void populateRV(List<Pet> favPetList);
+        void updateRV();
         void showErrorTV(String errType);
     }
 }

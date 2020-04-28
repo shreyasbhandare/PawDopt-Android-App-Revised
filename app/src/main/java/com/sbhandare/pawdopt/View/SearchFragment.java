@@ -191,6 +191,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+        void onFavoriteAdded(Pet pet);
     }
 
     private void initUIElements(View view){
@@ -220,7 +221,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             @Override
             public void run() {
                 hideErrorTV();
-                rViewAdapter = new RViewGridAdapter(getContext(), petList, totalResults, searchFragmentPresenter);
+                rViewAdapter = new RViewGridAdapter(getContext(), petList, totalResults, searchFragmentPresenter, mListener);
                 recyclerView.setAdapter(rViewAdapter);
                 petCategoryBtn.setVisibility(View.VISIBLE);
                 petDistanceBtn.setVisibility(View.VISIBLE);

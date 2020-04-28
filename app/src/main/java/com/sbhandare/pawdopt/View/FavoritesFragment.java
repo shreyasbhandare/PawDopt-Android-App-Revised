@@ -162,6 +162,17 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
     }
 
     @Override
+    public void updateRV() {
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                hideErrorTV();
+                rViewAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
     public void showErrorTV(String errType) {
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
@@ -181,5 +192,9 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
     private void hideErrorTV(){
         recyclerView.setVisibility(View.VISIBLE);
         favoritesErrTV.setVisibility(View.GONE);
+    }
+
+    void onFavoriteAdded(Pet pet){
+        favoritesFragmentPresenter.updateFavorites(pet);
     }
 }

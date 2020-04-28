@@ -1,7 +1,6 @@
 package com.sbhandare.pawdopt.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.net.Uri;
@@ -10,6 +9,7 @@ import android.view.View;
 
 import com.fxn.BubbleTabBar;
 import com.fxn.OnBubbleClickListener;
+import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.R;
 import com.sbhandare.pawdopt.Adapter.ViewPagerAdapter;
 
@@ -61,27 +61,22 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(View page, float position) {
+                final float MIN_SCALE = 0.65f;
+                final float MIN_ALPHA = 0.3f;
                 // do transformation here
-                if (position < -1){    // [-Infinity,-1)
+                if (position <-1){  // [-Infinity,-1)
                     // This page is way off-screen to the left.
                     page.setAlpha(0);
 
                 }
-                else if (position <= 0){    // [-1,0]
-                    page.setAlpha(1);
-                    page.setTranslationX(0);
-                    page.setScaleX(1);
-                    page.setScaleY(1);
+                else if (position <=1){ // [-1,1]
+
+                    page.setScaleX(Math.max(MIN_SCALE,1-Math.abs(position)));
+                    page.setScaleY(Math.max(MIN_SCALE,1-Math.abs(position)));
+                    page.setAlpha(Math.max(MIN_ALPHA,1-Math.abs(position)));
 
                 }
-                else if (position <= 1){    // (0,1]
-                    page.setTranslationX(-position*page.getWidth());
-                    page.setAlpha(1-Math.abs(position));
-                    page.setScaleX(1-Math.abs(position));
-                    page.setScaleY(1-Math.abs(position));
-
-                }
-                else {    // (1,+Infinity]
+                else {  // (1,+Infinity]
                     // This page is way off-screen to the right.
                     page.setAlpha(0);
 
@@ -116,5 +111,11 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
     public void onCategorySelected(String category) {
         SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag("searchFragment");
         Objects.requireNonNull(searchFragment).onCategorySelected(category);
+    }
+
+    @Override
+    public void onFavoriteAdded(Pet pet) {
+        FavoritesFragment favoritesFragment = (FavoritesFragment) getSupportFragmentManager().findFragmentByTag("favoritesFragment");
+        Objects.requireNonNull(favoritesFragment).onFavoriteAdded(pet);
     }
 }

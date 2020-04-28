@@ -1,5 +1,7 @@
 package com.sbhandare.pawdopt.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Pet
 {
     private int petid;
@@ -49,6 +51,9 @@ public class Pet
     private Organization organization;
 
     private long distance;
+
+    @SerializedName("currentUserFav")
+    private boolean isCurrentUserFav;
 
     public Pet(int id, String name, String breed, String img, long distance){
         this.petid = id;
@@ -203,6 +208,14 @@ public class Pet
 
     public void setDistance(long distance) {
         this.distance = distance;
+    }
+
+    public boolean isCurrentUserFav() {
+        return isCurrentUserFav;
+    }
+
+    public void setCurrentUserFav(boolean currentUserFav) {
+        isCurrentUserFav = currentUserFav;
     }
 }
 

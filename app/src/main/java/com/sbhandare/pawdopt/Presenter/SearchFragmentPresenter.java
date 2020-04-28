@@ -13,6 +13,8 @@ import com.sbhandare.pawdopt.Service.OkhttpProcessor;
 import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,8 +53,9 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
 
         if(securityUsers!=null && !securityUsers.isEmpty() && securityUsers.get(0).getToken()!=null) {
             String url = "https://pawdopt.herokuapp.com/api/v1/pet?page="+pageCt+"&access_token=" + securityUsers.get(0).getToken();
+            JSONObject userInfoBody = getUserInfoBody(securityUsers.get(0).getUsername());
 
-            okhttpProcessor.get(url, new Callback() {
+            okhttpProcessor.postWithUserInfo(url,userInfoBody.toString(), new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     // Something went wrong
@@ -72,6 +75,8 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
                                 petList.add(null);
 
                                 for (int i = 0; i < tempPetList.size(); i++) {
+                                    if(tempPetList.get(i).isCurrentUserFav())
+                                        continue;
                                     int id = tempPetList.get(i).getPetid();
                                     String name = tempPetList.get(i).getName();
                                     String breed = tempPetList.get(i).getBreed();
@@ -103,8 +108,9 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
         ++pageCt;
         if(securityUsers!=null && !securityUsers.isEmpty() && securityUsers.get(0).getToken()!=null) {
             String url = "https://pawdopt.herokuapp.com/api/v1/pet?page="+pageCt+"&access_token="+ securityUsers.get(0).getToken();
+            JSONObject userInfoBody = getUserInfoBody(securityUsers.get(0).getUsername());
 
-            okhttpProcessor.get(url, new Callback() {
+            okhttpProcessor.postWithUserInfo(url,userInfoBody.toString(), new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     // Something went wrong
@@ -123,6 +129,8 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
                                 List<Pet> tempPetList = (List<Pet>) (Object) petsPage.getListObj();
 
                                 for (int i = 0; i < tempPetList.size(); i++) {
+                                    if(tempPetList.get(i).isCurrentUserFav())
+                                        continue;
                                     int id = tempPetList.get(i).getPetid();
                                     String name = tempPetList.get(i).getName();
                                     String breed = tempPetList.get(i).getBreed();
@@ -183,6 +191,16 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
         }
     }
 
+    private JSONObject getUserInfoBody(String username){
+        JSONObject userInfoObject = new JSONObject();
+
+        try {
+            userInfoObject.put("username",username);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return userInfoObject;
+    }
 
     public interface View{
         void populateRV(List<Pet> petList, long totalResults);

@@ -23,7 +23,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class FavoritesFragmentPresenter implements PawDoptPresenter {
+public class FavoritesFragmentPresenter {
 
     private List<Pet> favPetList;
     private View view;
@@ -95,14 +95,15 @@ public class FavoritesFragmentPresenter implements PawDoptPresenter {
     }
 
     public void updateFavorites(Pet pet){
-        favPetList.add(pet);
-        view.updateRV();
-    }
-
-
-    @Override
-    public void addUserFavorite(Pet pet, int pos) {
-
+        if(favPetList.isEmpty()){
+            favPetList.add(null);
+            favPetList.add(pet);
+            view.populateRV(favPetList);
+        }
+        else {
+            favPetList.add(pet);
+            view.updateRV();
+        }
     }
 
     public interface View{

@@ -35,10 +35,10 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Context context;
     private List<Pet> dataSet;
     private long totalResults;
-    private PawDoptPresenter presenter;
+    private SearchFragmentPresenter presenter;
     private SearchFragment.OnFragmentInteractionListener mListener;
 
-    public RViewGridAdapter(Context context, List<Pet> data, long totalResults, PawDoptPresenter presenter, SearchFragment.OnFragmentInteractionListener mListener) {
+    public RViewGridAdapter(Context context, List<Pet> data, long totalResults, SearchFragmentPresenter presenter, SearchFragment.OnFragmentInteractionListener mListener) {
         this.context = context;
         this.dataSet = data;
         this.totalResults = totalResults;
@@ -116,12 +116,8 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @SuppressLint("DefaultLocale")
     private void showResultsView(ResultsViewHolder viewHolder, int position) {
-        //ProgressBar would be displayed
         TextView resultsTV = viewHolder.resultsTV;
-        TextView resultsLabelTV = viewHolder.resultsLabelTV;
         resultsTV.setText(String.format("%,d", totalResults));
-        if(presenter instanceof FavoritesFragmentPresenter)
-            resultsLabelTV.setText(PawDoptUtil.RESULTS_LABEL_FAVORITES);
     }
 
     private void populateItemRows(ItemViewHolder viewHolder, int position) {
@@ -136,49 +132,24 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         textViewPetDistance.setText(posTxt);
         checkBoxPetLike.setChecked(false);
 
-        if(presenter instanceof FavoritesFragmentPresenter) {
-            checkBoxPetLike.setChecked(true);
-            checkBoxPetLike.setClickable(false);
+        checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked) {
+                presenter.addUserFavorite(dataSet.get(position), position);
+                mListener.onFavoriteAdded(dataSet.get(position));
+            }
+        });
 
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
-                    PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
-                    Bundle args = new Bundle();
-                    args.putInt("petid",dataSet.get(position).getPetid());
-                    petDetailsFragment.setArguments(args);
-                    fragmentManager.beginTransaction()
-                            .add(R.id.favorites_fragment_root, petDetailsFragment)
-                            .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .addToBackStack(null)
-                            .commit();
-                }
-            });
-        }
-        else if(presenter instanceof SearchFragmentPresenter) {
-            checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-                if (isChecked) {
-                    presenter.addUserFavorite(dataSet.get(position), position);
-                    mListener.onFavoriteAdded(dataSet.get(position));
-                }
-            });
-
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
-                    PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
-                    Bundle args = new Bundle();
-                    args.putInt("petid",dataSet.get(position).getPetid());
-                    petDetailsFragment.setArguments(args);
-                    fragmentManager.beginTransaction()
-                            .add(R.id.search_fragment_root, petDetailsFragment)
-                            .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .addToBackStack(null)
-                            .commit();
-                }
-            });
-        }
+        viewHolder.itemView.setOnClickListener(v -> {
+            FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+            PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
+            Bundle args = new Bundle();
+            args.putInt("petid",dataSet.get(position).getPetid());
+            petDetailsFragment.setArguments(args);
+            fragmentManager.beginTransaction()
+                    .add(R.id.search_fragment_root, petDetailsFragment)
+                    .setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 }

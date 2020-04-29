@@ -147,6 +147,9 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
     }
 
     @Override
@@ -167,6 +170,7 @@ public class FavoritesFragment extends Fragment implements FavoritesFragmentPres
             @Override
             public void run() {
                 hideErrorTV();
+                rViewAdapter.incrementTotalResults();
                 rViewAdapter.notifyDataSetChanged();
             }
         });

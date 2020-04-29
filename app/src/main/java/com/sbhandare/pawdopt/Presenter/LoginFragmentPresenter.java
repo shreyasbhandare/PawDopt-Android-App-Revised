@@ -19,7 +19,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class LoginFragmentPresenter implements PawDoptPresenter {
+public class LoginFragmentPresenter {
     private View view;
     private Context context;
     private SecurityUserRepository securityUserRepository;
@@ -83,11 +83,6 @@ public class LoginFragmentPresenter implements PawDoptPresenter {
                 }
             }
         });
-    }
-
-    @Override
-    public void addUserFavorite(Pet pet, int pos) {
-
     }
 
     public interface View{

@@ -25,7 +25,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class SearchFragmentPresenter implements PawDoptPresenter {
+public class SearchFragmentPresenter {
     private List<Pet> petList;
     private long totalResults;
     private View view;
@@ -158,7 +158,6 @@ public class SearchFragmentPresenter implements PawDoptPresenter {
         }
     }
 
-    @Override
     public void addUserFavorite(Pet pet, int pos){
         securityUsers = securityUserRepository.getAllSecurityUsers();
 

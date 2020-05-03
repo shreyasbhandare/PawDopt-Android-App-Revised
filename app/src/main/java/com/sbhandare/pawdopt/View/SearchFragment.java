@@ -296,4 +296,8 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
         }
         petCategoryBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
     }
+
+    void onFavoriteAddedFromDetailsPage(Pet pet, int pos){
+        searchFragmentPresenter.addUserFavorite(pet, pos);
+    }
 }

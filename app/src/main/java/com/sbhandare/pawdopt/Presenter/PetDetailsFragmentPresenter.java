@@ -10,6 +10,8 @@ import com.sbhandare.pawdopt.Service.OkhttpProcessor;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,10 +28,12 @@ public class PetDetailsFragmentPresenter {
     private OkhttpProcessor okhttpProcessor;
     private List<SecurityUser> securityUsers;
     private Pet pet;
+    private long distance;
 
-    public PetDetailsFragmentPresenter(View view, Context context){
+    public PetDetailsFragmentPresenter(View view, Context context, long distance){
         this.view = view;
         this.context = context;
+        this.distance = distance;
         this.securityUserRepository = new SecurityUserRepository(context);
         this.okhttpProcessor = new OkhttpProcessor();
     }
@@ -39,11 +43,11 @@ public class PetDetailsFragmentPresenter {
 
         if(securityUsers!=null && !securityUsers.isEmpty() && securityUsers.get(0).getToken()!=null) {
             String url = "https://pawdopt.herokuapp.com/api/v1/pet/"+petId+"?access_token=" + securityUsers.get(0).getToken();
+            JSONObject userInfoBody = getUserInfoBody(securityUsers.get(0).getUsername());
 
-            okhttpProcessor.get(url, new Callback() {
+            okhttpProcessor.postWithUserInfo(url,userInfoBody.toString(), new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    // Something went wrong
                     System.out.println("failure");
                     view.populateDataNotFound();
                 }
@@ -51,17 +55,16 @@ public class PetDetailsFragmentPresenter {
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     if (response.isSuccessful()) {
-                        // Do what you want to do with the response.
                         if (response.body() != null) {
                             pet = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(),Pet.class);
-                            if(pet!=null)
+                            if(pet!=null) {
+                                pet.setDistance(distance);
                                 view.populateUI(pet);
+                            }
                             else
                                 view.populateDataNotFound();
                         }
-                        // call populateRV() method on view to update recycler view
                     } else {
-                        // Request not successful
                         System.out.println("no success");
                         view.populateDataNotFound();
                     }
@@ -125,8 +128,19 @@ public class PetDetailsFragmentPresenter {
         }
     }
 
-    public void addFavorite(){
+    public Pet getPet(){
+        return pet;
+    }
 
+    private JSONObject getUserInfoBody(String username){
+        JSONObject userInfoObject = new JSONObject();
+
+        try {
+            userInfoObject.put("username",username);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return userInfoObject;
     }
 
     public interface View{

@@ -99,6 +99,8 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     private PetDetailsFragmentPresenter petDetailsFragmentPresenter;
 
     private int petId;
+    private int pos;
+    private long distance;
 
     private OnFragmentInteractionListener mListener;
 
@@ -129,6 +131,8 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             petId = getArguments().getInt("petid");
+            pos = getArguments().getInt("pos");
+            distance = getArguments().getLong("dist");
         }
     }
 
@@ -139,7 +143,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
         View view = inflater.inflate(R.layout.fragment_pet_details, container, false);
         ButterKnife.bind(this,view);
 
-        petDetailsFragmentPresenter = new PetDetailsFragmentPresenter(this, getContext());
+        petDetailsFragmentPresenter = new PetDetailsFragmentPresenter(this, getContext(), distance);
 
         progDialog = ProgressDialog.show( getContext(), null, null, false, true );
         Objects.requireNonNull(progDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -195,6 +199,13 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
             }
         });
 
+        likeCb.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(compoundButton.isPressed()) {
+                mListener.onFavoriteAddedFromDetailsPage(petDetailsFragmentPresenter.getPet(),pos);
+                disableLikeCheckBox();
+            }
+        });
+
         return view;
     }
 
@@ -235,6 +246,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+        void onFavoriteAddedFromDetailsPage(Pet pet, int pos);
     }
 
     @Override
@@ -245,6 +257,10 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
                 if(pet != null){
                     if(!StringUtils.isEmpty(pet.getImage()))
                         Picasso.get().load(pet.getImage()).fit().centerCrop().into(petPhotoIv);
+                    if(pet.isCurrentUserFav()) {
+                        likeCb.setChecked(true);
+                        likeCb.setClickable(false);
+                    }
                     if(!StringUtils.isEmpty(pet.getName())) {
                         nameTv.setText(pet.getName());
                         bioNameTv.setText(pet.getName());
@@ -424,5 +440,9 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     public void openUrl(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
+    }
+
+    public void disableLikeCheckBox() {
+         likeCb.setClickable(false);
     }
 }

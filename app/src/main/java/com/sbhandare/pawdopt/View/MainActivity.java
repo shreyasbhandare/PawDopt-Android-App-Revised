@@ -118,4 +118,13 @@ public class MainActivity extends AppCompatActivity implements SearchFragment.On
         FavoritesFragment favoritesFragment = (FavoritesFragment) getSupportFragmentManager().findFragmentByTag("favoritesFragment");
         Objects.requireNonNull(favoritesFragment).onFavoriteAdded(pet);
     }
+
+    @Override
+    public void onFavoriteAddedFromDetailsPage(Pet pet, int pos) {
+        FavoritesFragment favoritesFragment = (FavoritesFragment) getSupportFragmentManager().findFragmentByTag("favoritesFragment");
+        SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag("searchFragment");
+
+        Objects.requireNonNull(favoritesFragment).onFavoriteAdded(pet);
+        Objects.requireNonNull(searchFragment).onFavoriteAddedFromDetailsPage(pet, pos);
+    }
 }

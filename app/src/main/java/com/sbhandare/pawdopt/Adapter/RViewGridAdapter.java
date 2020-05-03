@@ -144,6 +144,8 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
             Bundle args = new Bundle();
             args.putInt("petid",dataSet.get(position).getPetid());
+            args.putInt("pos",position);
+            args.putLong("dist",dataSet.get(position).getDistance());
             petDetailsFragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .add(R.id.search_fragment_root, petDetailsFragment)

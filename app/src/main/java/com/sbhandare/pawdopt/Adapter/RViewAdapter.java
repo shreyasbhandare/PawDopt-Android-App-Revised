@@ -142,6 +142,8 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
             Bundle args = new Bundle();
             args.putInt("petid",dataSet.get(position).getPetid());
+            args.putInt("pos",position);
+            args.putLong("dist",dataSet.get(position).getDistance());
             petDetailsFragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .add(R.id.favorites_fragment_root, petDetailsFragment)

@@ -118,7 +118,7 @@ public class DistanceFilterFragment extends BottomSheetDialogFragment {
         clearDistFilterIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onDistanceSelected(PawDoptUtil.NO_SELECTION);
+                mListener.onDistanceSelected(PawDoptUtil.CLEAR_SELECTION);
                 dismiss();
             }
         });

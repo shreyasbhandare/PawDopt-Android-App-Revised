@@ -133,7 +133,7 @@ public class CategoryFilterFragment extends BottomSheetDialogFragment {
         clearCatFilterIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onCategorySelected(PawDoptUtil.NO_SELECTION);
+                mListener.onCategorySelected(PawDoptUtil.CLEAR_SELECTION);
                 dismiss();
             }
         });

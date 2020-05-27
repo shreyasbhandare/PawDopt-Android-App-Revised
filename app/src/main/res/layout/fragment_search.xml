@@ -27,61 +27,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:id="@+id/petDistaceBtn"
-            android:layout_width="150dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:textAllCaps="false"
-            android:background="@drawable/bg_primary_filter_btn_straight"
-            android:textColor="@color/appSecondaryWhiteColor"
-            android:text="@string/distanceTitle"
-            android:visibility="gone"
-            android:animateLayoutChanges="true"
-            android:gravity="start|center_vertical"
-            android:paddingStart="@dimen/margin8dp"
-            android:paddingEnd="@dimen/margin32dp"
-            android:textSize="@dimen/txtSemiMedFontSize"
+            android:id="@+id/filter_btn_layout"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/petTypeBtn"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="@dimen/margin8dp"
-            android:layout_marginStart="4dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/petTypeBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:textAllCaps="false"
-            android:background="@drawable/bg_primary_filter_btn_straight"
-            android:textColor="@color/appSecondaryWhiteColor"
-            android:text="@string/categoryTitle"
-            android:visibility="gone"
-            android:animateLayoutChanges="true"
-            android:gravity="start|center_vertical"
-            android:paddingStart="@dimen/margin8dp"
-            android:paddingEnd="@dimen/margin32dp"
-            android:textSize="@dimen/txtSemiMedFontSize"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/petDistaceBtn"
-            app:layout_constraintRight_toRightOf="@id/filterImg"
-            android:layout_marginEnd="@dimen/margin8dp"
-            android:layout_marginTop="@dimen/margin8dp" />
+            <Button
+                android:id="@+id/petDistaceBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:fontFamily="@font/montserrat"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_primary_filter_btn_straight"
+                android:textColor="@color/appSecondaryWhiteColor"
+                android:text="@string/distanceTitle"
+                android:animateLayoutChanges="true"
+                android:gravity="start|center_vertical"
+                android:paddingStart="@dimen/margin8dp"
+                android:paddingEnd="@dimen/margin32dp"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="@dimen/margin8dp"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/filterImg"
-            android:visibility="gone"
-            android:animateLayoutChanges="true"
-            android:background="@drawable/filter_96"
-            app:layout_constraintLeft_toRightOf="@+id/petTypeBtn"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="@dimen/margin8dp"
-            />
+            <Button
+                android:id="@+id/petTypeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:fontFamily="@font/montserrat"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_primary_filter_btn_straight"
+                android:textColor="@color/appSecondaryWhiteColor"
+                android:text="@string/categoryTitle"
+                android:animateLayoutChanges="true"
+                android:gravity="start|center_vertical"
+                android:paddingStart="@dimen/margin8dp"
+                android:paddingEnd="@dimen/margin32dp"
+                android:textSize="@dimen/txtSemiMedFontSize"
+                android:layout_marginEnd="@dimen/margin8dp"
+                android:layout_marginTop="@dimen/margin8dp"
+                android:layout_weight="1"/>
+
+            <!--
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/filterImg"
+                android:visibility="gone"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/filter_96"
+                app:layout_constraintLeft_toRightOf="@+id/petTypeBtn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="@dimen/margin8dp"
+                />
+            -->
+
+        </LinearLayout>
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/petSearchListRV"
@@ -93,7 +104,7 @@
             android:overScrollMode="never"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/petDistaceBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/filter_btn_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

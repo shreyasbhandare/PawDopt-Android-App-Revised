@@ -59,7 +59,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private RecyclerView recyclerView;
     private Button petDistanceBtn;
     private Button petCategoryBtn;
-    private AppCompatImageView filterBtn;
+    //private AppCompatImageView filterBtn;
     private SearchFragmentPresenter searchFragmentPresenter;
     private ProgressDialog progDialog;
 
@@ -134,6 +134,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             }
         });
 
+        /*
         filterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,6 +142,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 filterFragment.show(Objects.requireNonNull(getFragmentManager()),"filter");
             }
         });
+        */
 
         scrollListener = new EndlessRecyclerViewScrollListener(gridLayoutManager) {
             @Override
@@ -197,7 +199,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     private void initUIElements(View view){
         petCategoryBtn = view.findViewById(R.id.petTypeBtn);
         petDistanceBtn = view.findViewById(R.id.petDistaceBtn);
-        filterBtn = view.findViewById(R.id.filterImg);
+        //filterBtn = view.findViewById(R.id.filterImg);
 
         recyclerView = view.findViewById(R.id.petSearchListRV);
         recyclerView.setHasFixedSize(true);
@@ -228,7 +230,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 recyclerView.setAdapter(rViewAdapter);
                 petCategoryBtn.setVisibility(View.VISIBLE);
                 petDistanceBtn.setVisibility(View.VISIBLE);
-                filterBtn.setVisibility(View.VISIBLE);
+                //filterBtn.setVisibility(View.VISIBLE);
                 progDialog.dismiss();
             }
         });
@@ -280,20 +282,66 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     }
 
     void onDistanceSelected(String distance){
-        if(!StringUtils.equals(distance, PawDoptUtil.NO_SELECTION)) {
-            petDistanceBtn.setText(distance);
-        }else{
+        if(StringUtils.equals(distance, PawDoptUtil.CLEAR_SELECTION)){
             petDistanceBtn.setText(R.string.distanceTitle);
+            searchFragmentPresenter.setDistance(PawDoptUtil.NO_DISTANCE_FILTER);
+        } else if(StringUtils.equals(distance, PawDoptUtil.NO_SELECTION)){
+            //do nothing
+        } else{
+            petDistanceBtn.setText(distance);
+            switch (distance){
+                case "< 5 Miles" :
+                    searchFragmentPresenter.setDistance(PawDoptUtil.FIVE_MILES_FILTER);
+                    break;
+                case "< 50 Miles" :
+                    searchFragmentPresenter.setDistance(PawDoptUtil.FIFTY_MILES_FILTER);
+                    break;
+                case "< 100 Miles" :
+                    searchFragmentPresenter.setDistance(PawDoptUtil.HUNDRED_MILES_FILTER);
+                    break;
+                case "< 500 Miles" :
+                    searchFragmentPresenter.setDistance(PawDoptUtil.FIVE_HUNDRED_MILES_FILTER);
+                    break;
+                default:
+                    break;
+            }
+            searchFragmentPresenter.populatePetList();
         }
+
         petDistanceBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
     }
 
     void onCategorySelected(String category){
-        if(!StringUtils.equals(category, PawDoptUtil.NO_SELECTION)) {
-            petCategoryBtn.setText(category);
-        }else{
+        if(StringUtils.equals(category, PawDoptUtil.CLEAR_SELECTION)){
             petCategoryBtn.setText(R.string.categoryTitle);
+            searchFragmentPresenter.setType(PawDoptUtil.NO_TYPE_FILTER);
+            searchFragmentPresenter.populatePetList();
+        } else if(StringUtils.equals(category, PawDoptUtil.NO_SELECTION)){
+            //do nothing
+        } else{
+            petCategoryBtn.setText(category);
+            switch (category){
+                case "Dog" :
+                    searchFragmentPresenter.setType(PawDoptUtil.DOG_TYPE_FILTER);
+                    break;
+                case "Cat" :
+                    searchFragmentPresenter.setType(PawDoptUtil.CAT_TYPE_FILTER);
+                    break;
+                case "Horse" :
+                    searchFragmentPresenter.setType(PawDoptUtil.HORSE_TYPE_FILTER);
+                    break;
+                case "Mouse" :
+                    searchFragmentPresenter.setType(PawDoptUtil.MOUSE_TYPE_FILTER);
+                    break;
+                case "Rabbit" :
+                    searchFragmentPresenter.setType(PawDoptUtil.RABBIT_TYPE_FILTER);
+                    break;
+                default:
+                    break;
+            }
+            searchFragmentPresenter.populatePetList();
         }
+
         petCategoryBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
     }
 

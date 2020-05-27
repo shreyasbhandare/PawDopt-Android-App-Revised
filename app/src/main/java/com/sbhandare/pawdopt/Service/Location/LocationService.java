@@ -14,6 +14,8 @@ import java.util.Locale;
 
 import androidx.core.app.ActivityCompat;
 
+import com.sbhandare.pawdopt.Model.GeoPoint;
+
 public class LocationService {
     private Context context;
     private LocationManager locationManager;
@@ -23,7 +25,7 @@ public class LocationService {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
-    private GeoPoint getCurrentLatLong() {
+    public GeoPoint getCurrentLatLong() {
         if (ActivityCompat.checkSelfPermission(context,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    Activity#requestPermissions
@@ -93,31 +95,5 @@ public class LocationService {
             return Math.round(loc1.distanceTo(loc2) * 0.00062137);
         }
         return 0;
-    }
-
-    private class GeoPoint{
-        double lattitude;
-        double longitude;
-
-        GeoPoint(double lat, double lon){
-            this.lattitude = lat;
-            this.longitude = lon;
-        }
-
-        public double getLattitude() {
-            return lattitude;
-        }
-
-        public void setLattitude(double lattitude) {
-            this.lattitude = lattitude;
-        }
-
-        public double getLongitude() {
-            return longitude;
-        }
-
-        public void setLongitude(double longitude) {
-            this.longitude = longitude;
-        }
     }
 }

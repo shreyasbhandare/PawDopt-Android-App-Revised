@@ -2,6 +2,7 @@ package com.sbhandare.pawdopt.Presenter;
 
 import android.content.Context;
 
+import com.sbhandare.pawdopt.Model.GeoPoint;
 import com.sbhandare.pawdopt.Model.Page;
 import com.sbhandare.pawdopt.Model.PageDetails;
 import com.sbhandare.pawdopt.Model.Pet;
@@ -10,6 +11,7 @@ import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
 import com.sbhandare.pawdopt.Service.Location.LocationService;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
+import com.sbhandare.pawdopt.Service.PawDoptURLBuilder;
 import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +35,8 @@ public class SearchFragmentPresenter {
     private SecurityUserRepository securityUserRepository;
     private OkhttpProcessor okhttpProcessor;
     private int pageCt;
+    private int distance;
+    private String type;
     private List<SecurityUser> securityUsers;
     private LocationService locationService;
 
@@ -44,6 +48,8 @@ public class SearchFragmentPresenter {
         this.okhttpProcessor = new OkhttpProcessor();
         this.locationService = new LocationService(context);
         pageCt = 0;
+        distance = PawDoptUtil.NO_DISTANCE_FILTER;
+        type = PawDoptUtil.NO_TYPE_FILTER;
         totalResults = 0;
     }
 
@@ -52,8 +58,10 @@ public class SearchFragmentPresenter {
         securityUsers = securityUserRepository.getAllSecurityUsers();
 
         if(securityUsers!=null && !securityUsers.isEmpty() && securityUsers.get(0).getToken()!=null) {
-            String url = "https://pawdopt.herokuapp.com/api/v1/pet?page="+pageCt+"&access_token=" + securityUsers.get(0).getToken();
             JSONObject userInfoBody = getUserInfoBody(securityUsers.get(0).getUsername());
+            String category = PawDoptURLBuilder.buildType(type);
+            String location = PawDoptURLBuilder.buildLocation(distance, locationService.getCurrentLatLong());
+            String url = PawDoptURLBuilder.buildSearchListURL(securityUsers.get(0).getToken(), pageCt, category, location);
 
             okhttpProcessor.postWithUserInfo(url,userInfoBody.toString(), new Callback() {
                 @Override
@@ -69,9 +77,10 @@ public class SearchFragmentPresenter {
                         if (response.body() != null) {
                             Page petsPage = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(), Page.class);
                             if (petsPage != null && petsPage.getListObj() != null && petsPage.getPageDetails() != null) {
-                                List<Pet> tempPetList = (List<Pet>) (Object) petsPage.getListObj();
-                                PageDetails pageDetails = (PageDetails) petsPage.getPageDetails();
+                                List<Pet> tempPetList = petsPage.getListObj();
+                                PageDetails pageDetails = petsPage.getPageDetails();
                                 totalResults = pageDetails.getTotalResults();
+                                petList.clear();
                                 petList.add(null);
 
                                 for (int i = 0; i < tempPetList.size(); i++) {
@@ -107,8 +116,10 @@ public class SearchFragmentPresenter {
     public void getMorePets(){
         ++pageCt;
         if(securityUsers!=null && !securityUsers.isEmpty() && securityUsers.get(0).getToken()!=null) {
-            String url = "https://pawdopt.herokuapp.com/api/v1/pet?page="+pageCt+"&access_token="+ securityUsers.get(0).getToken();
             JSONObject userInfoBody = getUserInfoBody(securityUsers.get(0).getUsername());
+            String category = PawDoptURLBuilder.buildType(type);
+            String location = PawDoptURLBuilder.buildLocation(distance, locationService.getCurrentLatLong());
+            String url = PawDoptURLBuilder.buildSearchListURL(securityUsers.get(0).getToken(), pageCt, category, location);
 
             okhttpProcessor.postWithUserInfo(url,userInfoBody.toString(), new Callback() {
                 @Override
@@ -126,7 +137,7 @@ public class SearchFragmentPresenter {
                         if (response.body() != null) {
                             Page petsPage = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(), Page.class);
                             if (petsPage != null && petsPage.getListObj() != null) {
-                                List<Pet> tempPetList = (List<Pet>) (Object) petsPage.getListObj();
+                                List<Pet> tempPetList = petsPage.getListObj();
 
                                 for (int i = 0; i < tempPetList.size(); i++) {
                                     if(tempPetList.get(i).isCurrentUserFav())
@@ -199,6 +210,14 @@ public class SearchFragmentPresenter {
             e.printStackTrace();
         }
         return userInfoObject;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public interface View{

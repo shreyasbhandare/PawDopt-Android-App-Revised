@@ -8,6 +8,10 @@ import org.apache.commons.lang3.StringUtils;
 public class PawDoptURLBuilder {
     private static String baseUrl = "https://pawdopt.herokuapp.com/api/v1/";
 
+    public static String buildOauthTokenURL(){
+        return baseUrl + "oauth/token?grant_type=client_credentials";
+    }
+
     public static String buildSearchListURL(String access_token, int page, String type, String location){
         StringBuilder searchUrlBuilder = new StringBuilder(baseUrl).append("pet?");
         searchUrlBuilder.append("access_token=").append(access_token).append("&");
@@ -19,6 +23,10 @@ public class PawDoptURLBuilder {
 
         searchUrlBuilder.setLength(searchUrlBuilder.length() - 1);
         return searchUrlBuilder.toString();
+    }
+
+    public static String buildPetDetailsURL(long petId, String token){
+        return baseUrl + "pet/" + petId + "?" + "access_token=" + token;
     }
 
     public static String buildLocation(int dist, GeoPoint pt){

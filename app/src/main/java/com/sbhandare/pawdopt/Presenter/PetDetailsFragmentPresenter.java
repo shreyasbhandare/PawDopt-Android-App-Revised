@@ -3,49 +3,44 @@ package com.sbhandare.pawdopt.Presenter;
 import android.content.Context;
 
 import com.sbhandare.pawdopt.Model.Pet;
-import com.sbhandare.pawdopt.Model.SecurityUser;
-import com.sbhandare.pawdopt.RoomDB.Repository.SecurityUserRepository;
 import com.sbhandare.pawdopt.Service.GSON;
 import com.sbhandare.pawdopt.Service.OkhttpProcessor;
+import com.sbhandare.pawdopt.Service.PawDoptURLBuilder;
+import com.sbhandare.pawdopt.Util.PawDoptUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class PetDetailsFragmentPresenter {
     private View view;
     private Context context;
-    private SecurityUserRepository securityUserRepository;
     private OkhttpProcessor okhttpProcessor;
-    private List<SecurityUser> securityUsers;
     private Pet pet;
     private long distance;
+    private String token;
 
     public PetDetailsFragmentPresenter(View view, Context context, long distance){
         this.view = view;
         this.context = context;
         this.distance = distance;
-        this.securityUserRepository = new SecurityUserRepository(context);
         this.okhttpProcessor = new OkhttpProcessor();
+        this.token = context.getSharedPreferences(PawDoptUtil.PAWDOPT_SHARED_PREFS, MODE_PRIVATE).getString("access_token","");
     }
 
-    public void populatePetDetails(int petId){
-        securityUsers = securityUserRepository.getAllSecurityUsers();
+    public void populatePetDetails(long petId, boolean isFav){
+        if(token != null) {
+            String url = PawDoptURLBuilder.buildPetDetailsURL(petId, token);
 
-        if(securityUsers!=null && !securityUsers.isEmpty() && securityUsers.get(0).getToken()!=null) {
-            String url = "https://pawdopt.herokuapp.com/api/v1/pet/"+petId+"?access_token=" + securityUsers.get(0).getToken();
-            JSONObject userInfoBody = getUserInfoBody(securityUsers.get(0).getUsername());
-
-            okhttpProcessor.postWithUserInfo(url,userInfoBody.toString(), new Callback() {
+            okhttpProcessor.post(url,"", new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
                     System.out.println("failure");
@@ -59,6 +54,7 @@ public class PetDetailsFragmentPresenter {
                             pet = GSON.getGson().fromJson(Objects.requireNonNull(response.body()).string(),Pet.class);
                             if(pet!=null) {
                                 pet.setDistance(distance);
+                                pet.setCurrentUserFav(isFav);
                                 view.populateUI(pet);
                             }
                             else
@@ -130,17 +126,6 @@ public class PetDetailsFragmentPresenter {
 
     public Pet getPet(){
         return pet;
-    }
-
-    private JSONObject getUserInfoBody(String username){
-        JSONObject userInfoObject = new JSONObject();
-
-        try {
-            userInfoObject.put("username",username);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return userInfoObject;
     }
 
     public interface View{

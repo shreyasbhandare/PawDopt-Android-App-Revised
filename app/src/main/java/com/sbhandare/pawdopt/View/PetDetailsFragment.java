@@ -98,9 +98,10 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
 
     private PetDetailsFragmentPresenter petDetailsFragmentPresenter;
 
-    private int petId;
+    private long petId;
     private int pos;
     private long distance;
+    private boolean isFav = false;
 
     private OnFragmentInteractionListener mListener;
 
@@ -130,9 +131,10 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            petId = getArguments().getInt("petid");
+            petId = getArguments().getLong("petid");
             pos = getArguments().getInt("pos");
             distance = getArguments().getLong("dist");
+            isFav = getArguments().getBoolean("isFav");
         }
     }
 
@@ -148,7 +150,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
         progDialog = ProgressDialog.show( getContext(), null, null, false, true );
         Objects.requireNonNull(progDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progDialog.setContentView(R.layout.progress_dialog);
-        petDetailsFragmentPresenter.populatePetDetails(petId);
+        petDetailsFragmentPresenter.populatePetDetails(petId, isFav);
 
         petPhotoIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -442,7 +444,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
         startActivity(browserIntent);
     }
 
-    public void disableLikeCheckBox() {
+    private void disableLikeCheckBox() {
          likeCb.setClickable(false);
     }
 }

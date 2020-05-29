@@ -1,12 +1,22 @@
 package com.sbhandare.pawdopt.Model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigDecimal;
+
+@Entity(tableName = "pet")
 public class Pet
 {
-    private int petid;
+    @PrimaryKey
+    @NonNull
+    private long petid;
 
-    private int petfinderid;
+    private long petfinderid;
 
     private String name;
 
@@ -48,6 +58,7 @@ public class Pet
 
     private String tags;
 
+    @Ignore
     private Organization organization;
 
     private long distance;
@@ -55,24 +66,34 @@ public class Pet
     @SerializedName("currentUserFav")
     private boolean isCurrentUserFav;
 
-    public Pet(int id, String name, String breed, String img, long distance){
+    private double latitude;
+
+    private double longitude;
+
+    public Pet(){
+
+    }
+
+    public Pet(long id, String name, String breed, String img, long distance, double latitude, double longitude){
         this.petid = id;
         this.name = name;
         this.breed = breed;
         this.image = img;
         this.distance = distance;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
-    public void setPetid(int petid){
+    public void setPetid(long petid){
         this.petid = petid;
     }
-    public int getPetid(){
+    public long getPetid(){
         return this.petid;
     }
-    public void setPetfinderid(int petfinderid){
+    public void setPetfinderid(long petfinderid){
         this.petfinderid = petfinderid;
     }
-    public int getPetfinderid(){
+    public long getPetfinderid(){
         return this.petfinderid;
     }
     public void setName(String name){
@@ -216,6 +237,22 @@ public class Pet
 
     public void setCurrentUserFav(boolean currentUserFav) {
         isCurrentUserFav = currentUserFav;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
 

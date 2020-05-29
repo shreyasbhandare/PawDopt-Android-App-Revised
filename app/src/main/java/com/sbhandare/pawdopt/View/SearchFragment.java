@@ -52,18 +52,16 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
 
     @BindView(R.id.searchErrTV) TextView searchErrTV;
     @BindView(R.id.layout_search) ConstraintLayout searchLayout;
+    @BindView(R.id.petDistaceBtn) Button petDistanceBtn;
+    @BindView(R.id.petTypeBtn) Button petCategoryBtn;
 
     private EndlessRecyclerViewScrollListener scrollListener;
     private RViewGridAdapter rViewAdapter;
     private GridLayoutManager gridLayoutManager;
     private RecyclerView recyclerView;
-    private Button petDistanceBtn;
-    private Button petCategoryBtn;
-    //private AppCompatImageView filterBtn;
     private SearchFragmentPresenter searchFragmentPresenter;
     private ProgressDialog progDialog;
 
-    private FilterFragment filterFragment;
     private DistanceFilterFragment distanceFilterFragment;
     private CategoryFilterFragment categoryFilterFragment;
 
@@ -134,16 +132,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             }
         });
 
-        /*
-        filterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filterFragment = new FilterFragment();
-                filterFragment.show(Objects.requireNonNull(getFragmentManager()),"filter");
-            }
-        });
-        */
-
         scrollListener = new EndlessRecyclerViewScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
@@ -197,10 +185,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
     }
 
     private void initUIElements(View view){
-        petCategoryBtn = view.findViewById(R.id.petTypeBtn);
-        petDistanceBtn = view.findViewById(R.id.petDistaceBtn);
-        //filterBtn = view.findViewById(R.id.filterImg);
-
         recyclerView = view.findViewById(R.id.petSearchListRV);
         recyclerView.setHasFixedSize(true);
         gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -230,7 +214,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
                 recyclerView.setAdapter(rViewAdapter);
                 petCategoryBtn.setVisibility(View.VISIBLE);
                 petDistanceBtn.setVisibility(View.VISIBLE);
-                //filterBtn.setVisibility(View.VISIBLE);
                 progDialog.dismiss();
             }
         });
@@ -307,7 +290,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             }
             searchFragmentPresenter.populatePetList();
         }
-
         petDistanceBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
     }
 
@@ -341,7 +323,6 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             }
             searchFragmentPresenter.populatePetList();
         }
-
         petCategoryBtn.setBackgroundResource(R.drawable.bg_primary_filter_btn_straight);
     }
 

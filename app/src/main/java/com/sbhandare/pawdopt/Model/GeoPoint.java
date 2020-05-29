@@ -1,5 +1,7 @@
 package com.sbhandare.pawdopt.Model;
 
+import java.math.BigDecimal;
+
 public class GeoPoint{
     private double lattitude;
     private double longitude;

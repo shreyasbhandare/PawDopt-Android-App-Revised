@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.FavoritesFragmentPresenter;
-import com.sbhandare.pawdopt.Presenter.PawDoptPresenter;
-import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
 import com.sbhandare.pawdopt.Util.PawDoptUtil;
 import com.sbhandare.pawdopt.View.PetDetailsFragment;
@@ -81,7 +79,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return dataSet.get(position) == null ? VIEW_TYPE_RESULT : VIEW_TYPE_ITEM;
     }
 
-    private class ItemViewHolder extends RecyclerView.ViewHolder {
+    private static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvPetName;
         TextView tvPetBreed;
@@ -99,7 +97,7 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    private class ResultsViewHolder extends RecyclerView.ViewHolder {
+    private static class ResultsViewHolder extends RecyclerView.ViewHolder {
 
         TextView resultsTV;
         TextView resultsLabelTV;
@@ -141,9 +139,10 @@ public class RViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
             PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
             Bundle args = new Bundle();
-            args.putInt("petid",dataSet.get(position).getPetid());
-            args.putInt("pos",position);
-            args.putLong("dist",dataSet.get(position).getDistance());
+            args.putLong("petid", dataSet.get(position).getPetid());
+            args.putInt("pos", position);
+            args.putBoolean("isFav", true);
+            args.putLong("dist", dataSet.get(position).getDistance());
             petDetailsFragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .add(R.id.favorites_fragment_root, petDetailsFragment)

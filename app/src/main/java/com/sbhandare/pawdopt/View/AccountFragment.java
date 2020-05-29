@@ -38,11 +38,6 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     private String mParam1;
     private String mParam2;
 
-    @BindView(R.id.usernameTxt) TextView nameTv;
-    @BindView(R.id.emailTxt) TextView emailTv;
-    @BindView(R.id.aboutTxt) TextView aboutTv;
-    @BindView(R.id.logoutTxt) TextView logoutTv;
-
     private AccountFragmentPresenter accountFragmentPresenter;
     private OnFragmentInteractionListener mListener;
 
@@ -85,43 +80,6 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
         ButterKnife.bind(this, view);
 
         accountFragmentPresenter = new AccountFragmentPresenter(this, getContext());
-        accountFragmentPresenter.populateUserInfo();
-
-        aboutTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog
-                        .Builder(getActivity())
-                        .setTitle(R.string.aboutTitleTxt)
-                        .setMessage(getString(R.string.aboutParaTxt))
-                        .setCancelable(true)
-                        .show();
-            }
-        });
-
-        logoutTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
-                            case DialogInterface.BUTTON_POSITIVE:
-                                accountFragmentPresenter.logout();
-                                break;
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                break;
-                        }
-                    }
-                };
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Are you sure?")
-                        .setMessage("Are you sure you want to log out from PawDopt?")
-                        .setPositiveButton("LOG OUT", dialogClickListener)
-                        .setNegativeButton("CANCEL", dialogClickListener)
-                        .show();
-            }
-        });
 
         return view;
     }
@@ -163,21 +121,5 @@ public class AccountFragment extends Fragment implements AccountFragmentPresente
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    @Override
-    public void loadLoginAcitivity() {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void populateEmailTextView(String email) {
-        emailTv.setText(email);
-    }
-
-    @Override
-    public void populateNameTextView(String name) {
-        nameTv.setText(name);
     }
 }

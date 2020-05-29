@@ -79,18 +79,17 @@ public class LocationService {
         return null;
     }
 
-    public long getDistanceInMiles(com.sbhandare.pawdopt.Model.Address address){
+    public long getDistanceInMiles(GeoPoint addressPt){
         GeoPoint currenLatLong = getCurrentLatLong();
-        GeoPoint addressLatLong = getLatLongFromAddress(address);
 
-        if(currenLatLong!=null & addressLatLong!=null) {
+        if(currenLatLong!=null && addressPt!=null) {
             Location loc1 = new Location("");
             loc1.setLatitude(currenLatLong.getLattitude());
             loc1.setLongitude(currenLatLong.getLongitude());
 
             Location loc2 = new Location("");
-            loc2.setLatitude(addressLatLong.getLattitude());
-            loc2.setLongitude(addressLatLong.getLongitude());
+            loc2.setLatitude(addressPt.getLattitude());
+            loc2.setLongitude(addressPt.getLongitude());
 
             return Math.round(loc1.distanceTo(loc2) * 0.00062137);
         }

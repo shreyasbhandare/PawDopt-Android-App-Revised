@@ -11,11 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sbhandare.pawdopt.Model.Pet;
-import com.sbhandare.pawdopt.Presenter.FavoritesFragmentPresenter;
-import com.sbhandare.pawdopt.Presenter.PawDoptPresenter;
 import com.sbhandare.pawdopt.Presenter.SearchFragmentPresenter;
 import com.sbhandare.pawdopt.R;
-import com.sbhandare.pawdopt.Util.PawDoptUtil;
 import com.sbhandare.pawdopt.View.PetDetailsFragment;
 import com.sbhandare.pawdopt.View.SearchFragment;
 import com.squareup.picasso.Picasso;
@@ -86,7 +83,7 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return VIEW_TYPE_ITEM;
     }
 
-    private class ItemViewHolder extends RecyclerView.ViewHolder {
+    private static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvPetName;
         TextView tvPetDistance;
@@ -102,7 +99,7 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private class ResultsViewHolder extends RecyclerView.ViewHolder {
+    private static class ResultsViewHolder extends RecyclerView.ViewHolder {
 
         TextView resultsTV;
         TextView resultsLabelTV;
@@ -134,8 +131,9 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         checkBoxPetLike.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
-                presenter.addUserFavorite(dataSet.get(position), position);
+                dataSet.get(position).setCurrentUserFav(true);
                 mListener.onFavoriteAdded(dataSet.get(position));
+                presenter.addUserFavorite(dataSet.get(position), position);
             }
         });
 
@@ -143,7 +141,7 @@ public class RViewGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
             PetDetailsFragment petDetailsFragment = new PetDetailsFragment();
             Bundle args = new Bundle();
-            args.putInt("petid",dataSet.get(position).getPetid());
+            args.putLong("petid",dataSet.get(position).getPetid());
             args.putInt("pos",position);
             args.putLong("dist",dataSet.get(position).getDistance());
             petDetailsFragment.setArguments(args);

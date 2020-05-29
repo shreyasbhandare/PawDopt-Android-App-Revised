@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/menu_search_48"
+        android:title="@string/menuSearchTxt"
+        android:checked="true"
+        android:iconTint="@color/appPrimaryGreenColor"/>
+
+    <item
+        android:id="@+id/favorite"
+        android:icon="@drawable/menu_heart_64"
+        android:title="@string/menuFavoriteTxt"
+        android:iconTint="@color/appPrimaryGreenColor"/>
+
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/menu_user_50"
+        android:title="@string/menuAccountTxt"
+        android:iconTint="@color/appPrimaryGreenColor"/>
+</menu>

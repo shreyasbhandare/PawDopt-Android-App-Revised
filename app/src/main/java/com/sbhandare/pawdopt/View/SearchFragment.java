@@ -210,6 +210,7 @@ public class SearchFragment extends Fragment implements SearchFragmentPresenter.
             @Override
             public void run() {
                 hideErrorTV();
+                scrollListener.resetState();
                 rViewAdapter = new RViewGridAdapter(getContext(), petList, totalResults, searchFragmentPresenter, mListener);
                 recyclerView.setAdapter(rViewAdapter);
                 petCategoryBtn.setVisibility(View.VISIBLE);

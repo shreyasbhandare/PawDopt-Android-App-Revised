@@ -249,6 +249,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+         <!--
+        <TextView
+            android:id="@+id/know_more_pflink_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin16dp"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:linksClickable="true"
+            android:textColorLink="@color/colorPrimary"
+            android:focusable="true"
+            app:layout_constraintTop_toBottomOf="@+id/tag_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+         -->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"

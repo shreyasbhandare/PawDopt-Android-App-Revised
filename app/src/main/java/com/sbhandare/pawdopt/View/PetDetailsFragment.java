@@ -27,10 +27,12 @@ import com.sbhandare.pawdopt.Model.Organization;
 import com.sbhandare.pawdopt.Model.Pet;
 import com.sbhandare.pawdopt.Presenter.PetDetailsFragmentPresenter;
 import com.sbhandare.pawdopt.R;
+import com.sbhandare.pawdopt.Util.PawDoptImageViewer;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -77,6 +79,7 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     @BindView(R.id.know_more_name_txt) TextView bioNameTv;
     @BindView(R.id.bio_txt) TextView bioTv;
     @BindView(R.id.tag_txt) TextView tagsTv;
+    //@BindView(R.id.know_more_pflink_txt) TextView pfLinkTv;
     @BindView(R.id.org_name_txt) TextView orgNameTv;
     @BindView(R.id.address_txt) TextView orgAddressTv;
     @BindView(R.id.email_txt) TextView orgEmailTv;
@@ -407,17 +410,11 @@ public class PetDetailsFragment extends Fragment implements PetDetailsFragmentPr
     }
 
     @Override
-    public void populateDialog(String imgUrl) {
+    public void populateDialog(List<String> images) {
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                AlertDialog.Builder alertadd = new AlertDialog.Builder(getContext());
-                LayoutInflater factory = LayoutInflater.from(getContext());
-                final View view = factory.inflate(R.layout.layout_full_pet_image, null);
-                ImageView imageView = view.findViewById(R.id.dialog_imageview);
-                Picasso.get().load(imgUrl).fit().centerInside().into(imageView);
-                alertadd.setView(view);
-                alertadd.show();
+                PawDoptImageViewer.Companion.loadImages(Objects.requireNonNull(getContext()), images);
             }
         });
     }

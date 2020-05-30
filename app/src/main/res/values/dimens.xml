@@ -40,4 +40,6 @@
     <dimen name="txtSemiMedFontSize">17sp</dimen>
     <dimen name="txtSmlFontSize">14sp</dimen>
     <dimen name="txtSemiSmlFontSize">10sp</dimen>
+
+    <dimen name="imageViewerDimen">350dp</dimen>
 </resources>

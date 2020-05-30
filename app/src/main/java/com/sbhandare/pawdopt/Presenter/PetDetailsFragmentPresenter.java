@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import okhttp3.Call;
@@ -70,8 +72,19 @@ public class PetDetailsFragmentPresenter {
     }
 
     public void openFullImage(){
-        if(pet.getImage()!=null)
-            view.populateDialog(pet.getImage());
+        List<String> images = new ArrayList<>();
+        if(!StringUtils.isEmpty(pet.getImage()))
+            images.add(pet.getImage());
+        //Todo : change getImage() to 2,3,4 below after multiple images from backend
+        if(!StringUtils.isEmpty(pet.getImage()))
+            images.add(pet.getImage());
+        if(!StringUtils.isEmpty(pet.getImage()))
+            images.add(pet.getImage());
+        if(!StringUtils.isEmpty(pet.getImage()))
+            images.add(pet.getImage());
+
+        if(!images.isEmpty())
+            view.populateDialog(images);
     }
 
     public void sendEmailWithBody(){
@@ -131,7 +144,7 @@ public class PetDetailsFragmentPresenter {
     public interface View{
         void populateUI(Pet pet);
         void populateDataNotFound();
-        void populateDialog(String imgUrl);
+        void populateDialog(List<String> url);
         void openEmail(boolean hasBody, String toEmail, String subject, String body);
         void openUrl(String url);
     }
